@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"					 
+             mc:Ignorable="d"
+             x:Class="crm.Views.custom.semaphore">
+
+	<UserControl.Resources>
+		<SolidColorBrush x:Key="ActiveColor">#FF212121</SolidColorBrush>
+		<SolidColorBrush x:Key="SleepColor">#FF2C2C2C</SolidColorBrush>
+		<SolidColorBrush x:Key="RED">#FFFF5B55</SolidColorBrush>
+		<SolidColorBrush x:Key="YEL">#FFFEBA32</SolidColorBrush>
+		<SolidColorBrush x:Key="GRN">#FF27C840</SolidColorBrush>		
+	</UserControl.Resources>
+	
+	<UserControl.Styles>
+		<Style Selector="Button">
+			<Setter Property="CornerRadius" Value="100"/>
+			<Setter Property="BorderBrush" Value="Gray"/>
+			<Setter Property="BorderThickness" Value="1.5"/>
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+		<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="{Binding $parent[Button].Background} "/>
+			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
+			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
+		</Style>
+		<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="{Binding $parent[Button].Background} "/>
+			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
+			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
+		</Style>
+		<!--<Style Selector="Button:pointerover">
+		</Style>
+		<Style Selector="Grid:pointerover > Button">
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
+		<Style Selector="Grid:pointerover > Button#b1">
+			<Setter Property="Background" Value="{DynamicResource RED}"/>
+		</Style>
+		<Style Selector="Grid:pointerover > Button#b2">
+			<Setter Property="Background" Value="{DynamicResource YEL}"/>
+		</Style>
+		<Style Selector="Grid:pointerover > Button#b3">
+			<Setter Property="Background" Value="{DynamicResource GRN}"/>
+		</Style>
+		<Style Selector="Grid">
+			<Setter Property="Background" Value="{DynamicResource SleepColor}"/>
+		</Style>
+		<Style Selector="Grid:pressed">
+			<Setter Property="Background" Value="{DynamicResource ActiveColor}"/>
+		</Style>-->	
+	</UserControl.Styles>
+
+	<Grid ColumnDefinitions="Auto, *">
+		<Grid Name="CG" Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto">
+			<Button Name="b1" Grid.Column="0" Height="15" Width="15" Margin="5"/>
+			<Button Name="b2" Grid.Column="1" Height="15" Width="15" Margin="5"/>
+			<Button Name="b3" Grid.Column="2" Height="15" Width="15" Margin="5"/>
+		</Grid>
+		<Grid Grid.Column="1">
+			
+		</Grid>
+	</Grid>
+	
+</UserControl>
