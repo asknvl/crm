@@ -11,6 +11,7 @@
     <Folder Include="libs\" />
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <Folder Include="Views\custom\" />
     <None Remove=".gitignore" />
     <None Remove="Assets\menu-swap.png" />
   </ItemGroup>
@@ -28,10 +29,5 @@
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.999-cibuild0020036-beta" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0020036-beta" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Material.Colors">
-      <HintPath>libs\Material.Colors.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

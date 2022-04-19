@@ -80,7 +80,8 @@
 		<Grid Grid.Row="1">
 			<Grid.DataTemplates>
 				<DataTemplate DataType="{x:Type tabvms:testTabVM}">
-					<TextBlock Text="{Binding Description}"/>
+					<!--<TextBlock Text="{Binding Description}"/>-->
+					<tabview:testTab/>
 				</DataTemplate>				
 			</Grid.DataTemplates>
 			<ContentControl Content="{Binding Content}"/>
