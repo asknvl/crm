@@ -13,7 +13,7 @@
     <AvaloniaResource Include="Assets\**" />
     <Folder Include="Views\custom\" />
     <None Remove=".gitignore" />
-    <None Remove="Assets\menu-swap.png" />
+    <None Remove="Assets\test.png" />	  
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.
@@ -28,6 +28,8 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0020036-beta" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.999-cibuild0020036-beta" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0020036-beta" />
+    <PackageReference Include="Material.Icons.Avalonia" Version="1.0.0" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
   </ItemGroup>
 </Project>

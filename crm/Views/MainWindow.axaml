@@ -6,6 +6,7 @@
 		xmlns:cust="using:crm.Views.custom"
 		xmlns:tabview="using:crm.Views.tabs"
 		xmlns:tabvms="using:crm.ViewModels.tabs"
+		xmlns:icns="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="crm.Views.MainWindow"
 		ExtendClientAreaToDecorationsHint="True"
@@ -21,10 +22,11 @@
 		<SolidColorBrush x:Key="SleepColor">#FF2C2C2C</SolidColorBrush>
 		<SolidColorBrush x:Key="RED">#FFFF5B55</SolidColorBrush>
 		<SolidColorBrush x:Key="YEL">#FFFEBA32</SolidColorBrush>
-		<SolidColorBrush x:Key="GRN">#FF27C840</SolidColorBrush>
+		<SolidColorBrush x:Key="GRN">#FF27C840</SolidColorBrush>		
 	</Window.Resources>
 
 	<Window.Styles>
+
 		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="Roboto"/>
 		</Style>
@@ -34,12 +36,12 @@
 			<Setter Property="BorderThickness" Value="1.5"/>
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
-		<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Style Selector="Button.Semaphore:pointerover /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="{Binding $parent[Button].Background} "/>
 			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
 			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
 		</Style>
-		<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+		<Style Selector="Button.Semaphore:pressed /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="{Binding $parent[Button].Background} "/>
 			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
 			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
@@ -47,13 +49,18 @@
 	</Window.Styles>
 
 	<Grid RowDefinitions="50, *">
-		<Grid Grid.Row="0" ColumnDefinitions="75, *" Background="{DynamicResource SleepColor}">
+		<Grid Grid.Row="0" ColumnDefinitions="75, 40, *" Background="{DynamicResource SleepColor}">
 			<Grid Name="CG" Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto" Background="{DynamicResource SleepColor}">
 				<Button Name="b1" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>
 				<Button Name="b2" Classes="Button Semaphore" Grid.Column="1" Height="15" Width="15" Margin="5"/>
 				<Button Name="b3" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>
 			</Grid>
-			<ListBox Grid.Column="1" Items="{Binding TestList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
+			<Button Grid.Column="1">
+				<icns:MaterialIconExt Kind="Abacus">
+					
+				</icns:MaterialIconExt>
+			</Button>
+			<ListBox Grid.Column="2" Items="{Binding TestList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
 						<StackPanel Orientation="Horizontal"/>

@@ -27,8 +27,6 @@ namespace crm.Views
             _b1.PointerEnter += _b1_PointerEnter;
             _b2 = this.FindControl<Button>("b2");
             _b3 = this.FindControl<Button>("b3");
-
-
         }
 
         private void _b1_PointerEnter(object? sender, Avalonia.Input.PointerEventArgs e)

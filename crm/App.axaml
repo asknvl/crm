@@ -1,16 +1,18 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:crm"			 
+             xmlns:local="clr-namespace:crm"								 
              x:Class="crm.App">
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
+	
+	<Application.Styles>		
+		<FluentTheme Mode="Light"/>
+		<StyleInclude Source="avares://Material.Icons.Avalonia/App.xaml"></StyleInclude>
+	</Application.Styles>
 
-    <Application.Styles>		
-        <FluentTheme Mode="Light"/>		
-    </Application.Styles>
-
-	<Application.Resources>		
-		<SolidColorBrush x:Key="TopPanelColor">#FF2C2C2C</SolidColorBrush>		
-	</Application.Resources>
+	<!--<Application.Resources>
+		<SolidColorBrush x:Key="TopPanelColor">#FF2C2C2C</SolidColorBrush>
+	</Application.Resources>-->
+	
 </Application>
