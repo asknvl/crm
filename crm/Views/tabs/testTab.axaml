@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="crm.Views.tabs.testTab">
-	<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{DynamicResource WorkAreaBackground}">		
+	<UserControl.Styles>
+		<StyleInclude Source = "/Styles/TabStyles.axaml" />
+	</UserControl.Styles>
+	<Grid Classes="Grid Tab">		
 	</Grid>
 </UserControl>

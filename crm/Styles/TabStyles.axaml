@@ -1,0 +1,63 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Style Selector="Grid.Tab">
+		<Setter Property="Background" Value="{DynamicResource WorkAreaBackground}"/>
+		<Setter Property="VerticalAlignment" Value="Stretch"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+	</Style>
+	<Style Selector="TextBox.CenterBlack">
+		<Setter Property="Foreground" Value="{DynamicResource WorkAreaTextForeground}"/>
+		<Setter Property="FontFamily" Value="Roboto"/>
+		<Setter Property="FontSize" Value="12"/>
+	</Style>
+	<Style Selector="TextBox.CenterBlack:focus">
+		<Setter Property="FontSize" Value="12"/>
+	</Style>
+	<Style Selector="TextBox.CenterBlack:focus /template/ Border#PART_BorderElement">
+		<Setter Property="BorderBrush" Value="{DynamicResource WorkAreaTextBoxBorderFocus}"/>	
+	</Style>
+	
+	<Style Selector="TextBlock.CenterBlack">
+		<Setter Property="Foreground" Value="{DynamicResource WorkAreaTextForeground}"/>		
+		<Setter Property="FontFamily" Value="Roboto"/>
+		<Setter Property="FontSize" Value="12"/>
+	</Style>
+	<Style Selector="Button.CenterBlack">
+		<Setter Property="Margin" Value="5"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="Background" Value="{DynamicResource WorkAreaButtonBackground}"/>
+		<Setter Property="Foreground" Value="{DynamicResource WorkAreaButtonForeground}"/>
+		<Setter Property="FontFamily" Value="Roboto"/>
+		<Setter Property="FontSize" Value="12"/>		
+	</Style>
+	<Style Selector="Button.CenterBlack:pointerover /template/ ContentPresenter#PART_ContentPresenter">				
+		<Setter Property="Background" Value="{DynamicResource WorkAreaButtonBackgroundPointerOver}"/>
+		<Setter Property="TextBlock.Foreground" Value="{DynamicResource WorkAreaButtonForegroundPointerOver}"/>
+	</Style>
+
+	<Style Selector="Button.Hyper">		
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="{DynamicResource WorkAreaTextBlockClickable}"/>
+		<Setter Property="FontFamily" Value="Roboto"/>
+		<Setter Property="FontSize" Value="12"/>		
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="CornerRadius" Value="0" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+	<Style Selector="Button.Hyper:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="TextBlock.Foreground" Value="{DynamicResource WorkAreaTextBlockClickable}"/>
+	</Style>
+
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+		</Border>
+	</Design.PreviewWith>
+	
+</Styles>

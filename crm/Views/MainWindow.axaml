@@ -17,7 +17,7 @@
         <vm:mainVM/>
     </Design.DataContext>
 
-	<Window.Resources>		
+	<!--<Window.Resources>		
 		<Color x:Key="TopPanelActiveColor">#FF212121</Color>
 		<Color x:Key="TopPanelInActiveColor">#FF2C2C2C</Color>
 		<Color x:Key="CloseDotColor">#FFFF5B55</Color>				
@@ -27,7 +27,7 @@
 		<Color x:Key="TopPanelInActiveTextForeground">Gray</Color>
 		<Color x:Key="TopPanelActiveTextForeground">White</Color>
 		<Color x:Key="WorkAreaBackground">White</Color>
-	</Window.Resources>
+	</Window.Resources>-->
 
 	<Window.Styles>
 		
@@ -54,19 +54,20 @@
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
 			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
-		</Style>
-		<Style Selector="Button.Icon">
-			<Setter Property="Foreground" Value="{DynamicResource TopPanelInActiveTextForeground}"/>
+		</Style>		
+		<Style Selector="Button.Icon /template/ ContentPresenter#PART_ContentPresenter">			
 			<Setter Property="Background" Value="Transparent"/>			
 			<Setter Property="CornerRadius" Value="0"/>
+			<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelControlForeground}"/>
 		</Style>		
-		<Style Selector="Button.Icon:pointerover">
-			<Setter Property="Foreground" Value="{DynamicResource TopPanelActiveTextForeground}"/>
-		</Style>
+		<Style Selector="Button.Icon:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="{DynamicResource TopPanelControlBackgroundPointerOver}"/>			
+			<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelControlForegroundPointerOver}"/>
+			<Setter Property="BorderBrush" Value="Transparent" />			
+		</Style>	
 		<Style Selector="Button.Icon:disabled /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
-
 		<Style Selector="Window[IsActive=true] Grid#TOP">
 			<Setter Property="IsEnabled" Value="True"/>
 			<Setter Property="Background" Value="{DynamicResource TopPanelActiveColor}"/>
@@ -92,18 +93,15 @@
 	</Window.Styles>
 
 	<Grid RowDefinitions="50, *">
-		<Grid Name="TOP" Grid.Row="0" ColumnDefinitions="Auto, Auto, *">
-			
+		<Grid Name="TOP" Grid.Row="0" ColumnDefinitions="Auto, Auto, *">			
 			<Grid Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto, Auto" VerticalAlignment="Stretch" Background="Transparent">
 				<Button Name="b1" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>				
 				<Button Name="b2" Classes="Button Semaphore" Grid.Column="1" Height="15" Width="15" Margin="5"/>
 				<Button Name="b3" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>				
 			</Grid>
-
-			<Button Grid.Column="1" Classes="Button Icon" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-1">
-				<material:MaterialIconExt Kind="Home" Size="24"/>
+			<Button Grid.Column="1" Classes="Button Icon" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0">				
+				<material:MaterialIconExt Kind="Home" Size="24"/>				
 			</Button>
-			
 			<ListBox Grid.Column="2" Items="{Binding TestList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
@@ -112,15 +110,22 @@
 				</ListBox.ItemsPanel>
 				<ListBox.Styles>
 					<Style Selector="ListBoxItem:selected /template/ ContentPresenter">						
-						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelTextActiveForeground}"/>
-						<Setter Property="TextBlock.Background" Value="#0FFFFFFF"/>
+						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelControlForegroundSelected}"/>
+						<Setter Property="TextBlock.Background" Value="{DynamicResource TopPanelControlBackgroundSelected}"/>
+					</Style>
+					<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelControlForegroundPointerOver}"/>
+						<Setter Property="TextBlock.Background" Value="{DynamicResource TopPanelControlBackgroundPointerOver}"/>
+					</Style>
+					<Style Selector="ListBoxItem:disabled /template/ ContentPresenter#PART_ContentPresenter">
+						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelControlForegroundDisabled}" />
 					</Style>
 					<Style Selector="ListBoxItem">						
-						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelInActiveTextForeground}"/>						
+						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelControlForeground}"/>						
 					</Style>
 				</ListBox.Styles>
 				<ListBox.ItemTemplate>
-					<DataTemplate DataType="{x:Type tabvms:testTabVM}">						
+					<DataTemplate DataType="{x:Type tabvms:loginVM}">						
 						<TextBlock Text="{Binding Title}" FontSize="12" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>						
 					</DataTemplate>
 				</ListBox.ItemTemplate>				
@@ -128,8 +133,8 @@
 		</Grid>
 		<Grid Grid.Row="1">			
 			<Grid.DataTemplates>
-				<DataTemplate DataType="{x:Type tabvms:testTabVM}">					
-					<tabview:testTab/>
+				<DataTemplate DataType="{x:Type tabvms:loginVM}">					
+					<tabview:loginTab/>
 				</DataTemplate>				
 			</Grid.DataTemplates>
 			<ContentControl Content="{Binding Content}"/>

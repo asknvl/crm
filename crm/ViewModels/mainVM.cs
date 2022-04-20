@@ -9,9 +9,8 @@ namespace crm.ViewModels
     public class mainVM : ViewModelBase
     {
 
-        public List<object> TestList { get; set; } = new List<object>() { 
-            new testTabVM() { Title = "Вкладка 1", Description = "Описание 1" },
-            new testTabVM() { Title = "Вкладка 2", Description = "Описание 2" }
+        public List<Tab> TestList { get; set; } = new List<Tab>() { 
+            new loginVM()            
         };
 
         object? content;
