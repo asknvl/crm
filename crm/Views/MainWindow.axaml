@@ -6,6 +6,7 @@
 		xmlns:cust="using:crm.Views.custom"
 		xmlns:tabview="using:crm.Views.tabs"
 		xmlns:tabvms="using:crm.ViewModels.tabs"		
+		xmlns:material="using:Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="crm.Views.MainWindow"
 		ExtendClientAreaToDecorationsHint="True"
@@ -25,7 +26,7 @@
 	</Window.Resources>
 
 	<Window.Styles>
-
+		
 		<Style Selector="TextBlock">
 			<Setter Property="FontFamily" Value="Roboto"/>
 		</Style>
@@ -45,15 +46,28 @@
 			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
 			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
 		</Style>
+		<Style Selector="Button.Icon">
+			<Setter Property="Foreground" Value="Gray"/>
+			<Setter Property="Background" Value="Transparent"/>			
+			<Setter Property="CornerRadius" Value="0"/>
+		</Style>		
+		<Style Selector="Button.Icon:pointerover">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>		
+		
 	</Window.Styles>
 
 	<Grid RowDefinitions="50, *">
-		<Grid Grid.Row="0" ColumnDefinitions="75, *" Background="{DynamicResource SleepColor}">
-			<Grid Name="CG" Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto" Background="{DynamicResource SleepColor}">
-				<Button Name="b1" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>
+		<Grid Grid.Row="0" ColumnDefinitions="Auto, *" Background="{DynamicResource SleepColor}">
+			<Grid Name="CG" Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto, Auto" Background="{DynamicResource SleepColor}" Margin="-1">
+				<Button Name="b1" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>				
 				<Button Name="b2" Classes="Button Semaphore" Grid.Column="1" Height="15" Width="15" Margin="5"/>
 				<Button Name="b3" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>
-			</Grid>			
+				<Button Classes="Button Icon" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="3">
+					<material:MaterialIconExt Kind="Home" Size="24"/>
+				</Button>
+			</Grid>
+			
 			<ListBox Grid.Column="1" Items="{Binding TestList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
@@ -66,8 +80,7 @@
 						<Setter Property="TextBlock.Background" Value="#0FFFFFFF"/>
 					</Style>
 					<Style Selector="ListBoxItem">
-						<Setter Property="TextBlock.Foreground" Value="LightGray"/>
-						<Setter Property="Background" Value="#05000000"/>
+						<Setter Property="TextBlock.Foreground" Value="LightGray"/>						
 						<Setter Property="TextBlock.Foreground" Value="Gray"/>						
 					</Style>
 				</ListBox.Styles>
@@ -78,7 +91,7 @@
 				</ListBox.ItemTemplate>				
 			</ListBox>
 		</Grid>
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="1" Background="White">
 			<Grid.DataTemplates>
 				<DataTemplate DataType="{x:Type tabvms:testTabVM}">
 					<!--<TextBlock Text="{Binding Description}"/>-->
