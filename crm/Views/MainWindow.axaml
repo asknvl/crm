@@ -46,6 +46,11 @@
 			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
 			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
 		</Style>
+		<Style Selector="Button.Semaphore:disabled /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="{Binding $parent[Button].BorderThickness} "/>
+			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
+		</Style>
 		<Style Selector="Button.Icon">
 			<Setter Property="Foreground" Value="Gray"/>
 			<Setter Property="Background" Value="Transparent"/>			
@@ -53,22 +58,49 @@
 		</Style>		
 		<Style Selector="Button.Icon:pointerover">
 			<Setter Property="Foreground" Value="White"/>
-		</Style>		
-		
+		</Style>
+		<Style Selector="Button.Icon:disabled /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+
+		<Style Selector="Window[IsActive=true] Grid#TOP">
+			<Setter Property="IsEnabled" Value="True"/>
+			<Setter Property="Background" Value="{DynamicResource ActiveColor}"/>
+		</Style>
+		<Style Selector="Window[IsActive=False] Grid#TOP">
+			<Setter Property="IsEnabled" Value="False"/>
+			<Setter Property="Background" Value="{DynamicResource SleepColor}"/>
+		</Style>
+
+		<Style Selector="Grid:pointerover > Button#b1">
+			<Setter Property="Background" Value="{DynamicResource RED}"/>
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
+		<Style Selector="Grid:pointerover > Button#b2">
+			<Setter Property="Background" Value="{DynamicResource YEL}"/>
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
+		<Style Selector="Grid:pointerover > Button#b3">
+			<Setter Property="Background" Value="{DynamicResource GRN}"/>
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
+
 	</Window.Styles>
 
 	<Grid RowDefinitions="50, *">
-		<Grid Grid.Row="0" ColumnDefinitions="Auto, *" Background="{DynamicResource SleepColor}">
-			<Grid Name="CG" Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto, Auto" Background="{DynamicResource SleepColor}" Margin="-1">
+		<Grid Name="TOP" Grid.Row="0" ColumnDefinitions="Auto, Auto, *">
+			
+			<Grid Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto, Auto">
 				<Button Name="b1" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>				
 				<Button Name="b2" Classes="Button Semaphore" Grid.Column="1" Height="15" Width="15" Margin="5"/>
-				<Button Name="b3" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>
-				<Button Classes="Button Icon" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="3">
-					<material:MaterialIconExt Kind="Home" Size="24"/>
-				</Button>
+				<Button Name="b3" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>				
 			</Grid>
+
+			<Button Grid.Column="1" Classes="Button Icon" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="-1">
+				<material:MaterialIconExt Kind="Home" Size="24"/>
+			</Button>
 			
-			<ListBox Grid.Column="1" Items="{Binding TestList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
+			<ListBox Grid.Column="2" Items="{Binding TestList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
 						<StackPanel Orientation="Horizontal"/>
