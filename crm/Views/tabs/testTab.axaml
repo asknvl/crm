@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="crm.Views.tabs.testTab">
-	<Grid Height="100" Width="100" Background="LightGray">
-		<TextBlock Text="{Binding Description}" Foreground="Black"/>
+	<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{DynamicResource WorkAreaBackground}">		
 	</Grid>
 </UserControl>

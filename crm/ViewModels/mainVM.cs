@@ -6,7 +6,7 @@ using System.Text;
 
 namespace crm.ViewModels
 {   
-    public class MainWindowViewModel : ViewModelBase
+    public class mainVM : ViewModelBase
     {
 
         public List<object> TestList { get; set; } = new List<object>() { 
@@ -14,8 +14,8 @@ namespace crm.ViewModels
             new testTabVM() { Title = "Вкладка 2", Description = "Описание 2" }
         };
 
-        object content;
-        public object Content 
+        object? content;
+        public object? Content 
         {
             get => content;
             set => this.RaiseAndSetIfChanged(ref content, value);

@@ -11,6 +11,7 @@
     <Folder Include="libs\" />
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaXaml Remove="Views\Colors.axaml" />
     <Folder Include="Views\custom\" />
     <None Remove=".gitignore" />
     <None Remove="Assets\test.png" />	  

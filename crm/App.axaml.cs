@@ -22,7 +22,7 @@ namespace crm
 
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new mainVM(),
                 };
             }
 

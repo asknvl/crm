@@ -5,24 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:cust="using:crm.Views.custom"
 		xmlns:tabview="using:crm.Views.tabs"
-		xmlns:tabvms="using:crm.ViewModels.tabs"		
+		xmlns:tabvms="using:crm.ViewModels.tabs"				
 		xmlns:material="using:Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="crm.Views.MainWindow"
+        x:Class="crm.Views.MainWindow"		
 		ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="-1">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:mainVM/>
     </Design.DataContext>
 
-	<Window.Resources>
-		<SolidColorBrush x:Key="ActiveColor">#FF212121</SolidColorBrush>
-		<SolidColorBrush x:Key="SleepColor">#FF2C2C2C</SolidColorBrush>
-		<SolidColorBrush x:Key="RED">#FFFF5B55</SolidColorBrush>
-		<SolidColorBrush x:Key="YEL">#FFFEBA32</SolidColorBrush>
-		<SolidColorBrush x:Key="GRN">#FF27C840</SolidColorBrush>		
+	<Window.Resources>		
+		<Color x:Key="TopPanelActiveColor">#FF212121</Color>
+		<Color x:Key="TopPanelInActiveColor">#FF2C2C2C</Color>
+		<Color x:Key="CloseDotColor">#FFFF5B55</Color>				
+		<Color x:Key="HideDotColor">#FFFEBA32</Color>
+		<Color x:Key="MaximizeDotColor">#FF27C840</Color>
+		<Color x:Key="ThreeDotBorderColor">Gray</Color>
+		<Color x:Key="TopPanelInActiveTextForeground">Gray</Color>
+		<Color x:Key="TopPanelActiveTextForeground">White</Color>
+		<Color x:Key="WorkAreaBackground">White</Color>
 	</Window.Resources>
 
 	<Window.Styles>
@@ -32,7 +36,7 @@
 		</Style>
 		<Style Selector="Button.Semaphore">
 			<Setter Property="CornerRadius" Value="100"/>
-			<Setter Property="BorderBrush" Value="Gray"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource ThreeDotBorderColor}"/>
 			<Setter Property="BorderThickness" Value="1.5"/>
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
@@ -52,12 +56,12 @@
 			<Setter Property="BorderBrush" Value="{Binding $parent[Button].BorderBrush} "/>
 		</Style>
 		<Style Selector="Button.Icon">
-			<Setter Property="Foreground" Value="Gray"/>
+			<Setter Property="Foreground" Value="{DynamicResource TopPanelInActiveTextForeground}"/>
 			<Setter Property="Background" Value="Transparent"/>			
 			<Setter Property="CornerRadius" Value="0"/>
 		</Style>		
 		<Style Selector="Button.Icon:pointerover">
-			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Foreground" Value="{DynamicResource TopPanelActiveTextForeground}"/>
 		</Style>
 		<Style Selector="Button.Icon:disabled /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="Transparent"/>
@@ -65,23 +69,23 @@
 
 		<Style Selector="Window[IsActive=true] Grid#TOP">
 			<Setter Property="IsEnabled" Value="True"/>
-			<Setter Property="Background" Value="{DynamicResource ActiveColor}"/>
+			<Setter Property="Background" Value="{DynamicResource TopPanelActiveColor}"/>
 		</Style>
 		<Style Selector="Window[IsActive=False] Grid#TOP">
 			<Setter Property="IsEnabled" Value="False"/>
-			<Setter Property="Background" Value="{DynamicResource SleepColor}"/>
+			<Setter Property="Background" Value="{DynamicResource TopPanelInActiveColor}"/>
 		</Style>
 
 		<Style Selector="Grid:pointerover > Button#b1">
-			<Setter Property="Background" Value="{DynamicResource RED}"/>
+			<Setter Property="Background" Value="{DynamicResource CloseDotColor}"/>
 			<Setter Property="BorderThickness" Value="0"/>
 		</Style>
 		<Style Selector="Grid:pointerover > Button#b2">
-			<Setter Property="Background" Value="{DynamicResource YEL}"/>
+			<Setter Property="Background" Value="{DynamicResource HideDotColor}"/>
 			<Setter Property="BorderThickness" Value="0"/>
 		</Style>
 		<Style Selector="Grid:pointerover > Button#b3">
-			<Setter Property="Background" Value="{DynamicResource GRN}"/>
+			<Setter Property="Background" Value="{DynamicResource MaximizeDotColor}"/>
 			<Setter Property="BorderThickness" Value="0"/>
 		</Style>
 
@@ -90,7 +94,7 @@
 	<Grid RowDefinitions="50, *">
 		<Grid Name="TOP" Grid.Row="0" ColumnDefinitions="Auto, Auto, *">
 			
-			<Grid Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto, Auto">
+			<Grid Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto, Auto" VerticalAlignment="Stretch" Background="Transparent">
 				<Button Name="b1" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>				
 				<Button Name="b2" Classes="Button Semaphore" Grid.Column="1" Height="15" Width="15" Margin="5"/>
 				<Button Name="b3" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>				
@@ -108,12 +112,11 @@
 				</ListBox.ItemsPanel>
 				<ListBox.Styles>
 					<Style Selector="ListBoxItem:selected /template/ ContentPresenter">						
-						<Setter Property="TextBlock.Foreground" Value="White"/>
+						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelTextActiveForeground}"/>
 						<Setter Property="TextBlock.Background" Value="#0FFFFFFF"/>
 					</Style>
-					<Style Selector="ListBoxItem">
-						<Setter Property="TextBlock.Foreground" Value="LightGray"/>						
-						<Setter Property="TextBlock.Foreground" Value="Gray"/>						
+					<Style Selector="ListBoxItem">						
+						<Setter Property="TextBlock.Foreground" Value="{DynamicResource TopPanelInActiveTextForeground}"/>						
 					</Style>
 				</ListBox.Styles>
 				<ListBox.ItemTemplate>
@@ -123,10 +126,9 @@
 				</ListBox.ItemTemplate>				
 			</ListBox>
 		</Grid>
-		<Grid Grid.Row="1" Background="White">
+		<Grid Grid.Row="1">			
 			<Grid.DataTemplates>
-				<DataTemplate DataType="{x:Type tabvms:testTabVM}">
-					<!--<TextBlock Text="{Binding Description}"/>-->
+				<DataTemplate DataType="{x:Type tabvms:testTabVM}">					
 					<tabview:testTab/>
 				</DataTemplate>				
 			</Grid.DataTemplates>
