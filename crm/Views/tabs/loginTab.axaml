@@ -2,51 +2,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"						 
+			 xmlns:b="using:crm.Views"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="crm.Views.tabs.loginTab">
 	<UserControl.Styles>
-		<StyleInclude Source="/Styles/TabStyles.axaml" />
+		<StyleInclude Source="/Styles/TabStyles.axaml" />		
 	</UserControl.Styles>
 	<Grid Classes="Grid Tab">		
 		<Image Source="/Assets/logo.png" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20"/>
 		<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
-			<TextBox Classes="TextBox CenterBlack" Watermark="mymail@protonmail.com" Margin="5"/>
-			<TextBox Classes="TextBox revealPasswordButton" PasswordChar="•" Watermark="пароль" Margin="5" FontFamily="Roboto" FontSize="12">
-				<TextBox.Styles>
-					<Style Selector="TextBox.revealPasswordButton /template/ Border#PART_BorderElement">
-						<Setter Property="BorderThickness" Value="2"/>
-						<Setter Property="BorderBrush" Value="Black"/>
-					</Style>
-					<Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-						<Setter Property="BorderBrush" Value="{DynamicResource WorkAreaTextBoxBorderFocus}"/>												
-					</Style>
-					<Style Selector="TextBox">
-						<Setter Property="Padding" Value="4"/>
-						<Setter Property="VerticalContentAlignment" Value="Center"/>
-					</Style>
-					<Style Selector="ToggleButton.passwordBoxRevealButton /template/ Path#PART_GlyphElement_Reveal,
-						ToggleButton.passwordBoxRevealButton /template/ Path#PART_GlyphElement_Hide">
-						<Setter Property="Fill" Value="{DynamicResource WorkAreaTextBoxBorderFocus}" />
-					</Style>
-					<Style Selector="ToggleButton.passwordBoxRevealButton:pressed /template/ Border#PART_ButtonLayoutBorder,
-                   ToggleButton.passwordBoxRevealButton:checked /template/ Border#PART_ButtonLayoutBorder,
-                   ToggleButton.passwordBoxRevealButton:indeterminate /template/ Border#PART_ButtonLayoutBorder">
-						<Setter Property="Background" Value="Transparent" />
-						<Setter Property="BorderBrush" Value="{DynamicResource WorkAreaTextBoxBorderFocus}"/>
-						<Setter Property="Margin" Value="-2"/>
-					</Style>
-					<Style Selector="ToggleButton.passwordBoxRevealButton:pointerover /template/ Path#PART_GlyphElement_Reveal,
-						ToggleButton.passwordBoxRevealButton:pointerover /template/ Path#PART_GlyphElement_Hide">
-						<Setter Property="Fill" Value="{DynamicResource WorkAreaTextBoxBorderFocus}" />
-					</Style>
-					<Style Selector="ToggleButton.passwordBoxRevealButton:pressed /template/ Path#PART_GlyphElement_Reveal,
-                   ToggleButton.passwordBoxRevealButton:checked /template/ Path#PART_GlyphElement_Hide,
-                   ToggleButton.passwordBoxRevealButton:indeterminate /template/ Path#PART_GlyphElement_Reveal">
-						<Setter Property="Fill" Value="{DynamicResource WorkAreaTextBoxBorderFocus}" />
-					</Style>
-				</TextBox.Styles>
+			<TextBox				
+				Classes="TextBox CenterBlack"
+				Watermark="mymail@protonmail.com"
+				Margin="5">
+				<i:Interaction.Behaviors>
+					<!--<b:FocusOnPointerPressedBehavior />-->
+					<b:LostFocusUpdateBindingBehavior Text="{Binding Login}"/>
+				</i:Interaction.Behaviors>	
 			</TextBox>
+
+			<TextBox Text="{Binding Password}"
+					 Classes="TextBox revealPasswordButton" 
+					 PasswordChar="•" 
+					 Watermark="пароль"
+					 Margin="5"
+					 FontSize="12"/>
 			<Button Command="{Binding enterCmd}" Classes="Button CenterBlack">
 				Вход
 			</Button>

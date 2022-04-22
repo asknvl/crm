@@ -1,27 +1,29 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">	
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<StyleInclude Source="/Styles/DataValidationErros.axaml" />
+
 	<Style Selector="Grid.Tab">
 		<Setter Property="Background" Value="{DynamicResource WorkAreaBackground}"/>
 		<Setter Property="VerticalAlignment" Value="Stretch"/>
 		<Setter Property="HorizontalAlignment" Value="Stretch"/>
 	</Style>
 	<!--TextBoxes-->	
-	<Style Selector="TextBox.CenterBlack">
-		<Setter Property="Foreground" Value="{DynamicResource WorkAreaTextForeground}"/>				
+	<Style Selector="TextBox.CenterBlack">		
+		<Setter Property="Foreground" Value="{DynamicResource TextControlForegroundBrush}"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrush}"/>
 		<Setter Property="FontSize" Value="12"/>		
 		<Setter Property="Padding" Value="4"/>
 		<Setter Property="VerticalContentAlignment" Value="Center"/>		
 	</Style>	
-	<Style Selector="TextBox.CenterBlack:focus">
-		<Setter Property="FontSize" Value="12"/>
-	</Style>
 	<Style Selector="TextBox.CenterBlack /template/ Border#PART_BorderElement">
-		<Setter Property="BorderThickness" Value="2"/>
-		<Setter Property="BorderBrush" Value="Black"/>
+		<Setter Property="BorderThickness" Value="2"/>		
 	</Style>
-	<Style Selector="TextBox.CenterBlack:focus /template/ Border#PART_BorderElement">
-		<Setter Property="BorderBrush" Value="{DynamicResource WorkAreaTextBoxBorderFocus}"/>	
+	<Style Selector="DataValidationErrors">
+		<Setter Property="Template" Value="{DynamicResource TooltipDataValidationContentTemplate}"/>
+		<Setter Property="ErrorTemplate" Value="{DynamicResource TooltipDataValidationErrorTemplate}" />
 	</Style>
+	
 	<!--TextBlocks-->
 	<Style Selector="TextBlock.CenterBlack">
 		<Setter Property="Foreground" Value="{DynamicResource WorkAreaTextForeground}"/>						
@@ -44,6 +46,7 @@
 		<Setter Property="Background" Value="{DynamicResource WorkAreaButtonBackgroundPointerOver}"/>
 		<Setter Property="TextBlock.Foreground" Value="{DynamicResource WorkAreaButtonForegroundPointerOver}"/>
 	</Style>
+	
 	<Style Selector="Button.Hyper">		
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Foreground" Value="{DynamicResource WorkAreaTextBlockClickable}"/>		
@@ -59,6 +62,7 @@
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="TextBlock.Foreground" Value="{DynamicResource WorkAreaTextBlockClickable}"/>
 	</Style>
+	
 	<Style Selector="Button.FlatIcon">
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Foreground" Value="{DynamicResource  WorkAreaIconButtonForeground}"/>		
@@ -74,6 +78,39 @@
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="TextBlock.Foreground" Value="{DynamicResource  WorkAreaIconButtonForegroundPointerOver}"/>
 	</Style>
+	
+	<Style Selector="TextBox.revealPasswordButton /template/ Border#PART_BorderElement">
+		<Setter Property="BorderThickness" Value="2"/>
+		<Setter Property="BorderBrush" Value="Black"/>
+	</Style>
+	<!--<Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+		<Setter Property="BorderBrush" Value="{DynamicResource WorkAreaTextBoxBorderFocus}"/>
+	</Style>-->
+	<Style Selector="TextBox">
+		<Setter Property="Padding" Value="4"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+	</Style>
+	<Style Selector="ToggleButton.passwordBoxRevealButton /template/ Path#PART_GlyphElement_Reveal,
+						ToggleButton.passwordBoxRevealButton /template/ Path#PART_GlyphElement_Hide">
+		<Setter Property="Fill" Value="{DynamicResource WorkAreaTextBoxBorderFocus}" />
+	</Style>
+	<Style Selector="ToggleButton.passwordBoxRevealButton:pressed /template/ Border#PART_ButtonLayoutBorder,
+                   ToggleButton.passwordBoxRevealButton:checked /template/ Border#PART_ButtonLayoutBorder,
+                   ToggleButton.passwordBoxRevealButton:indeterminate /template/ Border#PART_ButtonLayoutBorder">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="{DynamicResource WorkAreaTextBoxBorderFocus}"/>
+		<Setter Property="Margin" Value="-2"/>
+	</Style>
+	<Style Selector="ToggleButton.passwordBoxRevealButton:pointerover /template/ Path#PART_GlyphElement_Reveal,
+						ToggleButton.passwordBoxRevealButton:pointerover /template/ Path#PART_GlyphElement_Hide">
+		<Setter Property="Fill" Value="{DynamicResource WorkAreaTextBoxBorderFocus}" />
+	</Style>
+	<Style Selector="ToggleButton.passwordBoxRevealButton:pressed /template/ Path#PART_GlyphElement_Reveal,
+                   ToggleButton.passwordBoxRevealButton:checked /template/ Path#PART_GlyphElement_Hide,
+                   ToggleButton.passwordBoxRevealButton:indeterminate /template/ Path#PART_GlyphElement_Reveal">
+		<Setter Property="Fill" Value="{DynamicResource WorkAreaTextBoxBorderFocus}" />
+	</Style>
+	<!--ContextMenu-->	
 	<Design.PreviewWith>
 		<Border Padding="20">
 			<!-- Add Controls for Previewer Here -->

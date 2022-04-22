@@ -1,6 +1,8 @@
-﻿using ReactiveUI;
+﻿using Avalonia.Data;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reactive;
 using System.Text;
@@ -11,11 +13,16 @@ namespace crm.ViewModels.tabs
     public class loginVM : Tab 
     {
         #region properties
-        string login;
+        string login;        
         public string Login
         {
             get => login;
-            set => this.RaiseAndSetIfChanged(ref login, value); 
+            set
+            {
+                if (!value.Contains("@protonmail.com"))
+                    throw new DataValidationException("Введен некорректный e-mail");
+                this.RaiseAndSetIfChanged(ref login, value);                                                
+            }
         }
 
         string password;
@@ -28,9 +35,9 @@ namespace crm.ViewModels.tabs
         #endregion
 
         #region commands
-        ReactiveCommand<Unit, Unit> enterCmd { get; }
-        ReactiveCommand<Unit, Unit> createCmd { get; }
-        ReactiveCommand<Unit, Unit> forgotCmd { get; }
+        public ReactiveCommand<Unit, Unit> enterCmd { get; }
+        public ReactiveCommand<Unit, Unit> createCmd { get; }
+        public ReactiveCommand<Unit, Unit> forgotCmd { get; }
         #endregion
 
         public loginVM()
