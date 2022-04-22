@@ -25,6 +25,9 @@
 		<Color x:Key="WorkAreaButtonForeground">White</Color>
 		<Color x:Key="WorkAreaButtonForegroundPointerOver">White</Color>
 		<Color x:Key="WorkAreaButtonBackgroundPointerOver">#BB000000</Color>
+		<Color x:Key="WorkAreaIconButtonBackground">White</Color>
+		<Color x:Key="WorkAreaIconButtonForeground">#FF000000</Color>
+		<Color x:Key="WorkAreaIconButtonForegroundPointerOver">#BB000000</Color>
 		
 		<Color x:Key="WorkAreaTextBoxBorderFocus">#FF5D5AF7</Color>
 		<Color x:Key="WorkAreaTextBlockClickable">#FF5D5AF7</Color>		

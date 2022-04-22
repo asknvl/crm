@@ -10,7 +10,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="crm.Views.MainWindow"		
 		ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaChromeHints="NoChrome"	
         ExtendClientAreaTitleBarHeightHint="-1">
 
     <Design.DataContext>
@@ -32,8 +32,25 @@
 	<Window.Styles>
 		
 		<Style Selector="TextBlock">
-			<Setter Property="FontFamily" Value="Roboto"/>
+			<Setter Property="FontFamily" Value="/Assets/fonts/Inter/Inter.ttf#Inter"/>
 		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="FontFamily" Value="/Assets/fonts/Inter/Inter.ttf#Inter"/>			
+		</Style>
+		<Style Selector="Button /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="TextBlock.FontFamily" Value="/Assets/fonts/Inter/Inter.ttf#Inter"/>
+		</Style>
+
+		<!--<Style Selector="TextBlock">
+			<Setter Property="FontFamily" Value="/Assets/fonts/Oswald/Oswald.ttf#Oswald"/>
+		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="FontFamily" Value="/Assets/fonts/Oswald/Oswald.ttf#Oswald"/>
+		</Style>
+		<Style Selector="Button /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="TextBlock.FontFamily" Value="/Assets/fonts/Oswald/Oswald.ttf#Oswald"/>
+		</Style>-->
+		
 		<Style Selector="Button.Semaphore">
 			<Setter Property="CornerRadius" Value="100"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThreeDotBorderColor}"/>
@@ -76,7 +93,6 @@
 			<Setter Property="IsEnabled" Value="False"/>
 			<Setter Property="Background" Value="{DynamicResource TopPanelInActiveColor}"/>
 		</Style>
-
 		<Style Selector="Grid:pointerover > Button#b1">
 			<Setter Property="Background" Value="{DynamicResource CloseDotColor}"/>
 			<Setter Property="BorderThickness" Value="0"/>
@@ -102,7 +118,7 @@
 			<Button Grid.Column="1" Classes="Button Icon" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0">				
 				<material:MaterialIconExt Kind="Home" Size="24"/>				
 			</Button>
-			<ListBox Grid.Column="2" Items="{Binding TestList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
+			<ListBox Grid.Column="2" Items="{Binding TabsList}" SelectedItem="{Binding Content}" Background="Transparent" Foreground="White" VerticalAlignment="Stretch">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
 						<StackPanel Orientation="Horizontal"/>
@@ -125,7 +141,7 @@
 					</Style>
 				</ListBox.Styles>
 				<ListBox.ItemTemplate>
-					<DataTemplate DataType="{x:Type tabvms:loginVM}">						
+					<DataTemplate DataType="{x:Type tabvms:Tab}">						
 						<TextBlock Text="{Binding Title}" FontSize="12" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>						
 					</DataTemplate>
 				</ListBox.ItemTemplate>				
@@ -135,7 +151,10 @@
 			<Grid.DataTemplates>
 				<DataTemplate DataType="{x:Type tabvms:loginVM}">					
 					<tabview:loginTab/>
-				</DataTemplate>				
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type tabvms:tokenVM}">
+					<tabview:toketTab/>
+				</DataTemplate>
 			</Grid.DataTemplates>
 			<ContentControl Content="{Binding Content}"/>
 		</Grid>
