@@ -8,6 +8,7 @@ namespace crm.Models.validators
 {
     public interface IValidator<T>
     {
-        bool IsValid(T value);
+        string Message { get; }
+        bool IsValid(T value);        
     }
 }

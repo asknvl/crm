@@ -29,7 +29,6 @@ namespace crm.ViewModels.tabs
             {
                 value = la.AutoComplete(value);              
                 isLogin = lv.IsValid(value);
-
                 if (!isLogin)
                     throw new DataValidationException("Введен некорректный e-mail");
                 IsInputValid = CheckValidity(new bool[] { isLogin, isPassword });

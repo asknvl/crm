@@ -16,6 +16,8 @@ namespace crm.ViewModels.tabs
         bool isEmail;
         IValidator<string> email_vl = new LoginValidator<string>();
         IAutoComplete email_av = new EmailAutoComplete();
+        bool isPassword1, isPassword2;
+        IValidator<string> pswrd_vl = new PasswordValidator<string>();
         #endregion
         #region properties
         string email;
@@ -26,9 +28,9 @@ namespace crm.ViewModels.tabs
             {
                 value = email_av.AutoComplete(value);
                 isEmail = email_vl.IsValid(value);
-
                 if (!isEmail)
-                    throw new DataValidationException("Введен некорректный e-mail");                
+                    throw new DataValidationException("Введен некорректный e-mail");
+                updateValidity();
                 this.RaiseAndSetIfChanged(ref email, value);
             }
         }
@@ -39,6 +41,27 @@ namespace crm.ViewModels.tabs
             get => password1;
             set
             {
+                isPassword1 = pswrd_vl.IsValid(value);
+                if (!isPassword1)
+                    throw new DataValidationException(pswrd_vl.Message);
+                updateValidity();
+                this.RaiseAndSetIfChanged(ref password1, value);
+            }
+        }
+
+        string password2;
+        public string Password2
+        {
+            get => password2;
+            set
+            {
+                isPassword2 = pswrd_vl.IsValid(value);
+                if (!isPassword2)
+                    throw new DataValidationException(pswrd_vl.Message);
+                isPassword2 = value.Equals(Password1);
+                if (!isPassword2)
+                    throw new DataValidationException("Введенные пароли не совпадают");
+                updateValidity();
                 this.RaiseAndSetIfChanged(ref password1, value);
             }
         }
@@ -51,9 +74,36 @@ namespace crm.ViewModels.tabs
             Title = "Регистрация";
 
             IsInputValid = CheckValidity(new bool[] { 
-                isEmail 
+                //isEmail,
+                //isPassword1,
+                //isPassword2,
+                //isFullName,
+                //isBirthDate,
+                //isPhoneMumber,
+                //isTelegram,
+                //isWallet,
+                //isDevice
+                true
             });
 
         }
+
+        #region helpers
+        void updateValidity()
+        {
+            IsInputValid = CheckValidity(new bool[] { 
+                //isEmail,
+                //isPassword1,
+                //isPassword2,
+                //isFullName,
+                //isBirthDate,
+                //isPhoneMumber,
+                //isTelegram,
+                //isWallet,
+                //isDevice
+                true
+            });
+        }
+        #endregion
     }
 }

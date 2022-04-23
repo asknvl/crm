@@ -23,11 +23,13 @@
 				Margin="5"
 				/>
 			<TextBox
+				Text="{Binding Password1}"
 				Classes="TextBox CenterBlack"
 				Watermark="пароль"
 				Margin="5"
 				/>
 			<TextBox
+				Text="{Binding Password2}"
 				Classes="TextBox CenterBlack"
 				Watermark="пароль второй раз"
 				Margin="5"

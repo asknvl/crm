@@ -8,6 +8,8 @@ namespace crm.Models.validators
 {
     public class PasswordValidator<T> : IValidator<T>
     {
+        public string Message => "Пароль должен состоять не менее, чем из 12 символов и содрежать в себе буквы, числа и знаки";
+
         public bool IsValid(T value)
         {
             if (value == null)
