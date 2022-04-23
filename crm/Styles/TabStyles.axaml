@@ -10,8 +10,7 @@
 	</Style>	
 	<!--TextBoxes-->
 	<Style Selector="TextBox.CenterBlack, TextBox.revealPasswordButton, AutoCompleteBox">		
-		<Setter Property="Foreground" Value="{DynamicResource TextControlForegroundBrush}"/>
-		<Setter Property="BorderBrush" Value="{DynamicResource TextControlBorderBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource TextControlForegroundBrush}"/>		
 		<Setter Property="BorderThickness" Value="2"/>
 		<Setter Property="FontSize" Value="12"/>
 		<!--<Setter Property="VerticalContentAlignment" Value="Center"/>-->		

@@ -17,7 +17,7 @@ namespace crm.ViewModels.tabs
         #region vars
         bool isLogin;       
         bool isPassword;
-        IValidator<string> lv = new LoginValidator<string>();
+        IValidator<string> lv = new LoginValidator();
         IAutoComplete la = new EmailAutoComplete();       
         #endregion
         #region properties       

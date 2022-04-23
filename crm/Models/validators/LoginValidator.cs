@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace crm.Models.validators
 {
-    public class LoginValidator<T> : IValidator<T>
+    public class LoginValidator : IValidator<string>
     {
         string domen = "@protonmail.com";
         public string Message => "Введен неправильный адрес электронной почты";
-        public bool IsValid(T value)
+        public bool IsValid(string value)
         {
             if (value == null)
                 return false;

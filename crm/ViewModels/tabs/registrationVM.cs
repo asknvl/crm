@@ -13,11 +13,11 @@ namespace crm.ViewModels.tabs
     public class registrationVM : Tab
     {
         #region vars
-        bool isEmail;
-        IValidator<string> email_vl = new LoginValidator<string>();
-        IAutoComplete email_av = new EmailAutoComplete();
-        bool isPassword1, isPassword2;
-        IValidator<string> pswrd_vl = new PasswordValidator<string>();
+        bool isEmail,isPassword1, isPassword2, isFullName;
+        IValidator<string> email_vl = new LoginValidator();
+        IAutoComplete email_av = new EmailAutoComplete();        
+        IValidator<string> pswrd_vl = new PasswordValidator();
+        IValidator<string> fn_vl = new FullNameValidator();
         #endregion
         #region properties
         string email;
@@ -62,7 +62,20 @@ namespace crm.ViewModels.tabs
                 if (!isPassword2)
                     throw new DataValidationException("Введенные пароли не совпадают");
                 updateValidity();
-                this.RaiseAndSetIfChanged(ref password1, value);
+                this.RaiseAndSetIfChanged(ref password2, value);
+            }
+        }
+
+        string fullname;
+        public string FullName
+        {
+            get => fullname;
+            set
+            {
+                isFullName = fn_vl.IsValid(value);
+                if (!isFullName)
+                    throw new DataValidationException(fn_vl.Message);
+                this.RaiseAndSetIfChanged(ref fullname, value); 
             }
         }
         #endregion
