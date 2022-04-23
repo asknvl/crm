@@ -19,5 +19,6 @@ namespace crm.Views
             base.OnPointerPressed(e);
             BeginMoveDrag(e);
         }
+        
     }
 }

@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace crm.Views.tabs
 {
-    public partial class toketTab : UserControl
+    public partial class registrationTab : UserControl
     {
-        public toketTab()
+        public registrationTab()
         {
             InitializeComponent();
         }

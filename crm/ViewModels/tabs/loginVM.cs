@@ -1,4 +1,6 @@
 ﻿using Avalonia.Data;
+using crm.Models.autocompletions;
+using crm.Models.validators;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,25 @@ namespace crm.ViewModels.tabs
 {
     public class loginVM : Tab 
     {
-        #region properties
+        #region vars
+        bool isLogin;       
+        bool isPassword;
+        IValidator<string> lv = new LoginValidator<string>();
+        IAutoComplete la = new EmailAutoComplete();       
+        #endregion
+        #region properties       
         string login;        
-        public string Login
+        string Login
         {
             get => login;
             set
             {
-                if (!value.Contains("@protonmail.com"))
+                value = la.AutoComplete(value);              
+                isLogin = lv.IsValid(value);
+
+                if (!isLogin)
                     throw new DataValidationException("Введен некорректный e-mail");
+                IsInputValid = CheckValidity(new bool[] { isLogin, isPassword });
                 this.RaiseAndSetIfChanged(ref login, value);                                                
             }
         }
@@ -29,8 +41,11 @@ namespace crm.ViewModels.tabs
         public string Password
         {
             get => password;
-            set => this.RaiseAndSetIfChanged(ref password, value);
-
+            set {
+                isPassword = value.Length > 0;
+                IsInputValid = CheckValidity(new bool[] { isLogin, isPassword });
+                this.RaiseAndSetIfChanged(ref password, value);
+            }
         }
         #endregion
 
@@ -43,6 +58,10 @@ namespace crm.ViewModels.tabs
         public loginVM()
         {
             Title = "Вход";
+
+            #region dependencies
+           
+            #endregion
 
             #region commands
             enterCmd = ReactiveCommand.CreateFromTask(async () => {

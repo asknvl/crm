@@ -1,3 +1,4 @@
+using Avalonia.Controls;
 using crm.Models.user;
 using crm.ViewModels.tabs;
 using ReactiveUI;
@@ -5,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 
 namespace crm.ViewModels
@@ -15,20 +17,12 @@ namespace crm.ViewModels
         #region vars
         loginVM loginTab;
         tokenVM tokenTab;
+        registrationVM registrationTab;
         #endregion
 
-        #region properties
-        BaseUser user;
-        public BaseUser User
-        {
-            get => user;
-            set => this.RaiseAndSetIfChanged(ref user, value);  
-        }
-
+        #region properties      
         public ObservableCollection<Tab> TabsList { get; set; } = new ObservableCollection<Tab>()
-        {
-            //new loginVM(),            
-            //new tokenVM()
+        {            
         };
 
         object? content;
@@ -37,10 +31,45 @@ namespace crm.ViewModels
             get => content;
             set => this.RaiseAndSetIfChanged(ref content, value);
         }
+
+        WindowState windowState;
+        public WindowState WindowState { 
+            get => windowState; 
+            set => this.RaiseAndSetIfChanged(ref windowState, value); 
+        }
+        #endregion
+
+        #region commands
+        public ReactiveCommand<Unit, Unit> closeCmd { get; }
+        public ReactiveCommand<Unit, Unit> maximizeCmd { get; }
+        public ReactiveCommand<Unit, Unit> minimizeCmd { get; }
         #endregion
 
         public mainVM()
         {
+            #region init
+            WindowState = WindowState.Normal;
+            #endregion
+
+            #region commands
+            closeCmd = ReactiveCommand.Create(() => { });
+            maximizeCmd = ReactiveCommand.Create(() => {
+                if (WindowState == WindowState.Maximized)
+                    WindowState = WindowState.Normal;
+                else
+                if (WindowState == WindowState.Normal)
+                    WindowState = WindowState.Maximized;
+                else
+                if (WindowState == WindowState.Minimized)
+                    WindowState = WindowState.Maximized;
+
+
+            });
+            minimizeCmd = ReactiveCommand.Create(() => {
+                WindowState = WindowState.Normal;
+                WindowState = WindowState.Minimized;
+            });
+            #endregion
 
             #region loginTab
             loginTab = new loginVM();
@@ -60,9 +89,14 @@ namespace crm.ViewModels
                 if (result)
                 {
                     CloseTab(tokenTab);
-                    ShowTab(loginTab);
+                    ShowTab(registrationTab);
                 }
-            };            
+            };
+            #endregion
+
+            #region registrationTab
+            registrationTab = new registrationVM();
+            registrationTab.CloseTabEvent += CloseTab;
             #endregion
 
             ShowTab(loginTab);          

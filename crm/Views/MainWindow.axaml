@@ -10,7 +10,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="crm.Views.MainWindow"		
 		ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="NoChrome"	
+        ExtendClientAreaChromeHints="NoChrome"
+		WindowState="{Binding WindowState}"
         ExtendClientAreaTitleBarHeightHint="-1">
 
     <Design.DataContext>
@@ -91,9 +92,9 @@
 	<Grid RowDefinitions="50, *">
 		<Grid Name="TOP" Grid.Row="0" ColumnDefinitions="Auto, Auto, *">			
 			<Grid Grid.Column="0" ColumnDefinitions="Auto, Auto, Auto, Auto" VerticalAlignment="Stretch" Background="Transparent">
-				<Button Name="b1" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>				
-				<Button Name="b2" Classes="Button Semaphore" Grid.Column="1" Height="15" Width="15" Margin="5"/>
-				<Button Name="b3" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>				
+				<Button Name="b1" Command="{Binding closeCmd}" Classes="Button Semaphore" Grid.Column="0" Height="15" Width="15" Margin="5"/>				
+				<Button Name="b2" Command="{Binding maximizeCmd}" Classes="Button Semaphore" Grid.Column="1" Height="15" Width="15" Margin="5"/>
+				<Button Name="b3" Command="{Binding minimizeCmd}" Classes="Button Semaphore" Grid.Column="2" Height="15" Width="15" Margin="5"/>				
 			</Grid>
 			<Button Grid.Column="1" 
 					Classes="Button Icon" 
@@ -149,7 +150,10 @@
 					<tabview:loginTab/>
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type tabvms:tokenVM}">
-					<tabview:toketTab/>
+					<tabview:tokenTab/>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type tabvms:registrationVM}">
+					<tabview:registrationTab/>
 				</DataTemplate>
 			</Grid.DataTemplates>
 			<ContentControl Content="{Binding Content}"/>

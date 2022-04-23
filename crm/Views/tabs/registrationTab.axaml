@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="crm.Views.tabs.registrationTab">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TabStyles.axaml"/>
+	</UserControl.Styles>
+	<Grid
+		Classes="Grid Tab">
+		<Image
+			Source="/Assets/logo.png"
+			Width="100"
+			VerticalAlignment="Top"
+			HorizontalAlignment="Left"
+			Margin="20"/>
+		<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
+			<AutoCompleteBox
+				Text="{Binding Email}"
+				Classes="TextBox CenterBlack"
+				Watermark="mymail@protonmail.com"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="пароль"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="пароль второй раз"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="Имя Фамилия Очество"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="01.02.2022"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="+7 (918) 060-67-40"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="@telegram"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="USDT TRC20"
+				Margin="5"
+				/>
+			<TextBox
+				Classes="TextBox CenterBlack"
+				Watermark="Выберите устройство"
+				Margin="5"
+				/>
+			<Button Command="{Binding registerCmd}" Classes="Button CenterBlack" Content="Зарегистрироваться"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

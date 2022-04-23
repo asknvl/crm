@@ -17,6 +17,13 @@ namespace crm.ViewModels.tabs
             get => title;
             set => this.RaiseAndSetIfChanged(ref title, value);
         }
+
+        bool isInputValid;
+        protected bool IsInputValid
+        {
+            get => isInputValid;
+            set => this.RaiseAndSetIfChanged(ref isInputValid, value);
+        }
         #endregion
 
         #region commands
@@ -29,6 +36,13 @@ namespace crm.ViewModels.tabs
                 CloseTabEvent?.Invoke(this);
             });
         }
+
+        #region protected
+        protected bool CheckValidity(bool[] fields)
+        {
+            return !fields.Any(p => p == false);
+        }
+        #endregion
 
         #region public
         public event Action<Tab> CloseTabEvent;

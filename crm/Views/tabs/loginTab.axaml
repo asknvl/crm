@@ -13,15 +13,25 @@
 	<Grid Classes="Grid Tab">		
 		<Image Source="/Assets/logo.png" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20"/>
 		<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
-			<TextBox				
+			<!--<TextBox		
+				Text="{Binding Login, Mode=TwoWay}"
 				Classes="TextBox CenterBlack"
 				Watermark="mymail@protonmail.com"
 				Margin="5">
-				<i:Interaction.Behaviors>
-					<!--<b:FocusOnPointerPressedBehavior />-->
+				--><!--<i:Interaction.Behaviors>					
 					<b:LostFocusUpdateBindingBehavior Text="{Binding Login}"/>
-				</i:Interaction.Behaviors>	
-			</TextBox>
+				</i:Interaction.Behaviors>--><!--	
+			</TextBox>-->
+
+			<AutoCompleteBox
+				Text="{Binding Login, Mode=TwoWay}"
+				Classes="TextBox CenterBlack"
+				Watermark="mymail@protonmail.com"
+				Margin="5">
+				<!--<i:Interaction.Behaviors>					
+					<b:LostFocusUpdateBindingBehavior Text="{Binding Login}"/>
+				</i:Interaction.Behaviors>-->
+			</AutoCompleteBox>
 
 			<TextBox Text="{Binding Password}"
 					 Classes="TextBox revealPasswordButton" 
@@ -29,7 +39,7 @@
 					 Watermark="пароль"
 					 Margin="5"
 					 FontSize="12"/>
-			<Button Command="{Binding enterCmd}" Classes="Button CenterBlack">
+			<Button Command="{Binding enterCmd}" IsEnabled="{Binding IsInputValid}" Classes="Button CenterBlack">
 				Вход
 			</Button>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

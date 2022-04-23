@@ -68,4 +68,9 @@
       <SubType>Designer</SubType>
     </AvaloniaXaml>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\tabs\tokenTab.axaml.cs">
+      <DependentUpon>tokenTab.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
