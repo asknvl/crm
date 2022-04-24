@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:cust="using:crm.Views.custom"
+			 xmlns:material="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="crm.Views.tabs.registrationTab">
 	<UserControl.Styles>
@@ -62,29 +63,37 @@
 				Margin="5"
 				/>
 			<TextBox
+				Text="{Binding Wallet}"
 				Classes="TextBox CenterBlack"
 				Watermark="USDT TRC20"
 				Margin="5">
 				<TextBox.Styles>
-					<Style Selector="TextBox">
+					<Style Selector="TextBox">						
 						<Setter Property="InnerRightContent">
 							<Template>
-								<Button Classes="Button Icom">
-									1
+								<Button Command="{Binding pasteCmd}" Classes="Button FlatIcon" Margin="2" Foreground="Gray">
+									<material:MaterialIconExt Kind="ClipboardArrowLeftOutline" Size="24"/>
 								</Button>
 							</Template>
 						</Setter>
 					</Style>
-				</TextBox.Styles>
-				
+					<Style Selector="TextBox:error Panel#PART_InlineErrorTemplatePanel">						
+						<Setter Property="IsVisible" Value="False"/>
+					</Style>
+				</TextBox.Styles>				
 			</TextBox>
-				
-				
-			<TextBox
+			<AutoCompleteBox
+				Text="{Binding Device}"
+				Items="{Binding Devices}"
 				Classes="TextBox CenterBlack"
-				Watermark="Выберите устройство"
-				Margin="5"
-				/>
+				Watermark="Выберите устройство"				
+				Margin="5">
+				<AutoCompleteBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding}" FontSize="12"/>
+					</DataTemplate>
+				</AutoCompleteBox.ItemTemplate>				
+			</AutoCompleteBox>			
 			<Button Command="{Binding registerCmd}" IsEnabled="{Binding IsInputValid}" Classes="Button CenterBlack" Content="Зарегистрироваться"/>
 		</StackPanel>
 	</Grid>

@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using crm.Models.api.server;
 using crm.Models.user;
 using crm.ViewModels.tabs;
 using ReactiveUI;
@@ -18,6 +19,7 @@ namespace crm.ViewModels
         loginVM loginTab;
         tokenVM tokenTab;
         registrationVM registrationTab;
+        BaseServerApi api;
         #endregion
 
         #region properties      
@@ -47,6 +49,11 @@ namespace crm.ViewModels
 
         public mainVM()
         {
+
+            #region dependencies
+            api = new ServerApi("http://185.46.9.229:4000");
+            #endregion
+
             #region init
             WindowState = WindowState.Normal;
             #endregion
@@ -83,12 +90,12 @@ namespace crm.ViewModels
             #endregion
 
             #region tokenTab
-            tokenTab = new tokenVM();
+            tokenTab = new tokenVM(api);
             tokenTab.CloseTabEvent += CloseTab;
             tokenTab.onTokenCheckResult += (result) => { 
                 if (result)
                 {
-                    CloseTab(tokenTab);
+                    //CloseTab(tokenTab);
                     ShowTab(registrationTab);
                 }
             };

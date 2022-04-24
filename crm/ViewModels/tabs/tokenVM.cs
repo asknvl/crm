@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using crm.Models.api.server;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +25,20 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> returnCmd { get; }
         #endregion
 
-        public tokenVM()
+        public tokenVM(BaseServerApi api)
         {
             Title = "Токен";
 
             #region commands
             continueCmd = ReactiveCommand.CreateFromTask(async () => {
-                onTokenCheckResult?.Invoke(true);
+                bool res = await api.ValidateRegToken(Token);
+                if (res)
+                {
+                    onTokenCheckResult?.Invoke(true);
+                    //OnCloseTab();
+                } else { 
+
+                }                
             });            
             returnCmd = ReactiveCommand.Create(() => {
                 OnCloseTab();
