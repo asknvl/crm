@@ -70,12 +70,12 @@
 				<TextBox.Styles>
 					<Style Selector="TextBox">						
 						<Setter Property="InnerRightContent">
-							<Template>
-								<Button Command="{Binding pasteCmd}" Classes="Button FlatIcon" Margin="2" Foreground="Gray">
-									<material:MaterialIconExt Kind="ClipboardArrowLeftOutline" Size="24"/>
-								</Button>
+							<Template>								
+									<Button Command="{Binding pasteCmd}" Classes="Button FlatIcon" Margin="2">
+										<material:MaterialIconExt Kind="ClipboardArrowLeftOutline" Size="24"/>
+									</Button>								
 							</Template>
-						</Setter>
+						</Setter>						
 					</Style>
 					<Style Selector="TextBox:error Panel#PART_InlineErrorTemplatePanel">						
 						<Setter Property="IsVisible" Value="False"/>
