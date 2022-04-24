@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:cust="using:crm.Views.custom"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="crm.Views.tabs.registrationTab">
 	<UserControl.Styles>
@@ -26,7 +27,7 @@
 				Text="{Binding Password1}"
 				Classes="TextBox CenterBlack"
 				Watermark="пароль"
-				Margin="5"
+				Margin="5"				
 				/>
 			<TextBox
 				Text="{Binding Password2}"
@@ -35,21 +36,27 @@
 				Margin="5"
 				/>
 			<TextBox
+				Text="{Binding FullName}"
 				Classes="TextBox CenterBlack"
 				Watermark="Имя Фамилия Очество"
 				Margin="5"
 				/>
-			<TextBox
+			<cust:DateTextBox				
+				Text="{Binding BirthDate}"
 				Classes="TextBox CenterBlack"
-				Watermark="01.02.2022"
+				Watermark="02.02.2022"
 				Margin="5"
-				/>
-			<TextBox
+				MaxLength="10"
+				/>		
+			<cust:PhoneNumberTextBox
+				Text="{Binding PhoneNumber}"
 				Classes="TextBox CenterBlack"
 				Watermark="+7 (918) 060-67-40"
 				Margin="5"
+				MaxLength="18"				
 				/>
 			<TextBox
+				Text="{Binding Telegram}"
 				Classes="TextBox CenterBlack"
 				Watermark="@telegram"
 				Margin="5"
@@ -57,14 +64,28 @@
 			<TextBox
 				Classes="TextBox CenterBlack"
 				Watermark="USDT TRC20"
-				Margin="5"
-				/>
+				Margin="5">
+				<TextBox.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="InnerRightContent">
+							<Template>
+								<Button Classes="Button Icom">
+									1
+								</Button>
+							</Template>
+						</Setter>
+					</Style>
+				</TextBox.Styles>
+				
+			</TextBox>
+				
+				
 			<TextBox
 				Classes="TextBox CenterBlack"
 				Watermark="Выберите устройство"
 				Margin="5"
 				/>
-			<Button Command="{Binding registerCmd}" Classes="Button CenterBlack" Content="Зарегистрироваться"/>
+			<Button Command="{Binding registerCmd}" IsEnabled="{Binding IsInputValid}" Classes="Button CenterBlack" Content="Зарегистрироваться"/>
 		</StackPanel>
 	</Grid>
 </UserControl>

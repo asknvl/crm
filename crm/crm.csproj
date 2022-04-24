@@ -9,15 +9,11 @@
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-    <AvaloniaXaml Remove="libs\**" />
-    <AvaloniaXaml Remove="Views\custom\**" />	  
+    <AvaloniaXaml Remove="libs\**" />	  
 	<AvaloniaResource Include="Styles\**" />	
 	<Compile Remove="libs\**" />
-    <Compile Remove="Views\custom\**" />
     <EmbeddedResource Remove="libs\**" />
-    <EmbeddedResource Remove="Views\custom\**" />
     <None Remove="libs\**" />
-    <None Remove="Views\custom\**" />
     <AvaloniaResource Remove="Styles\Colors.axaml" />
     <AvaloniaResource Remove="Styles\DataValidationErros.axaml" />
     <AvaloniaXaml Remove="Views\Colors.axaml" />

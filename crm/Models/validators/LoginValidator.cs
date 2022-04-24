@@ -9,7 +9,7 @@ namespace crm.Models.validators
     public class LoginValidator : IValidator<string>
     {
         string domen = "@protonmail.com";
-        public string Message => "Введен неправильный адрес электронной почты";
+        public string Message => "Введен неправильный адрес электронной почты (mymail@protonmail.com)";
         public bool IsValid(string value)
         {
             if (value == null)
