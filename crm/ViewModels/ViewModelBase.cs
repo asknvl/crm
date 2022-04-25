@@ -7,5 +7,10 @@ namespace crm.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {
+        public event Action onCloseRequest;
+        public void OnCloseRequest()
+        {
+            onCloseRequest?.Invoke();
+        }
     }
 }

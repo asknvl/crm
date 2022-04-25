@@ -10,7 +10,10 @@ namespace crm.ViewModels.tabs
 {
     public abstract class Tab : ViewModelBase
     {
+
         #region properties
+        protected ViewModelBase Parent { get; }
+
         string title;
         public string Title
         {
@@ -30,8 +33,10 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> closeCmd { get; }
         #endregion
 
-        public Tab()
+        public Tab(ViewModelBase parent)
         {
+            Parent = parent;
+
             closeCmd = ReactiveCommand.Create(() => {
                 CloseTabEvent?.Invoke(this);
             });

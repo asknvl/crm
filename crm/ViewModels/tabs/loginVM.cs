@@ -20,6 +20,7 @@ namespace crm.ViewModels.tabs
         IValidator<string> lv = new LoginValidator();
         IAutoComplete la = new EmailAutoComplete();       
         #endregion
+
         #region properties       
         string login;        
         string Login
@@ -54,7 +55,7 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> forgotCmd { get; }
         #endregion
 
-        public loginVM()
+        public loginVM(ViewModelBase parent) : base(parent)
         {
             Title = "Вход";
 

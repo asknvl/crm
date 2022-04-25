@@ -56,7 +56,7 @@
 				Margin="5"
 				MaxLength="18"				
 				/>
-			<TextBox
+			<TextBox				
 				Text="{Binding Telegram}"
 				Classes="TextBox CenterBlack"
 				Watermark="@telegram"
@@ -72,7 +72,7 @@
 						<Setter Property="InnerRightContent">
 							<Template>								
 									<Button Command="{Binding pasteCmd}" Classes="Button FlatIcon" Margin="2">
-										<material:MaterialIconExt Kind="ClipboardArrowLeftOutline" Size="24"/>
+										<material:MaterialIconExt Kind="ClipboardTextOutline" Size="24"/>
 									</Button>								
 							</Template>
 						</Setter>						
@@ -93,7 +93,8 @@
 						<TextBlock Text="{Binding}" FontSize="12"/>
 					</DataTemplate>
 				</AutoCompleteBox.ItemTemplate>				
-			</AutoCompleteBox>			
+			</AutoCompleteBox>
+			
 			<Button Command="{Binding registerCmd}" IsEnabled="{Binding IsInputValid}" Classes="Button CenterBlack" Content="Зарегистрироваться"/>
 		</StackPanel>
 	</Grid>

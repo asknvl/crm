@@ -11,6 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using TextCopy;
+using crm.Models.user;
+using crm.Models.api.server;
+using crm.WS;
+using crm.ViewModels.dialogs;
 
 namespace crm.ViewModels.tabs
 {
@@ -38,6 +42,11 @@ namespace crm.ViewModels.tabs
         IValidator<string> tg_vl = new TelegramValidator();
         IValidator<string> wallet_vl = new WalletValidator();
         IValidator<string> device_vl = new DeviceValidator();
+
+        IWindowService ws = WindowService.getInstance();
+
+        BaseServerApi api;
+        string token;
         #endregion
 
         #region properties
@@ -179,6 +188,7 @@ namespace crm.ViewModels.tabs
 
             }
         }
+        public string Token { get; set; }
         #endregion
 
         #region commands
@@ -186,9 +196,22 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> registerCmd { get; }
         #endregion
 
-        public registrationVM()
+        public registrationVM(BaseServerApi api, ViewModelBase parent) : base(parent)
         {
             Title = "Регистрация";
+
+            this.api = api;
+#if DEBUG
+            Email = "test@protonmail.com";
+            Password1 = "F123qwe$%^0000";
+            Password2 = "F123qwe$%^0000";
+            FullName = "Тестов Тест Тестовна";
+            BirthDate = "23.04.1920";
+            PhoneNumber = "+7 (905) 333-22-11";
+            Telegram = "@telegram";
+            Wallet = "zxc123qwe345";
+            Device = "Gun";
+#endif
 
             #region commands
             pasteCmd = ReactiveCommand.CreateFromTask(async () =>
@@ -202,6 +225,31 @@ namespace crm.ViewModels.tabs
 
             registerCmd = ReactiveCommand.CreateFromTask(async () =>
             {
+
+                User user = new User() {
+
+                    Email = Email,
+                    Password = Password1,
+                    FullName = FullName,
+                    BirthDate = BirthDate,
+                    PhoneNumber = PhoneNumber,
+                    Telegram = Telegram,
+                    Wallet = Wallet,
+                    Devices = new string[] { Device }                    
+                };
+
+                bool res = false;
+                try
+                {
+                    res = await api.RegisterUser(Token, user);
+                    if (res)
+                        onUserRegistered?.Invoke();                   
+
+                } catch (Exception ex)
+                {
+                    ws.ShowDialog(new errMsgVM(ex.Message), Parent);
+                }
+
             });
             #endregion
 
@@ -223,6 +271,10 @@ namespace crm.ViewModels.tabs
                 //true
             });
         }
+        #endregion
+
+        #region public
+        public event Action onUserRegistered;
         #endregion
     }
 }
