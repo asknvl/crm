@@ -16,6 +16,7 @@ namespace crm.ViewModels
     {
 
         #region vars
+        homeVM homeTab;
         loginVM loginTab;
         tokenVM tokenTab;
         registrationVM registrationTab;
@@ -45,8 +46,8 @@ namespace crm.ViewModels
         public ReactiveCommand<Unit, Unit> closeCmd { get; }
         public ReactiveCommand<Unit, Unit> maximizeCmd { get; }
         public ReactiveCommand<Unit, Unit> minimizeCmd { get; }
+        public ReactiveCommand<Unit, Unit> homeCmd { get; }
         #endregion
-
         public mainVM()
         {
 
@@ -76,6 +77,13 @@ namespace crm.ViewModels
                 WindowState = WindowState.Normal;
                 WindowState = WindowState.Minimized;
             });
+            homeCmd = ReactiveCommand.Create(() => {
+                //ShowTab(homeTab);
+            });
+            #endregion
+
+            #region homeTab
+            homeTab = new homeVM(this);
             #endregion
 
             #region loginTab
@@ -107,6 +115,7 @@ namespace crm.ViewModels
             registrationTab.CloseTabEvent += CloseTab;
             #endregion
 
+            ShowTab(homeTab);
             ShowTab(loginTab);          
         }
 
@@ -116,11 +125,16 @@ namespace crm.ViewModels
             var fTab = TabsList.FirstOrDefault(t => t.Title.Equals(tab.Title));
             if (fTab == null)
             {
-                TabsList.Add(tab);
+                if (tab is homeVM)                
+                    TabsList.Insert(0, tab);
+                else                
+                    TabsList.Add(tab);
+                
                 Content = tab;
             }
-            else
+            else            
                 Content = fTab;
+            
         }
 
         void AddTab(Tab tab)

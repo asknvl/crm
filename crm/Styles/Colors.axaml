@@ -17,7 +17,9 @@
 		<Color x:Key="TopPanelControlForeground">Gray</Color>
 		<Color x:Key="TopPanelControlBackgroundPointerOver">#0FFFFFFF</Color>
 		<Color x:Key="TopPanelControlForegroundPointerOver">#FFFFFFFF</Color>
-		<Color x:Key="TopPanelControlBackgroundSelected">#0FFFFFFF</Color>
+		
+		<Color x:Key="TopPanelControlBackgroundSelected">#FF2C2C2C</Color>
+		
 		<Color x:Key="TopPanelControlForegroundSelected">#FFFFFFFF</Color>
 		<Color x:Key="TopPanelControlForegroundDisabled">Gray</Color>
 		
@@ -39,10 +41,13 @@
 		<Color x:Key="WorkAreaIconButtonForegroundPointerOver">#BB000000</Color>
 		
 		<Color x:Key="WorkAreaTextBoxBorderFocus">#FF5D5AF7</Color>
-		<Color x:Key="WorkAreaTextBlockClickable">#FF5D5AF7</Color>		
+		<Color x:Key="WorkAreaTextBlockClickable">#FF5D5AF7</Color>
 
+		<Color x:Key="HomeTabPrimaryHeaderBackground">#FF2C2C2C</Color>
+		<Color x:Key="HomeTabSecondaryTextForeground">Gray</Color>
+		<Color x:Key="HomeTabPrimaryTextForeground">White</Color>
 		
-		
+
 	</Styles.Resources>
 
 	<Design.PreviewWith>

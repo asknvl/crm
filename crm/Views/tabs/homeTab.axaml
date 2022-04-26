@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:material="using:Material.Icons.Avalonia"
+			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
+             x:Class="crm.Views.tabs.homeTab">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TabStyles.axaml" />
+	</UserControl.Styles>
+	<Grid RowDefinitions="50, *">
+		<Grid 
+			Grid.Row="0" 
+			ColumnDefinitions="250, *, Auto, Auto">
+			<Grid				
+				Grid.Column="0"			  				
+				ColumnDefinitions="5*, 1*"
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}"
+				Margin="0, 0, 0, 0">
+				<StackPanel
+					Grid.Column="0"
+					Margin="30, 0, 0, 0"					
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center">
+					<TextBlock
+						Foreground="{DynamicResource HomeTabPrimaryTextForeground}"
+						FontSize="12">						
+						Иван Петров
+					</TextBlock>
+					<TextBlock
+						Foreground="{DynamicResource HomeTabSecondaryTextForeground}"
+						FontSize="12">
+						mail@protonmail.com
+					</TextBlock>					
+				</StackPanel>
+				<Button
+					Name="AB"
+					Margin="20, 0, 0, 0"
+					Grid.Column="1"
+					Classes="Button ArrowDown">
+					<material:MaterialIconExt Kind="ChevronDown" Size="20"/>
+				</Button>
+			</Grid>
+			<Grid
+				Grid.Column="1" 				  
+				ColumnDefinitions="Auto, Auto"
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">
+				<Panel Grid.Column="0">					
+				</Panel>
+			</Grid>
+			<!--<Button Classes="FlatIcon" Margin="10" Height="40" Width="40">		
+				--><!--<Svg Path="/Assets/svgs/User.svg"/>--><!--	
+			</Button>-->			
+		</Grid>
+		<Grid
+			Grid.Row="1"
+			ColumnDefinitions="Auto, *">
+			<Panel
+				Grid.Column="0"
+				Background="LightBlue">
+				<Panel.Styles>
+					<Style Selector="Panel">
+						<Setter Property="Width" Value="50"/>
+					</Style>
+					<Style Selector="Panel:pointerover">
+						<Setter Property="Width" Value="300"/>
+					</Style>
+				</Panel.Styles>
+				<Panel.Transitions>
+					<Transitions>
+						<DoubleTransition Property="Width" Duration="0:0:0.2"/>
+					</Transitions>
+				</Panel.Transitions>				
+			</Panel>
+			<Panel
+				Grid.Column="1"
+				Background="LightCyan">				
+			</Panel>
+		</Grid>		
+	</Grid>
+
+	
+</UserControl>

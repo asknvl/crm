@@ -12,8 +12,7 @@
 	<Style Selector="TextBox.CenterBlack, TextBox.revealPasswordButton, AutoCompleteBox">		
 		<Setter Property="Foreground" Value="{DynamicResource TextControlForegroundBrush}"/>		
 		<Setter Property="BorderThickness" Value="2"/>
-		<Setter Property="FontSize" Value="12"/>
-		<!--<Setter Property="VerticalContentAlignment" Value="Center"/>-->		
+		<Setter Property="FontSize" Value="12"/>		
 		<Setter Property="Padding" Value="6"/>		
 	</Style>
 	
@@ -102,6 +101,36 @@
 	</Style>
 	<Style Selector="Button.FlatIcon /template/ ContentPresenter#PART_ContentPresenter">
 		<Setter Property="Background" Value="Transparent"/>				
+	</Style>
+	<Style Selector="Button.ArrowDown">
+		<Setter Property="Foreground" Value="{DynamicResource  HomeTabSecondaryTextForeground}"/>
+		<Setter Property="Background" Value="Transparent"/>		
+		<Setter Property="FontSize" Value="12"/>
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="CornerRadius" Value="0" />
+		<Setter Property="Padding" Value="0" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+	<Style Selector="Button.ArrowDown:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="TextBlock.Foreground" Value="{DynamicResource  HomeTabPrimaryTextForeground}"/>
+	</Style>
+	<Style Selector="Button.ArrowDown /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>		
+	</Style>
+	<Style Selector="Button.ArrowDown">
+		<Setter Property="RenderTransform" Value="none" />
+		<Setter Property="Transitions">
+			<Transitions>
+				<TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+			</Transitions>
+		</Setter>
+	</Style>
+
+	<Style Selector="Button.ArrowDown:pressed">
+		<Setter Property="RenderTransform" Value="scale(0.5)" />
 	</Style>
 	<!--ContextMenu-->	
 	<Design.PreviewWith>
