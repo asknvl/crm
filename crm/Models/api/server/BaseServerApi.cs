@@ -38,24 +38,17 @@ namespace crm.Models.api.server
                     if (response.StatusCode != HttpStatusCode.OK)
                         throw new ServerResponseException(response.StatusCode);
                     JObject json = JObject.Parse(response.Content);
-                    string? msg = json["message"]?.ToObject<string>();
-                    if (msg != null)
-                    {
-                        res = msg.ToLower().Equals("ok");
-                        if (!res)
-                            throw new ApiException("Невалидный токен или его срок действия истек");
-                    }
-                    else
+                    res = json["success"].ToObject<bool>();
+                    if (res == null)
                         throw new NoDataReceivedException();
+                    if (!res)                    
+                        throw new ApiException("Невалидный токен или его срок действия истек");                                        
                 });
 
-            }  catch (ServerException ex)
+            }  catch (Exception ex)
             {
-                throw new ServerException(ex.Message);
-            }  catch (ApiException ex)
-            {
-                throw new ApiException(ex.Message);
-            }
+                throw new ApiException(ex.Message); 
+            }  
             return res;
         }
 
@@ -75,9 +68,10 @@ namespace crm.Models.api.server
                 p.phone = converter.phone(user.PhoneNumber, Direction.user_server);
                 p.telegram = converter.telegram(user.Telegram, Direction.user_server);
                 p.usdtaccount = user.Wallet;
-                p.devices = new JArray();
-                foreach (var device in user.Devices) 
-                    p.devices.Add(device);
+                //p.devices = new JArray();
+                //foreach (var device in user.Devices) 
+                //    p.devices.Add(device);
+                p.device = user.Devices[0];
                 request.AddParameter("application/json", p.ToString(), ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
 

@@ -86,6 +86,11 @@ namespace crm.ViewModels
             homeTab = new homeVM(this);
             #endregion
 
+            #region registrationTab
+            registrationTab = new registrationVM(api, this);
+            registrationTab.CloseTabEvent += CloseTab;
+            #endregion
+
             #region loginTab
             loginTab = new loginVM(this);
             loginTab.CloseTabEvent += CloseTab;
@@ -98,7 +103,7 @@ namespace crm.ViewModels
             #endregion
 
             #region tokenTab
-            tokenTab = new tokenVM(this,api);
+            tokenTab = new tokenVM(api, this);
             tokenTab.CloseTabEvent += CloseTab;
             tokenTab.onTokenCheckResult += (result, token) =>
             {
@@ -108,11 +113,6 @@ namespace crm.ViewModels
                     ShowTab(registrationTab);
                 }
             };
-            #endregion
-
-            #region registrationTab
-            registrationTab = new registrationVM(api, this);
-            registrationTab.CloseTabEvent += CloseTab;
             #endregion
 
             ShowTab(homeTab);

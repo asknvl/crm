@@ -43,7 +43,7 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> returnCmd { get; }
         #endregion
 
-        public tokenVM(ViewModelBase parent, BaseServerApi api) : base(parent)
+        public tokenVM(BaseServerApi api, ViewModelBase parent ) : base(parent)
         {
             Title = "Токен";
 #if DEBUG
