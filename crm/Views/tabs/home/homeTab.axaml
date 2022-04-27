@@ -1,0 +1,129 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:material="using:Material.Icons.Avalonia"
+			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
+			 xmlns:screens="using:crm.Views.tabs.homeTabScreens"
+			 xmlns:controls="using:crm.Views.tabs.home.controls"
+			 xmlns:conv="using:crm.Views.converters"
+             x:Class="crm.Views.tabs.homeTab">
+	<UserControl.Styles>
+		<StyleInclude Source="/Styles/TabStyles.axaml" />
+	</UserControl.Styles>
+	<UserControl.Resources>
+		<conv:FullNameToShortNameConverter x:Key="fullNameConverter"/>		
+	</UserControl.Resources>
+	<Grid RowDefinitions="50, *">
+		<Grid 
+			Grid.Row="0" 
+			ColumnDefinitions="250, Auto, *, Auto">
+			<Grid				
+				Grid.Column="0"			  				
+				ColumnDefinitions="5*, 1*"
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}"
+				Margin="0, 0, 0, 0">
+				<StackPanel
+					Grid.Column="0"
+					Margin="30, 0, 0, 0"					
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center">
+					<TextBlock
+						Text="{Binding User.FullName, Converter={StaticResource fullNameConverter}}"
+						Foreground="{DynamicResource HomeTabPrimaryTextForeground}"
+						FontSize="12">												
+					</TextBlock>
+					<TextBlock
+						Text="{Binding User.Email}"
+						Foreground="{DynamicResource HomeTabSecondaryTextForeground}"
+						FontSize="12">						
+					</TextBlock>					
+				</StackPanel>
+				<Button					
+					Margin="20, 0, 0, 0"
+					Grid.Column="1"
+					Classes="Button ArrowDown">
+					<material:MaterialIconExt Kind="ChevronDown" Size="20"/>					
+				</Button>			
+			</Grid>
+			<Grid
+				Grid.Column="1" 				  
+				ColumnDefinitions="Auto, Auto"
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">
+				<Panel Grid.Column="0">					
+				</Panel>
+			</Grid>
+			<Grid
+				Grid.Column="2"
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">				
+			</Grid>
+			<Grid
+				Grid.Column="3"
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">								
+				<StackPanel
+					Orientation="Horizontal">
+					<Button						
+						Classes="Button ArrowDown"
+						HorizontalAlignment="Center"
+						Width="60">
+						<material:MaterialIconExt Kind="Bell" Size="20"/>
+					</Button>
+					<controls:InitialLetter>
+						<controls:InitialLetter.Styles>
+							<Style Selector="TextBlock">
+								<Setter Property="Text" Value="{Binding User.FullName[0]}"/>
+							</Style>
+						</controls:InitialLetter.Styles>
+					</controls:InitialLetter>					
+					<Button						
+						Classes="Button ArrowDown"
+						HorizontalAlignment="Center"
+						Width="60">
+						<material:MaterialIconExt Kind="ChevronDown" Size="20"/>
+					</Button>
+				</StackPanel>				
+			</Grid>
+			<!--<Button Classes="FlatIcon" Margin="10" Height="40" Width="40">		
+				--><!--<Svg Path="/Assets/svgs/User.svg"/>--><!--	
+			</Button>-->			
+		</Grid>
+		<Grid
+			Grid.Row="1"
+			ColumnDefinitions="Auto, *">
+			<Border
+				BorderBrush="LightGray"
+				BorderThickness="1"
+				Grid.Column="0">
+				<Grid				
+					Background="Transparent">
+					<Grid.Styles>
+						<Style Selector="Grid">
+							<Setter Property="Width" Value="50"/>
+						</Style>
+						<Style Selector="Grid:pointerover">
+							<Setter Property="Width" Value="258"/>
+						</Style>
+					</Grid.Styles>
+					<Panel.Transitions>
+						<Transitions>
+							<DoubleTransition Property="Width" Duration="0:0:0.4"/>
+						</Transitions>
+					</Panel.Transitions>
+				</Grid>
+			</Border>
+			
+			<Grid
+				Grid.Column="1">
+				<Grid.DataTemplates>
+					<DataTemplate>
+						<screens:userSrceen/>	
+					</DataTemplate>					
+				</Grid.DataTemplates>
+				<ContentControl Content="{Binding Screen}"/>
+			</Grid>			
+		</Grid>		
+	</Grid>
+
+	
+</UserControl>

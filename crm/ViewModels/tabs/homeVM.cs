@@ -1,4 +1,5 @@
-﻿using crm.ViewModels.tabs.homeTabScreens;
+﻿using crm.Models.user;
+using crm.ViewModels.tabs.homeTabScreens;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,33 @@ namespace crm.ViewModels.tabs
             set => this.RaiseAndSetIfChanged(ref screen, value);
         }
 
+        BaseUser user;
+        BaseUser User
+        {
+            get => user;            
+            set => this.RaiseAndSetIfChanged(ref user, value);                         
+            
+        }
+
+        string initialLetter;
+        public string InitialLetter
+        {
+            get => initialLetter;
+            set => this.RaiseAndSetIfChanged(ref initialLetter, value);
+        }
+
+
+
         public homeVM(ViewModelBase parent) : base(parent)
         {
+                
+            User = new User();
+            User.FullName = "Алексей Сергеевич Коновалов";
+            User.Email = "mymail@protonmail.com";
+
             Title = "Домой";
             Screen = new userScreenVM();
+
         }
     }
 }
