@@ -1,4 +1,5 @@
-﻿using crm.Models.user;
+﻿using crm.Models.api.server;
+using crm.Models.user;
 using crm.ViewModels.tabs.homeTabScreens;
 using ReactiveUI;
 using System;
@@ -12,7 +13,11 @@ namespace crm.ViewModels.tabs
 {
     public class homeVM : Tab
     {
+        #region vars
+        BaseServerApi api;        
+        #endregion
 
+        #region properties
         object screen;
         public object Screen
         {
@@ -35,18 +40,53 @@ namespace crm.ViewModels.tabs
             set => this.RaiseAndSetIfChanged(ref initialLetter, value);
         }
 
-
-
-        public homeVM(ViewModelBase parent) : base(parent)
+        bool isProfileMenuOpen;
+        public bool IsProfileMenuOpen
         {
-                
-            User = new User();
-            User.FullName = "Алексей Сергеевич Коновалов";
-            User.Email = "mymail@protonmail.com";
+            get => isProfileMenuOpen;
+            set {
+                isProfileMenuOpen = value;
+                this.RaisePropertyChanged("IsProfileMenuOpen");
+            }
+        }
+        #endregion
+
+        #region commands
+        public ReactiveCommand<Unit, Unit> profileMenuOpenCmd { get; }
+        public ReactiveCommand<Unit, Unit> addUserCmd { get; }
+        public ReactiveCommand<Unit, Unit> quitCmd { get; }
+        #endregion
+
+        public homeVM(BaseServerApi api, BaseUser user, ViewModelBase parent) : base(parent)
+        {
+
+            #region commands
+            profileMenuOpenCmd = ReactiveCommand.Create(() => {                        
+                IsProfileMenuOpen = true;
+            });
+
+            addUserCmd = ReactiveCommand.Create(() =>
+            {
+                AddUserEvent?.Invoke();
+            });
+
+            quitCmd = ReactiveCommand.Create(() =>
+            {
+                OnCloseTab();
+            });
+            #endregion
+
+            this.api = api;
+            User = user;            
 
             Title = "Домой";
             Screen = new userScreenVM();
-
         }
+
+        #region public
+        public event Action AddUserEvent;
+        #endregion
+
+
     }
 }

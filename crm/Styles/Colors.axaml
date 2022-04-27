@@ -43,6 +43,7 @@
 		<Color x:Key="WorkAreaTextBoxBorderFocus">#FF5D5AF7</Color>
 		<Color x:Key="WorkAreaTextBlockClickable">#FF5D5AF7</Color>
 
+		
 		<Color x:Key="HomeTabPrimaryHeaderBackground">#FF2C2C2C</Color>
 		<Color x:Key="HomeTabSecondaryTextForeground">Gray</Color>
 		<Color x:Key="HomeTabPrimaryTextForeground">White</Color>

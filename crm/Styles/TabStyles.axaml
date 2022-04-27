@@ -2,12 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<StyleInclude Source="/Styles/DataValidationErros.axaml" />	
-
+	<!--Grids-->
 	<Style Selector="Grid.Tab">
 		<Setter Property="Background" Value="{DynamicResource WorkAreaBackground}"/>
 		<Setter Property="VerticalAlignment" Value="Stretch"/>
 		<Setter Property="HorizontalAlignment" Value="Stretch"/>
-	</Style>	
+	</Style>
+	<Style Selector="Grid.FloatingMenu">
+		
+	</Style>
 	<!--TextBoxes-->
 	<Style Selector="TextBox.CenterBlack, TextBox.revealPasswordButton, AutoCompleteBox">		
 		<Setter Property="Foreground" Value="{DynamicResource TextControlForegroundBrush}"/>		
@@ -128,10 +131,37 @@
 			</Transitions>
 		</Setter>
 	</Style>
-
+	
 	<Style Selector="Button.ArrowDown:pressed">
-		<Setter Property="RenderTransform" Value="scale(0.5)" />
+		<Setter Property="RenderTransform" Value="scale(0.9)" />
 	</Style>
+
+
+	<Style Selector="Button.PopUpMenuItem Grid">
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+	</Style>
+				  
+	<Style Selector="Button.PopUpMenuItem">
+		<Setter Property="Background" Value="{DynamicResource HomeTabPrimaryHeaderBackground}"/>		
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>	
+	</Style>
+
+	<Style Selector="Button.PopUpMenuItem /template/ ContentPresenter#PART_ContentPresenter">		
+		<Setter Property="TextBlock.Foreground" Value="White"/>
+	</Style>
+
+	<Style Selector="Button.PopUpMenuItem TextBlock">
+		<Setter Property="Foreground" Value="{DynamicResource HomeTabPrimaryTextForeground}"/>
+		<Setter Property="FontSize" Value="12"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="TextAlignment" Value="Left"/>		
+		<Setter Property="Margin" Value="10, 0, 0, 0"/>
+	</Style>
+	
 	<!--ContextMenu-->	
 	<Design.PreviewWith>
 		<Border Padding="20">

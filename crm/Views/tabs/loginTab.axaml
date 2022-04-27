@@ -39,7 +39,7 @@
 					 Watermark="пароль"
 					 Margin="5"
 					 FontSize="12"/>
-			<Button Command="{Binding enterCmd}" IsEnabled="{Binding IsInputValid}" Classes="Button CenterBlack">
+			<Button Command="{Binding enterCmd}" IsEnabled="{Binding IsInputValid}" IsDefault="True" Classes="Button CenterBlack">
 				Вход
 			</Button>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

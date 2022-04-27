@@ -83,18 +83,35 @@ namespace crm.ViewModels
             #endregion
 
             #region homeTab
-            homeTab = new homeVM(this);
+            //homeTab = new homeVM(this);
             #endregion
 
             #region registrationTab
             registrationTab = new registrationVM(api, this);
+            registrationTab.onUserRegistered += () => 
+            {
+                CloseTab(registrationTab);
+                ShowTab(loginTab);
+            };
             registrationTab.CloseTabEvent += CloseTab;
             #endregion
 
             #region loginTab
-            loginTab = new loginVM(this);
+            loginTab = new loginVM(api, this);
             loginTab.CloseTabEvent += CloseTab;
-            loginTab.onEnterAction += () => {
+            loginTab.onLoginDone += (user) => {
+                homeVM homeTab = new homeVM(api, user, this);
+                homeTab.AddUserEvent += () => {
+                    ShowTab(tokenTab);
+                };
+                homeTab.CloseTabEvent += (tab) =>
+                {
+                    CloseTab(tab);
+                    loginTab.Password = "";
+                    ShowTab(loginTab);
+                };
+                CloseTab(loginTab);
+                ShowTab(homeTab);
             };
             loginTab.onCreateUserAction += () =>
             {
@@ -109,13 +126,14 @@ namespace crm.ViewModels
             {
                 if (result)
                 {
+                    CloseTab(tokenTab);
                     registrationTab.Token = token;
-                    ShowTab(registrationTab);
+                    ShowTab(registrationTab);                    
                 }
             };
             #endregion
 
-            ShowTab(homeTab);
+            //ShowTab(homeTa1b);
             ShowTab(loginTab);          
         }
 

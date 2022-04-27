@@ -205,12 +205,12 @@ namespace crm.ViewModels.tabs
             Email = "test@protonmail.com";
             Password1 = "F123qwe$%^0000";
             Password2 = "F123qwe$%^0000";
-            FullName = "Тестов Тест Тестовна";
-            BirthDate = "23.04.1920";
-            PhoneNumber = "+7 (905) 333-22-11";
-            Telegram = "@telegram";
-            Wallet = "zxc123qwe345";
-            Device = "Gun";
+            FullName = "Коновалов Алексей Сергеевич";
+            BirthDate = "28.06.1986";
+            PhoneNumber = "+7 (925) 618-69-36";
+            Telegram = "@xeylov";
+            Wallet = "$$$$$$";
+            Device = "Big Gun";
 #endif
 
             #region commands

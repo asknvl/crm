@@ -1,6 +1,10 @@
 ﻿using Avalonia.Data;
+using crm.Models.api.server;
 using crm.Models.autocompletions;
+using crm.Models.user;
 using crm.Models.validators;
+using crm.ViewModels.dialogs;
+using crm.WS;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -18,12 +22,14 @@ namespace crm.ViewModels.tabs
         bool isLogin;       
         bool isPassword;
         IValidator<string> lv = new LoginValidator();
-        IAutoComplete la = new EmailAutoComplete();       
+        IAutoComplete la = new EmailAutoComplete();
+
+        IWindowService ws = WindowService.getInstance();
         #endregion
 
         #region properties       
         string login;        
-        string Login
+        public string Login
         {
             get => login;
             set
@@ -55,23 +61,30 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> forgotCmd { get; }
         #endregion
 
-        public loginVM(ViewModelBase parent) : base(parent)
+        public loginVM(BaseServerApi api, ViewModelBase parent) : base(parent)
         {
             Title = "Вход";
 
             #region dependencies
-           
+
             #endregion
 
             #region commands
-            enterCmd = ReactiveCommand.CreateFromTask(async () => {
-                //отправляет логин, пароль
-                //получает токен
-                
+            enterCmd = ReactiveCommand.CreateFromTask(async () =>
+            {
+                try
+                {
+                    BaseUser user = await api.Login(Login, Password);
+                    if (user != null)
+                        onLoginDone?.Invoke(user);
+
+                } catch (Exception ex)
+                {
+                    ws.ShowDialog(new errMsgVM(ex.Message), Parent);
+                }
             });
 
-            createCmd = ReactiveCommand.CreateFromTask(async () => {
-                //отправляет токен, получает одобрение от сервера и права доступа                
+            createCmd = ReactiveCommand.CreateFromTask(async () => { 
                 onCreateUserAction?.Invoke();
             });
 
@@ -81,7 +94,7 @@ namespace crm.ViewModels.tabs
         }
 
         #region public
-        public event Action onEnterAction;
+        public event Action<BaseUser> onLoginDone;
         public event Action onCreateUserAction;
         public event Action onForgotPasswordAction;
         #endregion

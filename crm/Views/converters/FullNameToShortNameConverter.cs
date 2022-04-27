@@ -14,7 +14,7 @@ namespace crm.Views.converters
         {
             string fullname = (string)value;
             string[] splt = fullname.Split(' ');
-            return $"{splt[0]} {splt[2]}";
+            return $"{splt[0]} {splt[1]}";
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

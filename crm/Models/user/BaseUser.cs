@@ -11,6 +11,11 @@ namespace crm.Models.user
     public abstract class BaseUser : ViewModelBase
     {
         #region properties
+        string id;
+        public string Id { get; set; }
+        string token;
+        public string Token { get; set; }   
+
         string email;
         public string Email 
         {

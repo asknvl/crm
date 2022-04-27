@@ -13,80 +13,154 @@
 		<StyleInclude Source="/Styles/TabStyles.axaml" />
 	</UserControl.Styles>
 	<UserControl.Resources>
-		<conv:FullNameToShortNameConverter x:Key="fullNameConverter"/>		
+		<conv:FullNameToShortNameConverter x:Key="fullNameConverter"/>
 	</UserControl.Resources>
 	<Grid RowDefinitions="50, *">
-		<Grid 
-			Grid.Row="0" 
+		<Grid
+			Grid.Row="0"
 			ColumnDefinitions="250, Auto, *, Auto">
-			<Grid				
-				Grid.Column="0"			  				
+			<Grid
+				Name="TopGrid"
+				Grid.Column="0"
 				ColumnDefinitions="5*, 1*"
 				Background="{DynamicResource HomeTabPrimaryHeaderBackground}"
 				Margin="0, 0, 0, 0">
 				<StackPanel
 					Grid.Column="0"
-					Margin="30, 0, 0, 0"					
+					Margin="30, 0, 0, 0"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center">
 					<TextBlock
 						Text="{Binding User.FullName, Converter={StaticResource fullNameConverter}}"
 						Foreground="{DynamicResource HomeTabPrimaryTextForeground}"
-						FontSize="12">												
+						FontSize="12">
 					</TextBlock>
 					<TextBlock
 						Text="{Binding User.Email}"
 						Foreground="{DynamicResource HomeTabSecondaryTextForeground}"
-						FontSize="12">						
-					</TextBlock>					
+						FontSize="12">
+					</TextBlock>
 				</StackPanel>
-				<Button					
+				<Button
 					Margin="20, 0, 0, 0"
 					Grid.Column="1"
 					Classes="Button ArrowDown">
-					<material:MaterialIconExt Kind="ChevronDown" Size="20"/>					
-				</Button>			
+					<material:MaterialIconExt Kind="ChevronDown" Size="20"/>
+				</Button>
 			</Grid>
 			<Grid
-				Grid.Column="1" 				  
+				Grid.Column="1"
 				ColumnDefinitions="Auto, Auto"
 				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">
-				<Panel Grid.Column="0">					
+				<Panel Grid.Column="0">
 				</Panel>
 			</Grid>
 			<Grid
 				Grid.Column="2"
-				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">				
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">
 			</Grid>
 			<Grid
 				Grid.Column="3"
-				Background="{DynamicResource HomeTabPrimaryHeaderBackground}">								
-				<StackPanel
-					Orientation="Horizontal">
-					<Button						
-						Classes="Button ArrowDown"
-						HorizontalAlignment="Center"
-						Width="60">
-						<material:MaterialIconExt Kind="Bell" Size="20"/>
-					</Button>
-					<controls:InitialLetter>
-						<controls:InitialLetter.Styles>
-							<Style Selector="TextBlock">
-								<Setter Property="Text" Value="{Binding User.FullName[0]}"/>
-							</Style>
-						</controls:InitialLetter.Styles>
-					</controls:InitialLetter>					
-					<Button						
-						Classes="Button ArrowDown"
-						HorizontalAlignment="Center"
-						Width="60">
-						<material:MaterialIconExt Kind="ChevronDown" Size="20"/>
-					</Button>
-				</StackPanel>				
+				Name="profileGrid"
+				Background="{DynamicResource HomeTabPrimaryHeaderBackground}"
+				Width="200">
+				<Button
+					Classes="Button ArrowDown"
+					HorizontalAlignment="Right"
+					Margin="-300, 0, 0, 0">
+					<material:MaterialIconExt Kind="Bell" Size="20"/>
+				</Button>
+				<controls:InitialLetter
+					HorizontalAlignment="Right"
+					Margin="-150, 0, 0, 0">
+					<controls:InitialLetter.Styles>
+						<Style Selector="TextBlock">
+							<Setter Property="Text" Value="{Binding User.FullName[0]}"/>
+						</Style>
+					</controls:InitialLetter.Styles>
+				</controls:InitialLetter>
+				<Button
+					Command="{Binding profileMenuOpenCmd}"
+					Name="profileMenu"
+					Classes="Button ArrowDown"
+					HorizontalAlignment="Right"
+					Margin="-90, 0, 0, 0">
+					<!--<Button.Styles>
+						<Style Selector="Button:pressed Popup">
+							<Setter Property="IsOpen" Value="True"/>
+						</Style>
+					</Button.Styles>-->
+					<Grid Height="40" Width="40">						
+						<material:MaterialIconExt Kind="ChevronDown" Size="20"/>						
+						<Popup
+							IsOpen="{Binding IsProfileMenuOpen, Mode=TwoWay}"
+							WindowManagerAddShadowHint="False"													
+							StaysOpen="False"
+							VerticalOffset="40"
+							HorizontalOffset="-10"							
+							PlacementTarget="{Binding ElementName=profileGrid}">
+							<Border								
+								CornerRadius="3"
+								BorderThickness="1"
+								BorderBrush="{DynamicResource HomeTabPrimaryHeaderBackground}">								
+								<StackPanel	
+									Width="200"
+									Background="{DynamicResource HomeTabPrimaryHeaderBackground}"
+									Orientation="Vertical">
+									<Button										
+										Classes="Button PopUpMenuItem">										
+										<Grid ColumnDefinitions="20, *">
+											<material:MaterialIconExt Kind="Person" Size="20"/>																			
+											<TextBlock												
+												Grid.Column="1">
+												Редактировать профиль
+											</TextBlock>
+										</Grid>									
+									</Button>
+									<Button
+										Classes="Button PopUpMenuItem">
+										<Grid ColumnDefinitions="20, *">											
+											<material:MaterialIconExt Kind="SettingsVertical" Size="20"/>
+											<TextBlock												
+												Grid.Column="1">
+												Настройки
+											</TextBlock>
+										</Grid>
+									</Button>
+									<Grid Height="1" Background="Gray" HorizontalAlignment="Stretch"/>
+									<Button
+										Command="{Binding addUserCmd}"
+										Classes="Button PopUpMenuItem">
+										<Grid ColumnDefinitions="20, *">											
+											<material:MaterialIconExt Kind="Plus" Size="20"/>
+											<TextBlock
+												Grid.Column="1">
+												Добавить аккаунт
+											</TextBlock>
+										</Grid>
+									</Button>
+									<Button
+										Command="{Binding quitCmd}"
+										Classes="Button PopUpMenuItem">
+										<Grid ColumnDefinitions="20, *">											
+											<material:MaterialIconExt Kind="ExitToApp" Size="20"/>
+											<TextBlock
+												Grid.Column="1">
+												Выйти
+											</TextBlock>
+										</Grid>
+									</Button>
+								</StackPanel>
+							</Border>
+						</Popup>
+					</Grid>					
+				</Button>
 			</Grid>
 			<!--<Button Classes="FlatIcon" Margin="10" Height="40" Width="40">		
-				--><!--<Svg Path="/Assets/svgs/User.svg"/>--><!--	
-			</Button>-->			
+				-->
+			<!--<Svg Path="/Assets/svgs/User.svg"/>-->
+			<!--	
+			</Button>-->
 		</Grid>
 		<Grid
 			Grid.Row="1"
@@ -95,7 +169,7 @@
 				BorderBrush="LightGray"
 				BorderThickness="1"
 				Grid.Column="0">
-				<Grid				
+				<Grid
 					Background="Transparent">
 					<Grid.Styles>
 						<Style Selector="Grid">
@@ -112,18 +186,20 @@
 					</Panel.Transitions>
 				</Grid>
 			</Border>
-			
+
 			<Grid
 				Grid.Column="1">
 				<Grid.DataTemplates>
 					<DataTemplate>
-						<screens:userSrceen/>	
-					</DataTemplate>					
+						<screens:userSrceen/>
+					</DataTemplate>
 				</Grid.DataTemplates>
 				<ContentControl Content="{Binding Screen}"/>
-			</Grid>			
-		</Grid>		
+			</Grid>
+		</Grid>
+
+
+
 	</Grid>
 
-	
 </UserControl>

@@ -20,7 +20,7 @@ namespace crm.Models.api.server.valuesconverter
                     break;
                 case Direction.server_user:
                     splt = date.Split('-');
-                    res = $"{splt[2]}-{splt[1]}-{splt[0]}";
+                    res = $"{splt[2]}.{splt[1]}.{splt[0]}";
                     break;
                 default:
                     break;
