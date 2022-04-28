@@ -128,21 +128,27 @@ namespace crm.Models.api.server
                 p.device = user.Devices[0];
                 request.AddParameter("application/json", p.ToString(), ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
-                if (!response.IsSuccessful)
-                    throw new ServerResponseException(response.StatusCode);
+
+                //if (!response.IsSuccessful)
+                //    throw new ServerResponseException(response.StatusCode);
+
                 JObject json = JObject.Parse(response.Content);
                 res = json["success"].ToObject<bool>();
                 if (res == null)
                     throw new NoDataReceivedException();
                 if (!res)
-                    throw new ApiException("Не удалось зарегистрировать пользователя");
+                {
+                    string e = json["errors"].ToString();
+                    List<ServerError>? errors = JsonConvert.DeserializeObject<List<ServerError>>(e);
+                    throw new ServerException($"{getErrMsg(errors)}");                    
+                }
 
             });
 
             return res;
         }
 
-        public async Task<BaseUser> Login(string login, string password)
+        public virtual async Task<BaseUser> Login(string login, string password)
         {
             User user = null;
 
@@ -154,7 +160,12 @@ namespace crm.Models.api.server
                 p.email = login;
                 p.password = password;
                 request.AddParameter("application/json", p.ToString(), ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);                
+                IRestResponse response = client.Execute(request);  
+                if (!response.IsSuccessful)
+                {
+
+                }
+
                 JObject json = JObject.Parse(response.Content);
                 bool res = json["success"].ToObject<bool>();
 

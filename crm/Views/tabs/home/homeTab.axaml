@@ -5,7 +5,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:material="using:Material.Icons.Avalonia"
 			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
+			 xmlns:screenvm="using:crm.ViewModels.tabs.homeTabScreens"
+			 
 			 xmlns:screens="using:crm.Views.tabs.homeTabScreens"
+			 xmlns:screen="using:crm.Views.tabs.home.homeTabScreens"
+			 
 			 xmlns:controls="using:crm.Views.tabs.home.controls"
 			 xmlns:conv="using:crm.Views.converters"
              x:Class="crm.Views.tabs.homeTab">
@@ -169,13 +173,13 @@
 				BorderBrush="LightGray"
 				BorderThickness="1"
 				Grid.Column="0">
-				<Grid
+				<Grid Name="SlideGrid"
 					Background="Transparent">
 					<Grid.Styles>
-						<Style Selector="Grid">
+						<Style Selector="Grid#SlideGrid">
 							<Setter Property="Width" Value="50"/>
 						</Style>
-						<Style Selector="Grid:pointerover">
+						<Style Selector="Grid#SlideGrid:pointerover">
 							<Setter Property="Width" Value="258"/>
 						</Style>
 					</Grid.Styles>
@@ -184,14 +188,52 @@
 							<DoubleTransition Property="Width" Duration="0:0:0.4"/>
 						</Transitions>
 					</Panel.Transitions>
-				</Grid>
+
+					<ListBox
+						Items="{Binding ScreensList}"
+						SelectedItem="{Binding Screen}">						
+						<ListBox.DataTemplates>
+							<!--<DataTemplate DataType="{x:Type screenvm:userScreenVM}">
+								<Grid ColumnDefinitions="20, 50" HorizontalAlignment="Stretch">
+									<Grid										
+										Grid.Column="0"										
+										HorizontalAlignment="Stretch"
+										Height="30">
+										<Svg
+											Path="/Assets/svgs/User.svg"
+											Height="30"
+											Width="30"
+											VerticalAlignment="Center"/>
+									</Grid>
+									<Grid Grid.Column="1"										  
+										  HorizontalAlignment="Stretch"
+										  Height="30">
+										
+									</Grid>
+									<TextBlock
+										Text="{Binding Title}"
+										Grid.Column="1"
+										VerticalAlignment="Center"
+										FontSize="12"/>
+								</Grid>
+							</DataTemplate>-->
+							<DataTemplate>
+								<TextBlock Text="{Binding Title}" FontSize="12"/>
+							</DataTemplate>
+							
+						</ListBox.DataTemplates>						
+					</ListBox>
+				</Grid>				
 			</Border>
 
 			<Grid
 				Grid.Column="1">
 				<Grid.DataTemplates>
-					<DataTemplate>
+					<DataTemplate DataType="{x:Type screenvm:userScreenVM}">
 						<screens:userSrceen/>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type screenvm:dashboardScreenVM}">
+						<screen:dashboardScreen/>
 					</DataTemplate>
 				</Grid.DataTemplates>
 				<ContentControl Content="{Binding Screen}"/>

@@ -11,7 +11,7 @@ using System.Reactive;
 using System.Text;
 
 namespace crm.ViewModels
-{   
+{
     public class mainVM : ViewModelBase
     {
 
@@ -73,6 +73,9 @@ namespace crm.ViewModels
 
 
             });
+            closeCmd = ReactiveCommand.Create(() => {
+                OnCloseRequest();
+            });
             minimizeCmd = ReactiveCommand.Create(() => {
                 WindowState = WindowState.Normal;
                 WindowState = WindowState.Minimized;
@@ -91,6 +94,7 @@ namespace crm.ViewModels
             registrationTab.onUserRegistered += () => 
             {
                 CloseTab(registrationTab);
+                loginTab.Clear();
                 ShowTab(loginTab);
             };
             registrationTab.CloseTabEvent += CloseTab;
@@ -124,6 +128,7 @@ namespace crm.ViewModels
             tokenTab.CloseTabEvent += CloseTab;
             tokenTab.onTokenCheckResult += (result, token) =>
             {
+
                 if (result)
                 {
                     CloseTab(tokenTab);
@@ -143,15 +148,23 @@ namespace crm.ViewModels
             var fTab = TabsList.FirstOrDefault(t => t.Title.Equals(tab.Title));
             if (fTab == null)
             {
-                if (tab is homeVM)                
+                if (tab is homeVM)
                     TabsList.Insert(0, tab);
-                else                
+                else
                     TabsList.Add(tab);
-                
+
                 Content = tab;
+            } else
+            {
+                if (fTab is homeVM)
+                {
+
+                    CloseTab(fTab);
+                    ShowTab(tab);
+
+                } else
+                    Content = fTab;
             }
-            else            
-                Content = fTab;
             
         }
 

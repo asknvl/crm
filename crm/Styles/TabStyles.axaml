@@ -13,12 +13,12 @@
 	</Style>
 	<!--TextBoxes-->
 	<Style Selector="TextBox.CenterBlack, TextBox.revealPasswordButton, AutoCompleteBox">		
-		<Setter Property="Foreground" Value="{DynamicResource TextControlForegroundBrush}"/>		
+		<Setter Property="Foreground" Value="{DynamicResource TextControlForegroundBrush}"/>
+		<Setter Property="Background" Value="{DynamicResource WorkAreaTextBoxBackgroundFocus}"/>
 		<Setter Property="BorderThickness" Value="2"/>
 		<Setter Property="FontSize" Value="12"/>		
 		<Setter Property="Padding" Value="6"/>		
-	</Style>
-	
+	</Style>	
 	<Style Selector="TextBox.CenterBlack /template/ Border#PART_BorderElement">
 		<Setter Property="BorderThickness" Value="2"/>		
 	</Style>

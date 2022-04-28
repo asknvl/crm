@@ -10,12 +10,13 @@
 	</UserControl.Styles>
 	<Grid
 		Classes="Grid Tab">
-		<Image
+		<!--<Image
 			Source="/Assets/logo.png"
 			Width="100"
 			VerticalAlignment="Top"
 			HorizontalAlignment="Left"
-			Margin="20"/>
+			Margin="20"/>-->
+		<Image Source="/Assets/logo_transp.png" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-20, -15, 0, 0"/>
 		<Button
 			Grid.Column="1"
 			Command="{Binding returnCmd}"

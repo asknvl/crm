@@ -271,9 +271,14 @@ namespace crm.ViewModels.tabs
                 //true
             });
         }
+
+
         #endregion
 
         #region public
+        public override void Clear()
+        {
+        }
         public event Action onUserRegistered;
         #endregion
     }

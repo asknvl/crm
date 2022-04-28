@@ -4,6 +4,7 @@ using crm.ViewModels.tabs.homeTabScreens;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Text;
@@ -14,8 +15,13 @@ namespace crm.ViewModels.tabs
     public class homeVM : Tab
     {
         #region vars
-        BaseServerApi api;        
+        BaseServerApi api;
         #endregion
+        public ObservableCollection<HomeTabScreen> ScreensList { get; set; } = new ObservableCollection<HomeTabScreen>()
+        {
+            new dashboardScreenVM(),
+            new userScreenVM()
+        };
 
         #region properties
         object screen;
@@ -80,11 +86,15 @@ namespace crm.ViewModels.tabs
             User = user;            
 
             Title = "Домой";
-            Screen = new userScreenVM();
+            //Screen = new userScreenVM();
         }
 
         #region public
         public event Action AddUserEvent;
+
+        public override void Clear()
+        {            
+        }
         #endregion
 
 

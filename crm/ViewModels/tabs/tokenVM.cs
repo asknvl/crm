@@ -73,6 +73,10 @@ namespace crm.ViewModels.tabs
         #region public
         public event Action<bool,string> onTokenCheckResult;
         public event Action onReturnCmd;
+
+        public override void Clear()
+        {            
+        }
         #endregion
     }
 }

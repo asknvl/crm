@@ -11,7 +11,7 @@
 		<StyleInclude Source="/Styles/TabStyles.axaml" />		
 	</UserControl.Styles>
 	<Grid Classes="Grid Tab">		
-		<Image Source="/Assets/logo.png" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20"/>
+		<Image Source="/Assets/logo_transp.png" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-20, -15, 0, 0"/>
 		<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
 			<!--<TextBox		
 				Text="{Binding Login, Mode=TwoWay}"

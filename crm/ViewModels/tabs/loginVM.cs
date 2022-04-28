@@ -33,9 +33,14 @@ namespace crm.ViewModels.tabs
         {
             get => login;
             set
-            {
-                value = la.AutoComplete(value);              
-                isLogin = lv.IsValid(value);
+            {                
+                value = la.AutoComplete(value);
+
+                if (needValidate)
+                    isLogin = lv.IsValid(value);
+                else
+                    isLogin = true;
+
                 if (!isLogin)
                     throw new DataValidationException("Введен некорректный e-mail");
                 IsInputValid = CheckValidity(new bool[] { isLogin, isPassword });
@@ -48,7 +53,12 @@ namespace crm.ViewModels.tabs
         {
             get => password;
             set {
-                isPassword = value.Length > 0;
+
+                if (needValidate)
+                    isPassword = value.Length > 0;
+                else
+                    isPassword = true;
+
                 IsInputValid = CheckValidity(new bool[] { isLogin, isPassword });
                 this.RaiseAndSetIfChanged(ref password, value);
             }
@@ -74,7 +84,14 @@ namespace crm.ViewModels.tabs
             {
                 try
                 {
+#if ALLOK
+                    Login = "asknvl@protonmail.com";
+                    Password = "F123qwe$%^0000";
+                    BaseUser user = new TestUser();
+#else
+
                     BaseUser user = await api.Login(Login, Password);
+#endif
                     if (user != null)
                         onLoginDone?.Invoke(user);
 
@@ -90,13 +107,21 @@ namespace crm.ViewModels.tabs
 
             forgotCmd = ReactiveCommand.CreateFromTask(async () => {                 
             });
-            #endregion
+#endregion
         }
 
         #region public
         public event Action<BaseUser> onLoginDone;
         public event Action onCreateUserAction;
         public event Action onForgotPasswordAction;
+
+        public override void Clear()
+        {            
+                needValidate = false;
+                Login = "";
+                Password = "";
+                needValidate = true;            
+        }
         #endregion
     }
 }

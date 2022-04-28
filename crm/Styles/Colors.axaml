@@ -7,6 +7,8 @@
 		<Color x:Key="TextControlBorderBrushFocused">#FF5D5AF7</Color>
 		<Color x:Key="SystemControlErrorTextForegroundBrush">#FFFF0000</Color>		
 		<Color x:Key="TextControlBorderBrushPointerOver">Black</Color>
+		<Color x:Key="TextControlBackgroundPointerOver">White</Color>
+		
 
 		<Color x:Key="TextControlForegroundBrush">#FF000000</Color>
 		<Color x:Key="TextControlBorderBrush">#FF000000</Color>
@@ -31,7 +33,7 @@
 		<Color x:Key="TopPanelInActiveTextForeground">Gray</Color>
 		<Color x:Key="TopPanelActiveTextForeground">White</Color>		
 		
-		<Color x:Key="WorkAreaBackground">White</Color>				
+		<Color x:Key="WorkAreaBackground">#FFE5E5E5</Color>				
 		<Color x:Key="WorkAreaButtonBackground">#FF000000</Color>
 		<Color x:Key="WorkAreaButtonForeground">White</Color>
 		<Color x:Key="WorkAreaButtonForegroundPointerOver">White</Color>
@@ -42,6 +44,7 @@
 		
 		<Color x:Key="WorkAreaTextBoxBorderFocus">#FF5D5AF7</Color>
 		<Color x:Key="WorkAreaTextBlockClickable">#FF5D5AF7</Color>
+		<Color x:Key="WorkAreaTextBoxBackgroundFocus">White</Color>
 
 		
 		<Color x:Key="HomeTabPrimaryHeaderBackground">#FF2C2C2C</Color>
