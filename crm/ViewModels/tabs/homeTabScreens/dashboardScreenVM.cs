@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace crm.ViewModels.tabs.homeTabScreens
 {
-    public class userScreenVM : HomeTabScreen
+    public class dashboardScreenVM : HomeTabScreen
     {
-        public userScreenVM()
+        public dashboardScreenVM()
         {
-            Title = "Сотрудники";
+            Title = "Dashboard";
         }
     }
 }

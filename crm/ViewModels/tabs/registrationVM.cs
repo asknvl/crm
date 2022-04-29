@@ -15,6 +15,8 @@ using crm.Models.user;
 using crm.Models.api.server;
 using crm.WS;
 using crm.ViewModels.dialogs;
+using System.ComponentModel;
+using System.Collections;
 
 namespace crm.ViewModels.tabs
 {
@@ -25,6 +27,7 @@ namespace crm.ViewModels.tabs
             isEmail,
             isPassword1,
             isPassword2,
+            isPasswordsEql,
             isFullName,
             isBirthDate,
             isPhoneNumber,
@@ -70,12 +73,29 @@ namespace crm.ViewModels.tabs
         {
             get => password1;
             set
-            {
-                isPassword1 = pswrd_vl.IsValid(value);
+            {               
+                isPassword1 = pswrd_vl.IsValid(value);                
                 if (!isPassword1)
-                    throw new DataValidationException(pswrd_vl.Message);
+                    AddError(nameof(Password1), pswrd_vl.Message);
+                else
+                    RemoveError(nameof(Password1));
+
+                if (Password2 != null)
+                {
+                    isPasswordsEql = value == Password2;
+                    if (!isPasswordsEql)
+                    {
+                        AddError(nameof(Password1), "Пароли должны совпадать");
+                        AddError(nameof(Password2), "Пароли должны совпадать");                        
+                    }
+                    else
+                    {
+                        RemoveError(nameof(Password1));
+                        RemoveError(nameof(Password2));                        
+                    }
+                }
                 updateValidity();
-                this.RaiseAndSetIfChanged(ref password1, value);
+                this.RaiseAndSetIfChanged(ref password1, value);                
             }
         }
 
@@ -85,12 +105,25 @@ namespace crm.ViewModels.tabs
             get => password2;
             set
             {
-                isPassword2 = pswrd_vl.IsValid(value);
+                isPassword2 = pswrd_vl.IsValid(value);              
                 if (!isPassword2)
-                    throw new DataValidationException(pswrd_vl.Message);
-                isPassword2 = value.Equals(Password1);
-                if (!isPassword2)
-                    throw new DataValidationException("Введенные пароли не совпадают");
+                    AddError(nameof(Password2), pswrd_vl.Message);
+                else
+                    RemoveError(nameof(Password2));
+
+                if (Password1 != null)
+                {
+                    isPasswordsEql = value == Password1;
+                    if (!isPasswordsEql)
+                    {
+                        AddError(nameof(Password1), "Пароли должны совпадать");
+                        AddError(nameof(Password2), "Пароли должны совпадать");                        
+                    } else
+                    {
+                        RemoveError(nameof(Password1));
+                        RemoveError(nameof(Password2));                        
+                    }
+                }
                 updateValidity();
                 this.RaiseAndSetIfChanged(ref password2, value);
             }
@@ -262,19 +295,23 @@ namespace crm.ViewModels.tabs
                 isEmail,
                 isPassword1,
                 isPassword2,
+                isPasswordsEql,
                 isFullName,
                 isBirthDate,
                 isPhoneNumber,
                 isTelegram,
-                isWallet,
+                isWallet                
                 //isDevice
                 //true
             });
-        }
+        }       
         #endregion
 
         #region public
         public event Action onUserRegistered;
+        public override void Clear()
+        {         
+        }
         #endregion
     }
 }

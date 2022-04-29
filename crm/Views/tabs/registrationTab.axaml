@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:cust="using:crm.Views.custom"
+			 xmlns:beh="using:crm.Views"
 			 xmlns:material="using:Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="crm.Views.tabs.registrationTab">
@@ -11,12 +12,13 @@
 	</UserControl.Styles>
 	<Grid
 		Classes="Grid Tab">
-		<Image
+		<!--<Image
 			Source="/Assets/logo.png"
 			Width="100"
 			VerticalAlignment="Top"
 			HorizontalAlignment="Left"
-			Margin="20"/>
+			Margin="20"/>-->
+		<Image Source="/Assets/logo_transp.png" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-20, -15, 0, 0"/>
 		<StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
 			<AutoCompleteBox
 				Text="{Binding Email}"
@@ -24,14 +26,18 @@
 				Watermark="mymail@protonmail.com"
 				Margin="5"
 				/>
-			<TextBox
+			<TextBox		
 				Text="{Binding Password1}"
 				Classes="TextBox CenterBlack"
-				Watermark="пароль"
-				Margin="5"				
-				/>
+				Watermark="пароль"						
+				Margin="5">		
+				
+				<!--<Interaction.Behaviors>
+					<beh:LostFocusUpdateBindingBehavior Text="{Binding Password1}"/>
+				</Interaction.Behaviors>-->
+			</TextBox>
 			<TextBox
-				Text="{Binding Password2}"
+				Text="{Binding Password2, Mode=TwoWay}"
 				Classes="TextBox CenterBlack"
 				Watermark="пароль второй раз"
 				Margin="5"

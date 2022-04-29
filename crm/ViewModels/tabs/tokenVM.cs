@@ -1,4 +1,6 @@
-﻿using crm.Models.api.server;
+﻿//#define ALLOK
+
+using crm.Models.api.server;
 using crm.Models.validators;
 using crm.ViewModels.dialogs;
 using crm.Views.dialogs;
@@ -43,7 +45,7 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> returnCmd { get; }
         #endregion
 
-        public tokenVM(BaseServerApi api, ViewModelBase parent ) : base(parent)
+        public tokenVM(BaseServerApi api, ViewModelBase parent) : base(parent)
         {
             Title = "Токен";
 #if DEBUG
@@ -51,7 +53,12 @@ namespace crm.ViewModels.tabs
 #endif
 
             #region commands
-            continueCmd = ReactiveCommand.CreateFromTask(async () => {
+            continueCmd = ReactiveCommand.CreateFromTask(async () =>
+            {
+
+#if ALLOK
+                onTokenCheckResult?.Invoke(true, Token);
+#else
 
                 bool res = false;
                 try
@@ -62,17 +69,24 @@ namespace crm.ViewModels.tabs
                 } catch (Exception ex)
                 {
                     ws.ShowDialog(new errMsgVM(ex.Message), Parent);
-                }                
-            });            
-            returnCmd = ReactiveCommand.Create(() => {
+                }          
+#endif
+            });
+            returnCmd = ReactiveCommand.Create(() =>
+            {
                 OnCloseTab();
             });
+
             #endregion
         }
 
         #region public
-        public event Action<bool,string> onTokenCheckResult;
+        public event Action<bool, string> onTokenCheckResult;
         public event Action onReturnCmd;
+
+        public override void Clear()
+        {            
+        }
         #endregion
     }
 }

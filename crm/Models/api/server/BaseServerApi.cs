@@ -142,7 +142,7 @@ namespace crm.Models.api.server
             return res;
         }
 
-        public async Task<BaseUser> Login(string login, string password)
+        public virtual async Task<BaseUser> Login(string login, string password)
         {
             User user = null;
 
@@ -154,7 +154,12 @@ namespace crm.Models.api.server
                 p.email = login;
                 p.password = password;
                 request.AddParameter("application/json", p.ToString(), ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);                
+                IRestResponse response = client.Execute(request);  
+                if (!response.IsSuccessful)
+                {
+
+                }
+
                 JObject json = JObject.Parse(response.Content);
                 bool res = json["success"].ToObject<bool>();
 

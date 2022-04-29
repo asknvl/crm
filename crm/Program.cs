@@ -5,6 +5,8 @@ using Avalonia.Controls.Mixins;
 using Avalonia.ReactiveUI;
 using Avalonia.Svg;
 using Avalonia.Svg.Skia;
+using Avalonia.Xaml.Interactions.Core;
+using Avalonia.Xaml.Interactivity;
 using System;
 
 namespace crm

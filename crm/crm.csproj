@@ -35,6 +35,13 @@
     <None Remove="Assets\fonts\Oswald\Oswald-Regular.ttf" />
     <None Remove="Assets\fonts\Oswald\Oswald-SemiBold.ttf" />
     <None Remove="Assets\logo.png" />
+    <None Remove="Assets\logo_transp.png" />
+    <None Remove="Assets\svgs\Bell_Add.svg" />
+    <None Remove="Assets\svgs\Bell_Close.svg" />
+    <None Remove="Assets\svgs\Bell_Remove.svg" />
+    <None Remove="Assets\svgs\Bell_Ring.svg" />
+    <None Remove="Assets\svgs\expand.svg" />
+    <None Remove="Assets\svgs\roll_up.svg" />
     <None Remove="Assets\test.png" />	  
   </ItemGroup>
   <ItemGroup>
@@ -75,11 +82,19 @@
     </AvaloniaXaml>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\tabs\tokenTab.axaml.cs">
       <DependentUpon>tokenTab.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\svgs\" />
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

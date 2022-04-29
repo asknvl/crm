@@ -1,6 +1,8 @@
 ﻿using ReactiveUI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
 using System.Text;
@@ -27,6 +29,7 @@ namespace crm.ViewModels.tabs
             get => isInputValid;
             set => this.RaiseAndSetIfChanged(ref isInputValid, value);
         }
+        protected bool needValidate { get; set; }
         #endregion
 
         #region commands
@@ -55,6 +58,10 @@ namespace crm.ViewModels.tabs
         {
             CloseTabEvent?.Invoke(this);
         }
+        #endregion
+
+        #region abstract        
+        abstract public void Clear();        
         #endregion
     }
 }
