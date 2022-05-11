@@ -5,12 +5,16 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:material="using:Material.Icons.Avalonia"
 			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
+			 xmlns:vm="using:crm.ViewModels.tabs"
 			 xmlns:screenvm="using:crm.ViewModels.tabs.homeTabScreens"			 
 			 xmlns:screens="using:crm.Views.tabs.homeTabScreens"
 			 xmlns:screen="using:crm.Views.tabs.home.homeTabScreens"			 
 			 xmlns:controls="using:crm.Views.tabs.home.controls"
 			 xmlns:conv="using:crm.Views.converters"
              x:Class="crm.Views.tabs.homeTab">
+	<!--<Design.DataContext>
+		<vm:homeVM/>
+	</Design.DataContext>-->
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/TabStyles.axaml" />
 	</UserControl.Styles>
@@ -110,6 +114,9 @@
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type screenvm:dashboardScreenVM}">
 						<screen:dashboardScreen/>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type screenvm:userListVM}">
+						<screen:userList/>
 					</DataTemplate>
 				</Grid.DataTemplates>
 				<ContentControl Content="{Binding Screen}"/>

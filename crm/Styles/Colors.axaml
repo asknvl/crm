@@ -50,7 +50,10 @@
 		<Color x:Key="HomeTabPrimaryHeaderBackground">#FF2C2C2C</Color>
 		<Color x:Key="HomeTabSecondaryTextForeground">Gray</Color>
 		<Color x:Key="HomeTabPrimaryTextForeground">White</Color>
-		
+
+		<Color x:Key="LeftSlideMenuPrimaryTextForeground">#FF464646</Color>
+		<Color x:Key="LeftSlideMenuSelectedItemBackground">#AADAEBF7</Color>
+		<Color x:Key="LeftSlideMenuPointeoverItemBackground">#AADAEBF7</Color>
 
 	</Styles.Resources>
 

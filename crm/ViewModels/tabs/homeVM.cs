@@ -21,14 +21,21 @@ namespace crm.ViewModels.tabs
         {
             new dashboardScreenVM(),
             new userScreenVM()
+            
         };
 
-        #region properties
+        #region properties     
         object screen;
         public object Screen
         {
             get => screen;
-            set => this.RaiseAndSetIfChanged(ref screen, value);
+            set
+            {
+                //if (value is userScreenVM)
+                //    value = ScreensList[1].SubScreens[0];
+                this.RaiseAndSetIfChanged(ref screen, value);
+                
+            }
         }
 
         BaseUser user;
@@ -73,7 +80,7 @@ namespace crm.ViewModels.tabs
 
         public homeVM() : base(null)
         {
-            SlidePanelWidth = 150;
+            SlidePanelWidth = 250;
             ScreensList = new ObservableCollection<HomeTabScreen>() {
                 new dashboardScreenVM(),
                 new userScreenVM()
@@ -82,6 +89,13 @@ namespace crm.ViewModels.tabs
 
         public homeVM(BaseServerApi api, BaseUser user, ViewModelBase parent) : base(parent)
         {
+
+            SlidePanelWidth = 250;
+
+            ScreensList = new ObservableCollection<HomeTabScreen>() {
+                new dashboardScreenVM(),
+                new userScreenVM()
+            };
 
             #region commands
             toggleSlidePanel = ReactiveCommand.Create(() => {
@@ -105,8 +119,6 @@ namespace crm.ViewModels.tabs
                 OnCloseTab();
             });
             #endregion
-
-            SlidePanelWidth = 250;
 
             this.api = api;
             User = user;                        
