@@ -1,6 +1,5 @@
 ﻿using crm.Models.api.server;
 using crm.Models.user;
-using crm.ViewModels.tabs.homeTabScreens;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -17,25 +16,13 @@ namespace crm.ViewModels.tabs
         #region vars
         BaseServerApi api;
         #endregion
-        public ObservableCollection<HomeTabScreen> ScreensList { get; set; } = new ObservableCollection<HomeTabScreen>()
-        {
-            new dashboardScreenVM(),
-            new userScreenVM()
-            
-        };
-
+        
         #region properties     
         object screen;
         public object Screen
         {
             get => screen;
-            set
-            {
-                //if (value is userScreenVM)
-                //    value = ScreensList[1].SubScreens[0];
-                this.RaiseAndSetIfChanged(ref screen, value);
-                
-            }
+            set => this.RaiseAndSetIfChanged(ref screen, value);
         }
 
         BaseUser user;
@@ -63,48 +50,23 @@ namespace crm.ViewModels.tabs
             }
         }
 
-        int slidePanelWidth;
-        public int SlidePanelWidth
-        {
-            get => slidePanelWidth;
-            set => this.RaiseAndSetIfChanged(ref slidePanelWidth, value);            
-        }
         #endregion
 
-        #region commands
-        public ReactiveCommand<Unit, Unit> toggleSlidePanel { get; }
+        #region commands        
         public ReactiveCommand<Unit, Unit> profileMenuOpenCmd { get; }
         public ReactiveCommand<Unit, Unit> addUserCmd { get; }
         public ReactiveCommand<Unit, Unit> quitCmd { get; }
         #endregion
 
         public homeVM() : base(null)
-        {
-            SlidePanelWidth = 250;
-            ScreensList = new ObservableCollection<HomeTabScreen>() {
-                new dashboardScreenVM(),
-                new userScreenVM()
-            };
+        {            
         }
 
         public homeVM(BaseServerApi api, BaseUser user, ViewModelBase parent) : base(parent)
         {
 
-            SlidePanelWidth = 250;
-
-            ScreensList = new ObservableCollection<HomeTabScreen>() {
-                new dashboardScreenVM(),
-                new userScreenVM()
-            };
 
             #region commands
-            toggleSlidePanel = ReactiveCommand.Create(() => {
-                if (SlidePanelWidth > 50)
-                    SlidePanelWidth = 50;
-                else
-                    SlidePanelWidth = 200;
-            });
-
             profileMenuOpenCmd = ReactiveCommand.Create(() => {                        
                 IsProfileMenuOpen = true;
             });
