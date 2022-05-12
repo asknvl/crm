@@ -106,7 +106,7 @@
 			DisplayMode="CompactOverlay"
 			OpenPaneLength="250"
 			CompactPaneLength="55"
-			IsPaneOpen="True">			
+			IsPaneOpen="{Binding Menu.IsMenuExpanded, Mode=TwoWay}">			
 			<SplitView.Pane>
 				<Border
 					BorderBrush="LightGray"
@@ -150,12 +150,12 @@
 									<StackPanel>
 										<ToggleButton
 											x:Name="PART_Expand"
-											Classes="ToggleButton Collapse"
-											IsChecked="{Binding #PART_NavigationPane.IsPaneOpen, Mode=TwoWay}"											
-											HorizontalAlignment="Stretch">
+											Classes="ToggleButton Collapse"											
+											IsChecked="{Binding IsItemExpanded}"											
+											HorizontalAlignment="Stretch">										
 											<Grid
-											ColumnDefinitions="8, 20, *"
-											HorizontalAlignment="Stretch">
+												ColumnDefinitions="8, 20, *"
+												HorizontalAlignment="Stretch">
 												<Svg
 													x:Name="PART_Vector"
 													IsVisible="{Binding #PART_CollapseButton.IsChecked}"
@@ -182,6 +182,9 @@
 												<Style Selector="ToggleButton:checked Svg#PART_Vector">
 													<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/vector_d.svg"/>
 												</Style>
+												<Style Selector="ToggleButton.Collapse /template/ ContentPresenter#PART_ContentPresenter">
+													<Setter Property="Background" Value="{Binding ExpanderBackground}"/>
+												</Style>												
 											</ToggleButton.Styles>
 										</ToggleButton>										
 										<ItemsPresenter
@@ -212,8 +215,8 @@
 						</ItemsPresenter>
 
 						<ToggleButton							
-							x:Name="PART_CollapseButton"
-							IsChecked="{Binding #PART_NavigationPane.IsPaneOpen, Mode=TwoWay}"
+							x:Name="PART_CollapseButton"	
+							IsChecked="{Binding Menu.IsMenuExpanded}"
 							VerticalAlignment="Bottom"
 							HorizontalAlignment="Stretch"
 							Classes="ToggleButton Collapse">

@@ -14,6 +14,7 @@ namespace crm.ViewModels.tabs.home.menu
         public ObservableCollection<BaseScreen> Screens { get; } = new ObservableCollection<BaseScreen>();
         public abstract string Title { get; }
         public abstract string IconPath { get; }
+
         public BaseMenuItem() { }
 
         public void AddScreen(BaseScreen screen)        

@@ -16,25 +16,31 @@ namespace crm.ViewModels.tabs.home.menu
         #region properties
         public ObservableCollection<BaseMenuItem> Items { get; set; } = new ObservableCollection<BaseMenuItem>();
 
-
+        bool isMenuExpanded;
+        public bool IsMenuExpanded
+        {
+            get => isMenuExpanded;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref isMenuExpanded, value);
+                MenuExpandedEvent?.Invoke(value);
+            }
+        }
         #endregion
 
         #region commands
         public ReactiveCommand<Unit, Unit> collapseCmd { get; }
         #endregion
 
-        public BaseMenu()
-        {
-            collapseCmd = ReactiveCommand.Create(() => { 
-                            
-            });
-        }
-
         #region public
         public void AddItem(BaseMenuItem item)
         {
             Items.Add(item);
         }
+        #endregion
+
+        #region callbacks
+        public event Action<bool>? MenuExpandedEvent;
         #endregion
 
     }

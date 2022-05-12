@@ -1,4 +1,5 @@
-﻿using crm.ViewModels.tabs.home.menu.items;
+﻿using Avalonia.Media;
+using crm.ViewModels.tabs.home.menu.items;
 using crm.ViewModels.tabs.home.screens;
 using System;
 using System.Collections.Generic;
@@ -15,33 +16,82 @@ namespace crm.ViewModels.tabs.home.menu
         public admin_menu()
         {
 
-            BaseMenuItem dashboard = new items.Dashboard();
+            SimpleMenuItem dashboard = new items.Dashboard();
             dashboard.AddScreen(new screens.Dashboard());            
             dashboard.ScreenCheckedEvent += ScreenCheckedEvent;
             AddItem(dashboard);
 
-            BaseMenuItem users = new Users();
+            ComplexMenuItem users = new Users();
+            users.IsItemExpandedEvent += ItemExpandedEvent;
             users.AddScreen(new screens.UserList());
             users.AddScreen(new screens.UserActions());
             users.ScreenCheckedEvent += ScreenCheckedEvent;                       
             AddItem(users);
 
-            BaseMenuItem users1 = new Users();
+            ComplexMenuItem users1 = new Users();
+            users1.IsItemExpandedEvent += ItemExpandedEvent;
             users1.AddScreen(new screens.UserList());
             users1.AddScreen(new screens.UserActions());
             users1.ScreenCheckedEvent += ScreenCheckedEvent;
             AddItem(users1);
+
+            MenuExpandedEvent += Menu_ExpandedEvent;
         }
 
-        private void ScreenCheckedEvent(BaseScreen arg1, bool arg2)
+        private void Menu_ExpandedEvent(bool expanded)
         {
-            Debug.WriteLine(arg1 + "=" + arg2);
+            if (expanded)
+            {
+                foreach (var item in Items)
+                {
+                    if (item is ComplexMenuItem)
+                    {
+                        ComplexMenuItem citem = (ComplexMenuItem)item;
+                        bool chkd = citem.Screens.Any(o => o.IsChecked);
+                        if (chkd)
+                            citem.SetExpanderSelected(false);
+                    }
+
+                }
+
+                var itemToExpand = Items.FirstOrDefault(o => o is ComplexMenuItem && o.Screens.Any(s => s.IsChecked));
+                if (itemToExpand != null)
+                    ((ComplexMenuItem)itemToExpand).Expand();
+
+                return;
+            }
             foreach (var item in Items)
-                foreach (var screen in item.Screens)
-                    if (!screen.Equals(arg1))
-                        screen.Uncheck();
+            {
+                if (item is ComplexMenuItem)
+                {
+                    ComplexMenuItem citem = (ComplexMenuItem)item;
+                    citem.Collapse();
+                    bool chkd = citem.Screens.Any(o => o.IsChecked);
+                    if (chkd)
+                        citem.SetExpanderSelected(true);
+                }
+            }
         }
 
-        
+        private void ItemExpandedEvent()
+        {
+            IsMenuExpanded = true;                       
+        }
+
+        private void ScreenCheckedEvent(BaseScreen s, bool v)
+        {
+
+            foreach (var item in Items)
+            {
+                if (item is ComplexMenuItem)
+                {
+                    ((ComplexMenuItem)item).SetExpanderSelected(false);
+                }
+                    
+                foreach (var screen in item.Screens)
+                    if (!screen.Equals(s))
+                        screen.Uncheck();
+            }
+        }        
     }
 }
