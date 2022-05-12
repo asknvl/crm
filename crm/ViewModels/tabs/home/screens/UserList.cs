@@ -8,6 +8,6 @@ namespace crm.ViewModels.tabs.home.screens
 {
     public class UserList : BaseScreen
     {
-        public override string Title => "Список сотрудников";
+        public override string Title => "Список сотрудников";        
     }
 }

@@ -8,7 +8,6 @@ namespace crm.ViewModels.tabs.home.screens
 {
     public class Dashboard : BaseScreen
     {
-        public override string Title => "Dashboard";
-        
+        public override string Title => "Dashboard";        
     }
 }

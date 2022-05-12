@@ -10,9 +10,9 @@
 			 xmlns:conv="using:crm.Views.converters"
 			 xmlns:menu="using:crm.ViewModels.tabs.home.menu"
              x:Class="crm.Views.tabs.homeTab">
-	<!--<Design.DataContext>
+	<Design.DataContext>
 		<vm:homeVM/>
-	</Design.DataContext>-->
+	</Design.DataContext>
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/TabStyles.axaml" />
 		<StyleInclude Source="/Styles/LeftSlideMenuStyles.axaml" />
@@ -106,7 +106,7 @@
 			DisplayMode="CompactOverlay"
 			OpenPaneLength="250"
 			CompactPaneLength="55"
-			IsPaneOpen="True">
+			IsPaneOpen="True">			
 			<SplitView.Pane>
 				<Border
 					BorderBrush="LightGray"
@@ -114,11 +114,10 @@
 					BorderThickness="1">
 					<Panel
 						Background="White">
-
 						<ItemsPresenter DataContext="{Binding Menu}" Items="{Binding Items}">
 							<ItemsPresenter.DataTemplates>
 								<DataTemplate DataType="{x:Type menu:SimpleMenuItem}">
-									<!--<ToggleButton										
+									<ToggleButton										
 										IsChecked="{Binding Screens[0].IsChecked}"
 										Classes="ToggleButton SimpleItem"										
 										HorizontalAlignment="Stretch">
@@ -145,28 +144,21 @@
 												Margin="22, 0, 0, 0"
 												Text="{Binding Title}"/>
 										</Grid>
-									</ToggleButton>-->
-									<ListBox Items="{Binding Screens}">
-										<ListBox.DataTemplates>
-											<DataTemplate>
-												<TextBlock Text="{Binding Title}"/>
-											</DataTemplate>
-										</ListBox.DataTemplates>
-									</ListBox>								
-									
+									</ToggleButton>								
 								</DataTemplate>
 								<DataTemplate DataType="{x:Type menu:ComplexMenuItem}">
 									<StackPanel>
 										<ToggleButton
 											x:Name="PART_Expand"
 											Classes="ToggleButton Collapse"
-											IsChecked="{Binding #PART_NavigationPane.IsPaneOpen, Mode=OneWay}"
+											IsChecked="{Binding #PART_NavigationPane.IsPaneOpen, Mode=TwoWay}"											
 											HorizontalAlignment="Stretch">
 											<Grid
-											ColumnDefinitions="Auto,Auto, *"
+											ColumnDefinitions="8, 20, *"
 											HorizontalAlignment="Stretch">
 												<Svg
 													x:Name="PART_Vector"
+													IsVisible="{Binding #PART_CollapseButton.IsChecked}"
 													Grid.Column="0"
 													Width="8"
 													Height="8"
@@ -191,13 +183,14 @@
 													<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/vector_d.svg"/>
 												</Style>
 											</ToggleButton.Styles>
-										</ToggleButton>
+										</ToggleButton>										
 										<ItemsPresenter
-											Items="{Binding Screens}"
-											IsVisible="{Binding #PART_Expand.IsChecked}">
+											Items="{Binding Screens}"											
+											IsVisible="{Binding #PART_Expand.IsChecked}">											
 											<ItemsPresenter.ItemTemplate>
 												<DataTemplate>
 													<ToggleButton
+														x:Name="PART_ListButton"
 														IsChecked="{Binding IsChecked}"
 														Classes="ToggleButton SimpleItem"
 														HorizontalAlignment="Stretch">
@@ -209,7 +202,7 @@
 																Grid.Column="1"
 																Text="{Binding Title}"/>
 														</Grid>
-													</ToggleButton>
+													</ToggleButton>													
 												</DataTemplate>
 											</ItemsPresenter.ItemTemplate>
 										</ItemsPresenter>
@@ -218,7 +211,8 @@
 							</ItemsPresenter.DataTemplates>
 						</ItemsPresenter>
 
-						<ToggleButton
+						<ToggleButton							
+							x:Name="PART_CollapseButton"
 							IsChecked="{Binding #PART_NavigationPane.IsPaneOpen, Mode=TwoWay}"
 							VerticalAlignment="Bottom"
 							HorizontalAlignment="Stretch"
@@ -249,7 +243,11 @@
 					</Panel>
 				</Border>
 			</SplitView.Pane>
-
+			<!--<SplitView.Styles>
+				<Style Selector="SplitView[IsPaneOpen=True] ToggleButton#PART_Expand /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="Yellow"/>
+				</Style>
+			</SplitView.Styles>-->
 		</SplitView>
 
 	</Grid>
