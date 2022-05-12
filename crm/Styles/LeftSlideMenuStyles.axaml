@@ -1,11 +1,11 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Design.PreviewWith>
-        <Border Padding="20">
-            <!-- Add Controls for Previewer Here -->
-        </Border>
-    </Design.PreviewWith>
-	
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+		</Border>
+	</Design.PreviewWith>
+
 	<!--Collapse button-->
 	<Style Selector="ToggleButton.Collapse">
 		<Style.Resources>
@@ -13,17 +13,12 @@
 			<Color x:Key="ToggleButtonBackgroundPressed">#FFFFFFFF</Color>
 			<Color x:Key="ToggleButtonBorderBrushPointerOver">#FF0BB3E8</Color>
 		</Style.Resources>
+		<Setter Property="Height" Value="50"/>
 		<Setter Property="Margin" Value="0, 0, 0, 0"/>
 		<Setter Property="CornerRadius" Value="0"/>
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="TextBlock.Foreground" Value="#FF000000"/>
-	</Style>
-	<Style Selector="ToggleButton.Collapse Svg">
-		<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/hide.svg"/>
-	</Style>
-	<!--<Style Selector="ToggleButton:checked Svg">
-		<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/user.svg"/>
-	</Style>-->	
+	</Style>	
 	<Style Selector="ToggleButton.Collapse:pointerover /template/ ContentPresenter#PART_ContentPresenter">
 		<Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushPointerOver}"/>
 	</Style>
@@ -32,10 +27,35 @@
 		<Setter Property="TextBlock.Foreground" Value="#FF000000"/>
 	</Style>
 	<Style Selector="ToggleButton.Collapse:checked /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="#FFFFFFFF"/>
+		<Setter Property="TextBlock.Foreground" Value="#FF000000"/>
+	</Style>
+
+	<!--Menu item-->
+	<Style Selector="ToggleButton.SimpleItem">
+		<Style.Resources>
+			<Color x:Key="ToggleButtonBackgroundPointerOver">#FFFFFFFF</Color>
+			<Color x:Key="ToggleButtonBackgroundPressed">#FFFFFFFF</Color>
+			<Color x:Key="ToggleButtonBorderBrushPointerOver">#FF0BB3E8</Color>
+		</Style.Resources>
+		<Setter Property="Height" Value="50"/>
+		<Setter Property="Margin" Value="0, 0, 0, 0"/>
+		<Setter Property="CornerRadius" Value="0"/>
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="TextBlock.Foreground" Value="#FF000000"/>
 	</Style>
+	<Style Selector="ToggleButton.SimpleItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushPointerOver}"/>
+	</Style>
+	<Style Selector="ToggleButton.SimpleItem /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="TextBlock.Foreground" Value="#FF000000"/>
+	</Style>
+	<Style Selector="ToggleButton.SimpleItem:checked /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="#FFDAEBF7"/>
+		<Setter Property="TextBlock.Foreground" Value="#FF000000"/>
+	</Style>
 	
-	<!--Simple menu item-->
 	
+
 </Styles>

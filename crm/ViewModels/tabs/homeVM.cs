@@ -1,5 +1,6 @@
 ﻿using crm.Models.api.server;
 using crm.Models.user;
+using crm.ViewModels.tabs.home.menu;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,20 @@ namespace crm.ViewModels.tabs
         #region vars
         BaseServerApi api;
         #endregion
-        
+
         #region properties     
-        object screen;
-        public object Screen
+        BaseMenu menu;
+        public BaseMenu Menu
         {
-            get => screen;
-            set => this.RaiseAndSetIfChanged(ref screen, value);
+            get => menu;
+            set => this.RaiseAndSetIfChanged(ref menu, value);
         }
+        //object screen;
+        //public object Screen
+        //{
+        //    get => screen;
+        //    set => this.RaiseAndSetIfChanged(ref screen, value);
+        //}
 
         BaseUser user;
         BaseUser User
@@ -59,7 +66,8 @@ namespace crm.ViewModels.tabs
         #endregion
 
         public homeVM() : base(null)
-        {            
+        {
+            Menu = new admin_menu();
         }
 
         public homeVM(BaseServerApi api, BaseUser user, ViewModelBase parent) : base(parent)
@@ -85,6 +93,8 @@ namespace crm.ViewModels.tabs
             this.api = api;
             User = user;                        
             Title = "Домой";
+
+            Menu = new admin_menu();
             
         }
 

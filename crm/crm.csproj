@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\svgs\leftslidemenu\hide.svg" />
+    <None Remove="Assets\svgs\leftslidemenu\vector_d.svg" />
     <None Remove="Assets\svgs\user.svg" />
+    <None Remove="Assets\vector_r.svg" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.
