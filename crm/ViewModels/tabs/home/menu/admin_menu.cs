@@ -28,13 +28,7 @@ namespace crm.ViewModels.tabs.home.menu
             users.ScreenCheckedEvent += ScreenCheckedEvent;                       
             AddItem(users);
 
-            ComplexMenuItem users1 = new Users();
-            users1.IsItemExpandedEvent += ItemExpandedEvent;
-            users1.AddScreen(new screens.UserList());
-            users1.AddScreen(new screens.UserActions());
-            users1.ScreenCheckedEvent += ScreenCheckedEvent;
-            AddItem(users1);
-
+            IsMenuExpanded = true;
             MenuExpandedEvent += Menu_ExpandedEvent;
         }
 
@@ -51,9 +45,7 @@ namespace crm.ViewModels.tabs.home.menu
                         if (chkd)
                             citem.SetExpanderSelected(false);
                     }
-
                 }
-
                 var itemToExpand = Items.FirstOrDefault(o => o is ComplexMenuItem && o.Screens.Any(s => s.IsChecked));
                 if (itemToExpand != null)
                     ((ComplexMenuItem)itemToExpand).Expand();

@@ -94,16 +94,13 @@
 						</Popup>
 					</Grid>
 				</Button>
-			</Grid>
-
-			<!--<Svg Path="/Assets/svgs/expand.svg" Width="24" Height="24"/>
-			<Svg Path="/Assets/svgs/Bell_Close.svg" Width="24" Height="24" Margin="80, 0, 0, 0"/>-->
+			</Grid>			
 		</Grid>
 
 		<SplitView
 			Grid.Row="1"
 			x:Name="PART_NavigationPane"
-			DisplayMode="CompactOverlay"
+			DisplayMode="CompactInline"
 			OpenPaneLength="250"
 			CompactPaneLength="55"
 			IsPaneOpen="{Binding Menu.IsMenuExpanded, Mode=TwoWay}">			
@@ -112,7 +109,7 @@
 					BorderBrush="LightGray"
 					Margin="-1, 0, 0, -1"
 					BorderThickness="1">
-					<Panel
+					<Panel						
 						Background="White">
 						<ItemsPresenter DataContext="{Binding Menu}" Items="{Binding Items}">
 							<ItemsPresenter.DataTemplates>
@@ -237,20 +234,12 @@
 							<ToggleButton.Styles>
 								<Style Selector="ToggleButton Svg">
 									<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/hide.svg"/>
-								</Style>
-								<!--<Style Selector="ToggleButton:checked Svg">
-										<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/user.svg"/>
-									</Style>-->
+								</Style>							
 							</ToggleButton.Styles>
 						</ToggleButton>
 					</Panel>
 				</Border>
-			</SplitView.Pane>
-			<!--<SplitView.Styles>
-				<Style Selector="SplitView[IsPaneOpen=True] ToggleButton#PART_Expand /template/ ContentPresenter#PART_ContentPresenter">
-					<Setter Property="Background" Value="Yellow"/>
-				</Style>
-			</SplitView.Styles>-->
+			</SplitView.Pane>			
 		</SplitView>
 
 	</Grid>
