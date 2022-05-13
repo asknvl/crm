@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace crm.ViewModels.tabs.home.screens
 {
-    public class UserList : BaseScreen
+    public class GEO : BaseScreen
     {
-        public override string Title => "Список сотрудников";        
-
+        public override string Title => "ГЕО";
     }
 }

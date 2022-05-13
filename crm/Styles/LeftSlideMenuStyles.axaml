@@ -5,6 +5,10 @@
 			<!-- Add Controls for Previewer Here -->
 		</Border>
 	</Design.PreviewWith>
+	<!--TextBlock-->
+	<Style Selector="TextBlock">
+		<Setter Property="FontSize" Value="12"/>
+	</Style>
 
 	<!--Collapse button-->
 	<Style Selector="ToggleButton.Collapse">
@@ -13,7 +17,7 @@
 			<Color x:Key="ToggleButtonBackgroundPressed">#FFFFFFFF</Color>
 			<Color x:Key="ToggleButtonBorderBrushPointerOver">#FF0BB3E8</Color>
 		</Style.Resources>
-		<Setter Property="Height" Value="50"/>
+		<Setter Property="Height" Value="40"/>
 		<Setter Property="Margin" Value="0, 0, 0, 0"/>
 		<Setter Property="CornerRadius" Value="0"/>
 		<Setter Property="Background" Value="Transparent"/>
@@ -38,7 +42,7 @@
 			<Color x:Key="ToggleButtonBackgroundPressed">#FFFFFFFF</Color>
 			<Color x:Key="ToggleButtonBorderBrushPointerOver">#FF0BB3E8</Color>
 		</Style.Resources>
-		<Setter Property="Height" Value="50"/>
+		<Setter Property="Height" Value="40"/>
 		<Setter Property="Margin" Value="0, 0, 0, 0"/>
 		<Setter Property="CornerRadius" Value="0"/>
 		<Setter Property="Background" Value="Transparent"/>

@@ -42,7 +42,13 @@
     <None Remove="Assets\test.png" />-->	  
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\svgs\leftslidemenu\burger_off.svg" />
+    <None Remove="Assets\svgs\leftslidemenu\burger_on.svg" />
+    <None Remove="Assets\svgs\leftslidemenu\expand.svg" />
     <None Remove="Assets\svgs\leftslidemenu\hide.svg" />
+    <None Remove="Assets\svgs\leftslidemenu\off.svg" />
+    <None Remove="Assets\svgs\leftslidemenu\on.svg" />
+    <None Remove="Assets\svgs\leftslidemenu\subscriptions.svg" />
     <None Remove="Assets\svgs\leftslidemenu\vector_d.svg" />
     <None Remove="Assets\svgs\user.svg" />
     <None Remove="Assets\vector_r.svg" />
