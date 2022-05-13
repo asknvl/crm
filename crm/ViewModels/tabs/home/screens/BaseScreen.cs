@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,6 @@ namespace crm.ViewModels.tabs.home.screens
                     ScreenCheckedEvent?.Invoke(this, value);
             }
         }
-
         public abstract string Title { get; }
         #endregion
 
@@ -37,6 +37,12 @@ namespace crm.ViewModels.tabs.home.screens
             NeedInvoke = false;
             IsChecked = false;
             NeedInvoke = true;
+        }
+        public virtual void OnActivate() {
+            Debug.WriteLine($"Activated:{Title}");
+        }
+        public virtual void OnDeactivate() {
+            Debug.WriteLine($"Deactivated:{Title}");
         }
         #endregion
 

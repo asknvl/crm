@@ -6,6 +6,8 @@
 			 xmlns:material="using:Material.Icons.Avalonia"
 			 xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
 			 xmlns:vm="using:crm.ViewModels.tabs"
+			 xmlns:scrvm="using:crm.ViewModels.tabs.home.screens"
+			 xmlns:scrvw="using:crm.Views.tabs.home.screens"
 			 xmlns:controls="using:crm.Views.tabs.home.controls"
 			 xmlns:conv="using:crm.Views.converters"
 			 xmlns:menu="using:crm.ViewModels.tabs.home.menu"			 
@@ -270,13 +272,15 @@
 				</Border>
 			</SplitView.Pane>
 			<Grid>
-				<ContentControl Content="{Binding Menu.Screen}">
-					<!--<ContentControl.ContentTemplate>
-						<DataTemplate DataType="{x:Type ">
-							
-						</DataTemplate>
-					</ContentControl.ContentTemplate>-->
-				</ContentControl>				
+				<Grid.DataTemplates>
+					<DataTemplate DataType="{x:Type scrvm:UserList}">
+						<scrvw:UserList/>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type scrvm:UserActions}">
+						<scrvw:TBD/>
+					</DataTemplate>
+				</Grid.DataTemplates>
+				<ContentControl Content="{Binding Menu.Screen}"/>
 			</Grid>
 			<SplitView.Styles>
 				<!--<Style Selector="SplitView ToggleButton#PART_Simple Svg#PART_Simple_Icon">

@@ -2,11 +2,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace crm.Views.tabs.home.homeTabScreens
+namespace crm.Views.tabs.home.screens
 {
-    public partial class userList : UserControl
+    public partial class UserList : UserControl
     {
-        public userList()
+        public UserList()
         {
             InitializeComponent();
         }

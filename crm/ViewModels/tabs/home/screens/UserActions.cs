@@ -8,6 +8,6 @@ namespace crm.ViewModels.tabs.home.screens
 {
     public class UserActions : BaseScreen
     {
-        public override string Title => "События";        
+        public override string Title => "События";
     }
 }

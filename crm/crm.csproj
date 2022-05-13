@@ -42,6 +42,7 @@
     <None Remove="Assets\test.png" />-->	  
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\png\screens\TBD.png" />
     <None Remove="Assets\svgs\leftslidemenu\burger_off.svg" />
     <None Remove="Assets\svgs\leftslidemenu\burger_on.svg" />
     <None Remove="Assets\svgs\leftslidemenu\expand.svg" />

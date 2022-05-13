@@ -26,6 +26,18 @@ namespace crm.ViewModels.tabs.home.menu
                 MenuExpandedEvent?.Invoke(value);
             }
         }
+
+        BaseScreen screen;
+        public BaseScreen Screen
+        {
+            get => screen;
+            set
+            {
+                screen?.OnDeactivate();                
+                this.RaiseAndSetIfChanged(ref screen, value);
+                value.OnActivate();
+            }
+        }
         #endregion
 
         #region commands
@@ -85,6 +97,9 @@ namespace crm.ViewModels.tabs.home.menu
                     if (!screen.Equals(s))
                         screen.Uncheck();
             }
+
+            Screen = s;            
+
         }
         #endregion
 
