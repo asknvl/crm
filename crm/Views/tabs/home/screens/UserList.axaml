@@ -117,7 +117,7 @@
 		<Grid
 			Grid.Row="3">
 			<ScrollViewer >
-				<Grid RowDefinitions="40, *">
+				<Grid RowDefinitions="35, *">
 					<Grid
 						VerticalAlignment="Center"
 						Margin="0, 10, 0, 10"						
@@ -154,7 +154,7 @@
 						
 						<TextBlock
 							Grid.Column="1">
-							ID
+							Id
 						</TextBlock>
 						<TextBlock
 							Grid.Column="2">
@@ -231,9 +231,10 @@
 					<ItemsPresenter Grid.Row="1" Items="{Binding Users}">
 						<ItemsPresenter.DataTemplates>
 							<DataTemplate>
-								<Grid
+								<Grid									
 									VerticalAlignment="Center"
-									Margin="0, 10, 0, 10"
+									Height="35"
+									Margin="0, 0, 0, 0"
 									Name="PART_UserList"
 									Grid.Row="0"
 									ColumnDefinitions="
@@ -264,15 +265,16 @@
 											Width="15"
 											Height="15"/>
 									</ToggleButton>
-
-									<TextBlock
-										Text="{Binding Id}"
-										Grid.Column="1">										
-									</TextBlock>
-									<TextBlock
-										Text="{Binding Litera}"
-										Grid.Column="2">										
-									</TextBlock>
+									<Button
+										Classes="Button Hyper"										
+										Grid.Column="1">
+										<TextBlock Text="{Binding Id}"/>										
+									</Button>
+									<Button
+										Classes="Button Hyper"										
+										Grid.Column="2">
+										<TextBlock Text="{Binding Litera}"/>
+									</Button>
 									<Svg
 										Path="/Assets/svgs/screens/status_offline.svg"
 										Width="10"
@@ -344,12 +346,7 @@
 										Grid.Column="17">
 										Фото паспорта
 									</TextBlock>
-									<Grid.Styles>
-										<Style Selector="Grid#PART_Title TextBlock">
-											<Setter Property="FontWeight" Value="Bold"/>
-											<Setter Property="VerticalAlignment" Value="Center"/>
-											<Setter Property="HorizontalAlignment" Value="Center"/>
-										</Style>
+									<Grid.Styles>										
 										<Style Selector="Grid#PART_UserList TextBlock">											
 											<Setter Property="VerticalAlignment" Value="Center"/>
 											<Setter Property="HorizontalAlignment" Value="Center"/>
