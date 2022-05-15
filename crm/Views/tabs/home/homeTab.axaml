@@ -261,10 +261,10 @@
 							</Grid>
 							<ToggleButton.Styles>
 								<Style Selector="ToggleButton Svg">
-									<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/on.svg"/>
+									<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/off.svg"/>
 								</Style>
 								<Style Selector="ToggleButton:checked Svg">
-									<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/off.svg"/>
+									<Setter Property="Path" Value="/Assets/svgs/leftslidemenu/on.svg"/>
 								</Style>
 							</ToggleButton.Styles>
 						</ToggleButton>
