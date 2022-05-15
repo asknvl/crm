@@ -268,7 +268,7 @@ namespace crm.ViewModels.tabs
                     PhoneNumber = PhoneNumber,
                     Telegram = Telegram,
                     Wallet = Wallet,
-                    Devices = new string[] { Device }                    
+                    Devices = new Device[] { new Device() { Name = Device } }                    
                 };
 
                 bool res = false;

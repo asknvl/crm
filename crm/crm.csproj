@@ -18,7 +18,8 @@
     <AvaloniaResource Remove="Styles\Colors.axaml" />
     <AvaloniaResource Remove="Styles\DataValidationErros.axaml" />
     <AvaloniaResource Remove="Styles\LeftSlideMenuStyles.axaml" />
-    <AvaloniaResource Remove="Styles\TreeViewItem.axaml" />
+    <AvaloniaResource Remove="Styles\ScreenStyle.axaml" />
+    <AvaloniaResource Remove="Styles\UserListStyle.axaml" />
     <AvaloniaXaml Remove="Views\Colors.axaml" />
     <!--<None Remove=".gitignore" />
     <None Remove="Assets\fonts\Inter\Inter-Black.ttf" />
@@ -77,12 +78,17 @@
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaXaml Update="Styles\LeftSlideMenuStyles.axaml">
+    <AvaloniaXaml Update="Styles\ScreenStyle.axaml">
       <SubType>Designer</SubType>
     </AvaloniaXaml>
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaXaml Update="Styles\TreeViewItem.axaml">
+    <AvaloniaXaml Update="Styles\UserListStyle.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaXaml Update="Styles\LeftSlideMenuStyles.axaml">
       <SubType>Designer</SubType>
     </AvaloniaXaml>
   </ItemGroup>
@@ -116,5 +122,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\svgs\screens\" />
   </ItemGroup>
 </Project>

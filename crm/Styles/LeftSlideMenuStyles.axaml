@@ -8,6 +8,7 @@
 	<!--TextBlock-->
 	<Style Selector="TextBlock">
 		<Setter Property="FontSize" Value="12"/>
+		<Setter Property="Foreground" Value="#FF464646"/>
 	</Style>
 
 	<!--Collapse button-->

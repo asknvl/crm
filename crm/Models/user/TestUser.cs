@@ -18,7 +18,7 @@ namespace crm.Models.user
             PhoneNumber = "+7 (925) 618-69-36";
             Telegram = "@xeylov";
             Wallet = "$$$$$$";
-            Devices = new string[] { "BigGun" };
+            Devices = new Device[1];
 
         }
     }

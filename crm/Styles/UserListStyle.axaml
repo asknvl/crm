@@ -1,0 +1,57 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+			<Button Classes="Button List">
+				Посмотреть
+			</Button>
+        </Border>
+    </Design.PreviewWith>
+	<!--CheckBox-->
+	<Style Selector="ToggleButton.CheckButton">
+		<Style.Resources>
+			<Color x:Key="ToggleButtonBackgroundPointerOver">#FFFFFFFF</Color>
+			<Color x:Key="ToggleButtonBackgroundPressed">#FFFFFFFF</Color>
+			<Color x:Key="ToggleButtonBorderBrushPointerOver">#FF0BB3E8</Color>
+		</Style.Resources>
+		<Setter Property="Margin" Value="0, 0, 0, 0"/>
+		<Setter Property="CornerRadius" Value="0"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="BorderBrush" Value="Red"/>
+		<Setter Property="Background" Value="Transparent"/>
+	</Style>	
+	<Style Selector="ToggleButton.CheckButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushPointerOver}"/>
+	</Style>
+	<Style Selector="ToggleButton.CheckButton /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>		
+	</Style>
+	<Style Selector="ToggleButton.CheckButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background" Value="Transparent"/>		
+	</Style>
+	<Style Selector="ToggleButton.CheckButton[IsChecked=True] Svg#PART_CHB">
+		<Setter Property="Path" Value="/Assets/svgs/screens/checkbox_ch.svg"/>
+	</Style>
+	<Style Selector="ToggleButton.CheckButton[IsChecked=False] Svg#PART_CHB">
+		<Setter Property="Path" Value="/Assets/svgs/screens/checkbox_un.svg"/>
+	</Style>
+	<!--Buttons-->
+	<Style Selector="Button.List">
+		<Style.Resources>
+			<Color x:Key="ButtonBackgroundPressed">#FFFFFFFF</Color>
+			<Color x:Key="ButtonBackgroundPointerOver">#FFF5F5F5</Color>
+			<Color x:Key="ButtonBorderBrushPointerOver">#FF464646</Color>
+			<Color x:Key="ButtonBorderBrushPressed">#FF464646</Color>
+		</Style.Resources>
+		<Setter Property="Background" Value="#FFFFFFFF"/>
+		<Setter Property="BorderBrush" Value="#FF464646"/>		
+		<Setter Property="CornerRadius" Value="15"/>
+		<Setter Property="Margin" Value="0"/>
+		<Setter Property="Height" Value="20"/>
+		<Setter Property="Padding" Value="10, 0, 10, 0"/>
+	</Style>
+
+	<Style Selector="Button.Hyper">
+		
+	</Style>
+</Styles>
