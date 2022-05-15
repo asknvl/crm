@@ -225,15 +225,15 @@
 										</DataTemplate>
 									</ItemsPresenter.DataTemplates>
 								</ItemsPresenter>
-							</ScrollViewer>
-							<Grid.Styles>
-								<Style Selector="Grid:pointerover ScrollViewer">
-									<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-								</Style>
-								<Style Selector="Grid ScrollViewer">
-									<Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
-								</Style>
-							</Grid.Styles>
+								<ScrollViewer.Styles>
+									<Style Selector="ScrollViewer:pointerover">
+										<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+									</Style>
+									<Style Selector="ScrollViewer">
+										<Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+									</Style>
+								</ScrollViewer.Styles>
+							</ScrollViewer>							
 						</Grid>
 						
 						<ToggleButton
