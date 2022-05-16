@@ -1,4 +1,5 @@
-﻿using crm.Models.user;
+﻿using crm.Models.appcontext;
+using crm.Models.user;
 using crm.ViewModels.tabs.home.screens.users;
 using ReactiveUI;
 using System;
@@ -18,21 +19,11 @@ namespace crm.ViewModels.tabs.home.screens
         CancellationTokenSource cts;
         #endregion
         #region properties
+        ApplicationContext AppContext { get; }
         public override string Title => "Список сотрудников";
 
-        private string test;
-        public string Test
-        {
-            get => test;
-            set => this.RaiseAndSetIfChanged(ref test, value);
-        }
-
         public ObservableCollection<UserListItem> Users { get; set; } = new ObservableCollection<UserListItem>();
-        //{
-        //    new UserItemTest(),
-        //    new UserItemTest()
-        //};
-
+        
         int page;
         public int SelectedPage
         {
@@ -48,8 +39,9 @@ namespace crm.ViewModels.tabs.home.screens
         }
         #endregion
 
-        public UserList()
+        public UserList(ApplicationContext appcontext)
         {
+            AppContext = appcontext;
             SelectedPage = 1;
         }
 
@@ -66,18 +58,31 @@ namespace crm.ViewModels.tabs.home.screens
 
             try
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
                 {
 
 
+                    
+
+                    List<User> users;
+                    int total_pages = 0;
+
+                    (users, total_pages) = await AppContext.ServerApi.GetUsers(1, 20, AppContext.User.Token);
+
                     Users.Clear();
-                    Users.Add(new UserItemTest());
-                    Users.Add(new UserItemTest());
-                    Users.Add(new UserItemTest());
-                    Users.Add(new UserItemTest());
-                    Users.Add(new UserItemTest());
-                    Users.Add(new UserItemTest());
-                    Users.Add(new UserItemTest());
+
+                    foreach (var user in users)
+                    {
+                        Users.Add();
+                    }
+
+                    //Users.Add(new UserItemTest());
+                    //Users.Add(new UserItemTest());
+                    //Users.Add(new UserItemTest());
+                    //Users.Add(new UserItemTest());
+                    //Users.Add(new UserItemTest());
+                    //Users.Add(new UserItemTest());
+                    //Users.Add(new UserItemTest());
 
 
 

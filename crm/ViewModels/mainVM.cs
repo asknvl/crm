@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using crm.Models.api.server;
+using crm.Models.appcontext;
 using crm.Models.user;
 using crm.ViewModels.tabs;
 using ReactiveUI;
@@ -20,7 +21,7 @@ namespace crm.ViewModels
         loginVM loginTab;
         tokenVM tokenTab;
         registrationVM registrationTab;
-        BaseServerApi api;
+        //BaseServerApi api;
         #endregion
 
         #region properties      
@@ -52,7 +53,9 @@ namespace crm.ViewModels
         {
 
             #region dependencies
-            api = new ServerApi("http://185.46.9.229:4000");
+            ApplicationContext AppContext = new ApplicationContext();
+            AppContext.ServerApi = new ServerApi("http://185.46.9.229:4000");
+            //api = 
             #endregion
 
             #region init
@@ -86,11 +89,11 @@ namespace crm.ViewModels
             #endregion
 
             #region homeTab
-            homeTab = new homeVM(api, new User() { FullName = "Ко Ал Се" }, this);
+            //homeTab = new homeVM(api, new User() { FullName = "Ко Ал Се" }, this);
             #endregion
 
             #region registrationTab
-            registrationTab = new registrationVM(api, this);
+            registrationTab = new registrationVM(AppContext, this);
             registrationTab.onUserRegistered += () => 
             {
                 CloseTab(registrationTab);
@@ -101,10 +104,12 @@ namespace crm.ViewModels
             #endregion
 
             #region loginTab
-            loginTab = new loginVM(api, this);
+            loginTab = new loginVM(AppContext, this);
             loginTab.CloseTabEvent += CloseTab;
             loginTab.onLoginDone += (user) => {
-                homeVM homeTab = new homeVM(api, user, this);
+
+                AppContext.User = user;
+                homeVM homeTab = new homeVM(AppContext, this);
                 homeTab.AddUserEvent += () => {
                     ShowTab(tokenTab);
                 };
@@ -124,7 +129,7 @@ namespace crm.ViewModels
             #endregion
 
             #region tokenTab
-            tokenTab = new tokenVM(api, this);
+            tokenTab = new tokenVM(AppContext, this);
             tokenTab.CloseTabEvent += CloseTab;
             tokenTab.onTokenCheckResult += (result, token) =>
             {

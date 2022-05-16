@@ -1,8 +1,10 @@
-﻿namespace crm.ViewModels.tabs.home.menu
+﻿using crm.Models.appcontext;
+
+namespace crm.ViewModels.tabs.home.menu
 {
     public class admin_menu : BaseMenu
     {
-        public admin_menu()
+        public admin_menu(ApplicationContext appcontext) : base(appcontext)
         {
 
             SimpleMenuItem dashboard = new items.Dashboard();
@@ -10,7 +12,7 @@
             AddItem(dashboard);
 
             ComplexMenuItem users = new items.Users();            
-            users.AddScreen(new screens.UserList());
+            users.AddScreen(new screens.UserList(appcontext));
             users.AddScreen(new screens.UserActions());            
             AddItem(users);
 

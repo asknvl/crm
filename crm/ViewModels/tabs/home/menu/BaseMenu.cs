@@ -1,4 +1,5 @@
-﻿using crm.ViewModels.tabs.home.screens;
+﻿using crm.Models.appcontext;
+using crm.ViewModels.tabs.home.screens;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -103,8 +104,9 @@ namespace crm.ViewModels.tabs.home.menu
         }
         #endregion
 
-        public BaseMenu()
+        public BaseMenu(ApplicationContext appcontext)
         {
+
             IsMenuExpanded = true;
             MenuExpandedEvent += Menu_ExpandedEvent;
         }

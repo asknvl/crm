@@ -11,7 +11,7 @@ namespace crm.Models.appcontext
     public class ApplicationContext
     {
         public BaseServerApi ServerApi { get; set; }
-        BaseUser user { get; set; }
+        public BaseUser User { get; set; }
         
     }
 }

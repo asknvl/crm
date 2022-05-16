@@ -1,6 +1,7 @@
 ﻿//#define ALLOK
 
 using crm.Models.api.server;
+using crm.Models.appcontext;
 using crm.Models.validators;
 using crm.ViewModels.dialogs;
 using crm.Views.dialogs;
@@ -45,7 +46,7 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> returnCmd { get; }
         #endregion
 
-        public tokenVM(BaseServerApi api, ViewModelBase parent) : base(parent)
+        public tokenVM(ApplicationContext appcontext, ViewModelBase parent) : base(parent)
         {
             Title = "Токен";
 #if DEBUG
@@ -63,7 +64,7 @@ namespace crm.ViewModels.tabs
                 bool res = false;
                 try
                 {
-                    res = await api.ValidateRegToken(Token);
+                    res = await appcontext.ServerApi.ValidateRegToken(Token);
                     onTokenCheckResult?.Invoke(res, Token);
 
                 } catch (Exception ex)

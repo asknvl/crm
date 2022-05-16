@@ -17,6 +17,7 @@ using crm.WS;
 using crm.ViewModels.dialogs;
 using System.ComponentModel;
 using System.Collections;
+using crm.Models.appcontext;
 
 namespace crm.ViewModels.tabs
 {
@@ -48,7 +49,6 @@ namespace crm.ViewModels.tabs
 
         IWindowService ws = WindowService.getInstance();
 
-        BaseServerApi api;
         string token;
         #endregion
 
@@ -229,11 +229,9 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> registerCmd { get; }
         #endregion
 
-        public registrationVM(BaseServerApi api, ViewModelBase parent) : base(parent)
+        public registrationVM(ApplicationContext appcontext, ViewModelBase parent) : base(parent)
         {
             Title = "Регистрация";
-
-            this.api = api;
 #if DEBUG
             Email = "test@protonmail.com";
             Password1 = "F123qwe$%^0000";
@@ -274,7 +272,7 @@ namespace crm.ViewModels.tabs
                 bool res = false;
                 try
                 {
-                    res = await api.RegisterUser(Token, user);
+                    res = await appcontext.ServerApi.RegisterUser(Token, user);
                     if (res)
                         onUserRegistered?.Invoke();                   
 

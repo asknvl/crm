@@ -31,6 +31,10 @@ namespace crm.ViewModels.tabs.home.screens
         public abstract string Title { get; }
         #endregion
 
+        public BaseScreen()
+        {
+        }
+
         #region public
         public void Uncheck()
         {

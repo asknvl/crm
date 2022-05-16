@@ -1,4 +1,5 @@
 ﻿using crm.Models.api.server;
+using crm.Models.appcontext;
 using crm.Models.user;
 using crm.ViewModels.tabs.home.menu;
 using ReactiveUI;
@@ -16,6 +17,7 @@ namespace crm.ViewModels.tabs
     {
         #region vars
         BaseServerApi api;
+        ApplicationContext AppContext;
         #endregion
 
         #region properties     
@@ -65,12 +67,12 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> quitCmd { get; }
         #endregion
 
-        public homeVM() : base(null)
-        {
-            Menu = new admin_menu();
-        }
+        //public homeVM() : base(null)
+        //{
+        //    Menu = new admin_menu();
+        //}
 
-        public homeVM(BaseServerApi api, BaseUser user, ViewModelBase parent) : base(parent)
+        public homeVM(ApplicationContext appcontext, ViewModelBase parent) : base(parent)
         {
 
 
@@ -90,11 +92,10 @@ namespace crm.ViewModels.tabs
             });
             #endregion
 
-            this.api = api;
-            User = user;                        
+            User = appcontext.User;                        
             Title = "Домой";
 
-            Menu = new admin_menu();
+            Menu = new admin_menu(appcontext);
             
         }
 

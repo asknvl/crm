@@ -2,6 +2,7 @@
 
 using Avalonia.Data;
 using crm.Models.api.server;
+using crm.Models.appcontext;
 using crm.Models.autocompletions;
 using crm.Models.user;
 using crm.Models.validators;
@@ -73,7 +74,7 @@ namespace crm.ViewModels.tabs
         public ReactiveCommand<Unit, Unit> forgotCmd { get; }
         #endregion
 
-        public loginVM(BaseServerApi api, ViewModelBase parent) : base(parent)
+        public loginVM(ApplicationContext appcontext , ViewModelBase parent) : base(parent)
         {
             Title = "Вход";
 
@@ -92,12 +93,12 @@ namespace crm.ViewModels.tabs
                     BaseUser user = new TestUser();
 #else
 
-                    BaseUser user = await api.Login(Login, Password);
+                    BaseUser user = await appcontext.ServerApi.Login(Login, Password);
 
                     List<User> users;
                     int page;
 
-                    (users, page) = await api.GetUsers(0, 20, user.Token);
+                    (users, page) = await appcontext.ServerApi.GetUsers(0, 20, user.Token);
 
 #endif
                     if (user != null)
