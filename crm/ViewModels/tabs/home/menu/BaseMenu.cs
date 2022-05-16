@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace crm.ViewModels.tabs.home.menu
 {
     public abstract class BaseMenu : ViewModelBase
-    {
+    {        
         #region properties
         public ObservableCollection<BaseMenuItem> Items { get; set; } = new ObservableCollection<BaseMenuItem>();
 

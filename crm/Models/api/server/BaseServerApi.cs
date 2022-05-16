@@ -146,7 +146,7 @@ namespace crm.Models.api.server
         {
             User user = null;
 
-            await Task.Run(() => { 
+            await Task.Run(async () => { 
 
                 var client = new RestClient($"{url}/v1/auth");
                 var request = new RestRequest(Method.POST);            
@@ -154,24 +154,23 @@ namespace crm.Models.api.server
                 p.email = login;
                 p.password = password;
                 request.AddParameter("application/json", p.ToString(), ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);  
+                IRestResponse response = client.Execute(request);
+                JObject json = JObject.Parse(response.Content);
                 if (!response.IsSuccessful)
                 {
-
+                    string e = json["errors"].ToString();
+                    List<ServerError>? errors = JsonConvert.DeserializeObject<List<ServerError>>(e);
+                    throw new ServerException($"{getErrMsg(errors)}");
                 }
-
-                JObject json = JObject.Parse(response.Content);
+                
                 bool res = json["success"].ToObject<bool>();
-
                 string token, id;
-                user = new User();
+                
 
                 if (res)
                 {
                     token = json["data"]["token"].ToObject<string>();
-                    id = json["data"]["userID"].ToObject<string>();
-                    user.Token = token;
-                    user.Id = id;                   
+                    id = json["data"]["userID"].ToObject<string>();                    
                 } else
                 {
                     string e = json["errors"].ToString();
@@ -181,37 +180,91 @@ namespace crm.Models.api.server
 
                 if (res)
                 {
-                    client = new RestClient($"{url}/v1/users/{user.Id}");
-                    request = new RestRequest(Method.GET);
-                    request.AddHeader($"Authorization", $"Bearer {user.Token}");                    
-                    response = client.Execute(request);
-                    json = JObject.Parse(response.Content);
-                    res = json["success"].ToObject<bool>();
-                    if (res)
-                    {
-                        user.Email = json["data"]["email"].ToObject<string>();
-                        user.FullName = json["data"]["userfullname"].ToObject<string>();
-                        string bd = json["data"]["birthday"].ToObject<string>();
-                        user.BirthDate = converter.date(bd, Direction.server_user);
-                        string ph = json["data"]["phone"].ToObject<string>();
-                        user.PhoneNumber = converter.phone(ph, Direction.server_user);
-                        string tg = json["data"]["telegram"].ToObject<string>();
-                        user.Telegram = converter.telegram(tg, Direction.server_user);
-                        user.Wallet = json["data"]["usdtaccount"].ToObject<string>();
-
-                    } else
-                    {
-                        string e = json["errors"].ToString();
-                        List<ServerError>? errors = JsonConvert.DeserializeObject<List<ServerError>>(e);
-                        throw new ServerException($"{getErrMsg(errors)}");
-                    }
+                    user = await GetUser(id, token);    
                 }
 
             });
             return user;
 
         }
+
+        public virtual async Task<User> GetUser(string id, string token)
+        {
+            User user = new User();
+
+            await Task.Run(() => {
+
+                var client = new RestClient($"{url}/v1/users/{id}");
+                var request = new RestRequest(Method.GET);
+                request.AddHeader($"Authorization", $"Bearer {token}");
+                var response = client.Execute(request);
+                var json = JObject.Parse(response.Content);
+                var res = json["success"].ToObject<bool>();
+                if (res)
+                {
+                    JToken data = json["data"];
+                    if (data != null)
+                    {
+                        user.Email = data["email"].ToString();
+                        user.FullName = data["fullname"].ToString();
+                        user.LastName = data["lastname"].ToString();
+                        user.FirstName = data["firstname"].ToString();
+                        user.MiddleName = data["middlename"].ToString();
+                        string bd = data["birthday"].ToString();
+                        user.BirthDate = converter.date(bd, Direction.server_user);
+                        string ph = data["phone"].ToString();
+                        user.PhoneNumber = converter.phone(ph, Direction.server_user);
+                        string tg = data["telegram"].ToString();
+                        user.Telegram = converter.telegram(tg, Direction.server_user);
+                        user.Wallet = data["usdt_account"].ToString();
+                        user.Roles = JsonConvert.DeserializeObject<List<Role>>(data["roles"].ToString());
+                        user.Devices = JsonConvert.DeserializeObject<List<Device>>(data["devices"].ToString());
+                    }
+
+                } else
+                {
+                    string e = json["errors"].ToString();
+                    List<ServerError>? errors = JsonConvert.DeserializeObject<List<ServerError>>(e);
+                    throw new ServerException($"{getErrMsg(errors)}");
+                }
+            });
+
+            user.Id = id;
+            user.Token = token;
+
+            return user;
+        }
         
+        public virtual async Task<(List<User>, int)> GetUsers(int page, int size, string token)
+        {
+            List<User> users = new List<User>();
+            int total_pages = 0;
+
+            var client = new RestClient($"{url}/v1/users/");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader($"Authorization", $"Bearer {token}");
+            request.AddQueryParameter("page", page.ToString());
+            request.AddQueryParameter("size", size.ToString());
+            var response = client.Execute(request);
+            var json = JObject.Parse(response.Content);
+            var res = json["success"].ToObject<bool>();
+            if (res)
+            {
+                JToken data = json["data"];
+                if (data != null)
+                {
+                    users = JsonConvert.DeserializeObject<List<User>>(data.ToString());
+                    total_pages = json["total_pages"].ToObject<int>();
+                }
+            } else
+            {
+                string e = json["errors"].ToString();
+                List<ServerError>? errors = JsonConvert.DeserializeObject<List<ServerError>>(e);
+                throw new ServerException($"{getErrMsg(errors)}");
+            }
+            return (users, total_pages);
+        }
+
         #endregion
 
     }

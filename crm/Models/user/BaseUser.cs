@@ -1,4 +1,5 @@
 ﻿using crm.ViewModels;
+using Newtonsoft.Json;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace crm.Models.user
     {
         #region properties
         string id;
+        [JsonProperty("id")]
         public string Id {
             get => id;
             set => this.RaiseAndSetIfChanged(ref id, value);    
@@ -20,6 +22,7 @@ namespace crm.Models.user
         public string Token { get; set; }
 
         string litera;
+        [JsonProperty("letter_id")]
         public string Litera
         {
             get => litera;
@@ -27,18 +30,20 @@ namespace crm.Models.user
         }
 
         string email;
+        [JsonProperty("email")]
         public string Email 
         {
             get => email;
             set => this.RaiseAndSetIfChanged(ref email, value);
         }
-        string password;
+        string password;        
         public string Password
         {
             get => password;
             set => this.RaiseAndSetIfChanged(ref password, value);
         }
         string fullname;
+        [JsonProperty("fullname")]
         public string FullName
         {
             get => fullname;
@@ -46,6 +51,7 @@ namespace crm.Models.user
         }
 
         string lastname;
+        [JsonProperty("lastname")]
         public string LastName
         {
             get => lastname;
@@ -53,6 +59,7 @@ namespace crm.Models.user
         }
 
         string firstname;
+        [JsonProperty("firstname")]
         public string FirstName
         {
             get => firstname;
@@ -60,6 +67,7 @@ namespace crm.Models.user
         }
 
         string middlename;
+        [JsonProperty("middlename")]
         public string MiddleName
         {
             get => middlename;
@@ -67,61 +75,70 @@ namespace crm.Models.user
         }
 
         string birthdate;
+        [JsonProperty("birthday")]
         public string BirthDate
         {
             get => birthdate;
             set => this.RaiseAndSetIfChanged(ref birthdate, value);
         }
         string phonenumber;
+        [JsonProperty("phone")]
         public string PhoneNumber
         {
             get => phonenumber;
             set => this.RaiseAndSetIfChanged(ref phonenumber, value);
         }
 
-        SocialNetwork[] socialnetworks;
-        public SocialNetwork[] SocialNetworks
+        List<SocialNetwork> socialnetworks;
+        [JsonProperty("social_networks")]
+        public List<SocialNetwork> SocialNetworks
         {
             get => socialnetworks;
             set => this.RaiseAndSetIfChanged(ref socialnetworks, value);
         }
 
         string telegram;
+        [JsonProperty("telegram")]
         public string Telegram
         {
             get => telegram;
             set => this.RaiseAndSetIfChanged(ref telegram, value);
         }
         string wallet;
+        [JsonProperty("usdt_account")]
         public string Wallet
         {
             get => wallet;
             set => this.RaiseAndSetIfChanged(ref wallet, value);
         }
 
-        string lastlogindate;
-        public string LastLoginDate
+        string? lastlogindate;
+        [JsonProperty("last_login_date")]
+        public string? LastLoginDate
         {
             get => lastlogindate;
             set => this.RaiseAndSetIfChanged(ref lastlogindate, value);
         }
 
-        string lasteventdate;
-        public string LastEventDate
+        string? lasteventdate;
+        [JsonProperty("last_event_date")]
+        public string? LastEventDate
         {
             get => lasteventdate;
             set => this.RaiseAndSetIfChanged(ref lasteventdate, value);
         }
 
-        Device[] devices;
-        public Device[] Devices
+        List<Device>? devices;
+        [JsonProperty("devices")]
+        public List<Device>? Devices
         {
             get => devices;
             set => this.RaiseAndSetIfChanged(ref devices, value);
         }
 
-        Role[] roles;
-        public Role[] Roles
+        List<Role> roles;
+        [JsonProperty("roles")]
+        public List<Role> Roles
         {
             get => roles;
             set => this.RaiseAndSetIfChanged(ref roles, value);

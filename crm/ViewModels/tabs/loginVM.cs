@@ -1,4 +1,4 @@
-﻿#define ALLOK
+﻿//#define ALLOK
 
 using Avalonia.Data;
 using crm.Models.api.server;
@@ -93,6 +93,12 @@ namespace crm.ViewModels.tabs
 #else
 
                     BaseUser user = await api.Login(Login, Password);
+
+                    List<User> users;
+                    int page;
+
+                    (users, page) = await api.GetUsers(0, 20, user.Token);
+
 #endif
                     if (user != null)
                         onLoginDone?.Invoke(user);
