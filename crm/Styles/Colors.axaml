@@ -33,7 +33,7 @@
 		<Color x:Key="TopPanelInActiveTextForeground">Gray</Color>
 		<Color x:Key="TopPanelActiveTextForeground">White</Color>		
 		
-		<Color x:Key="WorkAreaBackground">#FFE5E5E5</Color>				
+		<Color x:Key="WorkAreaBackground">#FFFFFFFF</Color>				
 		<Color x:Key="WorkAreaButtonBackground">#FF000000</Color>
 		<Color x:Key="WorkAreaButtonForeground">White</Color>
 		<Color x:Key="WorkAreaButtonForegroundPointerOver">White</Color>

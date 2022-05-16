@@ -22,7 +22,6 @@
 	</UserControl.Styles>
 	<UserControl.Resources>
 		<conv:FullNameToShortNameConverter x:Key="fullNameConverter"/>
-
 	</UserControl.Resources>
 	<Grid RowDefinitions="50, *">
 		<Grid

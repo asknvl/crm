@@ -33,6 +33,8 @@ namespace crm.ViewModels.tabs.home.screens.users
             {
                 new Role() { Id = 1, Name = "admin"}                
             };
+
+            Status = true;
         }
     }
 }

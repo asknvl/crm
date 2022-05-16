@@ -3,12 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:uservm="using:crm.ViewModels.tabs.home.screens.users"
+			 xmlns:conv="using:crm.Views.converters"
              mc:Ignorable="d" d:DesignWidth="2800" d:DesignHeight="450"
              x:Class="crm.Views.tabs.home.screens.UserList">
 	<UserControl.Styles>
 		<StyleInclude Source="/Styles/ScreenStyle.axaml"/>
 		<StyleInclude Source="/Styles/UserListStyle.axaml"/>
 	</UserControl.Styles>
+	<UserControl.Resources>
+		<conv:StatusToSvgPathConverter x:Key="statusConverter"/>
+	</UserControl.Resources>
 	<Grid
 		RowDefinitions="Auto, Auto, Auto, *, Auto"
 		Margin="25, 12, 0, 0">
@@ -117,12 +121,14 @@
 		<Grid
 			Grid.Row="3">
 			<ScrollViewer >
-				<Grid RowDefinitions="40, *">
+				<Grid RowDefinitions="Auto, *">
 					<Grid
 						VerticalAlignment="Center"
-						Margin="0, 10, 0, 10"						
+						Height="35"
+						Margin="0, 0, 0, 0"						
 						Name="PART_Title"
 						Grid.Row="0"
+						RowDefinitions="*, 1"
 						ColumnDefinitions="
 							20, 
 							60,
@@ -154,7 +160,7 @@
 						
 						<TextBlock
 							Grid.Column="1">
-							Id
+							ID
 						</TextBlock>
 						<TextBlock
 							Grid.Column="2">
@@ -220,6 +226,12 @@
 							Grid.Column="17">
 							Фото паспорта
 						</TextBlock>
+						<Grid 
+							Background="{DynamicResource SeparatorColor}"
+							Height="1"							
+							Grid.Row="1"
+							Grid.ColumnSpan="18">										
+						</Grid>
 						<Grid.Styles>
 							<Style Selector="Grid#PART_Title TextBlock">
 								<Setter Property="FontWeight" Value="Bold"/>
@@ -231,12 +243,14 @@
 					<ItemsPresenter Grid.Row="1" Items="{Binding Users}">
 						<ItemsPresenter.DataTemplates>
 							<DataTemplate>
-								<Grid									
+								<Grid					
+									Classes="Grid Highlight"
 									VerticalAlignment="Center"
 									Height="35"
 									Margin="0, 0, 0, 0"
 									Name="PART_UserList"
-									Grid.Row="0"
+									Grid.Row="0"	
+									RowDefinitions="*, 1"
 									ColumnDefinitions="
 										20, 
 										60,
@@ -276,7 +290,7 @@
 										<TextBlock Text="{Binding Litera}"/>
 									</Button>
 									<Svg
-										Path="/Assets/svgs/screens/status_offline.svg"
+										Path="{Binding Status, Converter={StaticResource statusConverter}}"
 										Width="10"
 										Height="10"
 										Grid.Column="3">																				
@@ -304,13 +318,11 @@
 									<Button
 										Classes="Button List"
 										VerticalAlignment="Center"
-										HorizontalAlignment="Center"										
+										HorizontalAlignment="Center"
 										Grid.Column="9">
-										<!--<Grid>-->
-											<TextBlock>
-												Посмотреть
-											</TextBlock>
-										<!--</Grid>-->
+										<TextBlock>
+											Посмотреть
+										</TextBlock>										
 									</Button>
 									<TextBlock
 										Text="{Binding Email}"
@@ -342,17 +354,25 @@
 										Text="{Binding Devices[0].Name}"
 										Grid.Column="16">										
 									</TextBlock>
-									<TextBlock
+									<Button Classes="Button Passport"
 										Grid.Column="17">
-										Фото паспорта
-									</TextBlock>
+										<Svg
+											Height="15"
+											Width="30"/>
+									</Button>
+									<Grid 
+										Background="{DynamicResource SeparatorColor}"
+										Height="1"
+										Grid.Row="1"
+										Grid.ColumnSpan="18">										
+									</Grid>
 									<Grid.Styles>										
 										<Style Selector="Grid#PART_UserList TextBlock">											
 											<Setter Property="VerticalAlignment" Value="Center"/>
 											<Setter Property="HorizontalAlignment" Value="Center"/>
 										</Style>
-									</Grid.Styles>
-								</Grid>
+									</Grid.Styles>								
+								</Grid>								
 							</DataTemplate>
 						</ItemsPresenter.DataTemplates>
 					</ItemsPresenter>				
@@ -371,6 +391,20 @@
 		</Grid>
 		<Grid
 			Grid.Row="4">
+			<StackPanel
+				Margin="15"
+				HorizontalAlignment="Center"
+				Orientation="Horizontal">
+				<Button Classes="Button PageLeft">
+					<Svg/>
+				</Button>
+				<Border Classes="Border Page">				
+					<TextBlock Text="{Binding SelectedPage}"/>
+				</Border>
+				<Button Classes="Button PageRight">
+					<Svg/>
+				</Button>
+			</StackPanel>		
 		</Grid>		
 	</Grid>
 </UserControl>
