@@ -229,6 +229,7 @@ namespace crm.ViewModels.tabs.home.screens
             }
             catch (OperationCanceledException ex)
             {
+                обработать ошибки
             }
         }
         public override void OnDeactivate()
