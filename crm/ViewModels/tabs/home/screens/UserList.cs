@@ -176,8 +176,8 @@ namespace crm.ViewModels.tabs.home.screens
                     while (true)
                     {
 
-                        //List<User> users;
-                        //(users, TotalPages) = await AppContext.ServerApi.GetUsers(SelectedPage - 1, 20, AppContext.User.Token);
+                        List<User> users;
+                        (users, TotalPages) = await AppContext.ServerApi.GetUsers(SelectedPage - 1, 20, AppContext.User.Token);
 
                         //if (users.Count != Users.Count)
                         //{
@@ -187,24 +187,24 @@ namespace crm.ViewModels.tabs.home.screens
                         //    });
                         //}
 
-                        //foreach (var user in users)
-                        //{
-                        //    var found = Users.FirstOrDefault(u => u.Id == user.Id);
-                        //    if (found != null)
-                        //    {
-                        //        found.Copy(user);
-                        //    } else
-                        //    {
-                        //        var tmp = new UserListItem();
-                        //        tmp.Copy(user);
-                        //        await Dispatcher.UIThread.InvokeAsync(() =>
-                        //        {
-                        //            Users.Add(tmp);
-                        //        });
-                        //    }
-                        //}
+                        foreach (var user in users)
+                        {
+                            var found = Users.FirstOrDefault(u => u.Id == user.Id);
+                            if (found != null)
+                            {
+                                found.Copy(user);
+                            } else
+                            {
+                                var tmp = new UserListItem();
+                                tmp.Copy(user);
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    Users.Add(tmp);
+                                });
+                            }
+                        }
 
-                        //Thread.Sleep(1000);
+                        Thread.Sleep(1000);
                     }
 
                     //Users.Add(new UserItemTest());
