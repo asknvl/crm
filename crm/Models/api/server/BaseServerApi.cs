@@ -204,21 +204,8 @@ namespace crm.Models.api.server
                 {
                     JToken data = json["data"];
                     if (data != null)
-                    {
-                        user.Email = data["email"].ToString();
-                        user.FullName = data["fullname"].ToString();
-                        user.LastName = data["lastname"].ToString();
-                        user.FirstName = data["firstname"].ToString();
-                        user.MiddleName = data["middlename"].ToString();
-                        string bd = data["birthday"].ToString();
-                        user.BirthDate = converter.date(bd, Direction.server_user);
-                        string ph = data["phone"].ToString();
-                        user.PhoneNumber = converter.phone(ph, Direction.server_user);
-                        string tg = data["telegram"].ToString();
-                        user.Telegram = converter.telegram(tg, Direction.server_user);
-                        user.Wallet = data["usdt_account"].ToString();
-                        user.Roles = JsonConvert.DeserializeObject<List<Role>>(data["roles"].ToString());
-                        user.Devices = JsonConvert.DeserializeObject<List<Device>>(data["devices"].ToString());
+                    {                        
+                        user = JsonConvert.DeserializeObject<User>(data.ToString());
                     }
 
                 } else

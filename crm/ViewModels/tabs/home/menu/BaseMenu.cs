@@ -104,7 +104,7 @@ namespace crm.ViewModels.tabs.home.menu
         }
         #endregion
 
-        public BaseMenu(ApplicationContext appcontext)
+        public BaseMenu(ApplicationContext context)
         {
 
             IsMenuExpanded = true;

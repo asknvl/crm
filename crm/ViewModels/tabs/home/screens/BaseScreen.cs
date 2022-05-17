@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using crm.Models.appcontext;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,10 +30,13 @@ namespace crm.ViewModels.tabs.home.screens
             }
         }
         public abstract string Title { get; }
+
+        protected ApplicationContext AppContext { get; }
         #endregion
 
-        public BaseScreen()
+        public BaseScreen(ApplicationContext context)
         {
+            AppContext = context;
         }
 
         #region public

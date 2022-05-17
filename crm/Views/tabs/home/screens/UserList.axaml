@@ -395,13 +395,19 @@
 				Margin="15"
 				HorizontalAlignment="Center"
 				Orientation="Horizontal">
-				<Button Classes="Button PageLeft">
+				<Button
+					Command="{Binding prevPageCmd}"
+					IsEnabled="{Binding IsPrevActive}"
+					Classes="Button PageLeft">
 					<Svg/>
 				</Button>
 				<Border Classes="Border Page">				
 					<TextBlock Text="{Binding SelectedPage}"/>
 				</Border>
-				<Button Classes="Button PageRight">
+				<Button
+					Command="{Binding nextPageCmd}"
+					IsEnabled="{Binding IsNextActive}"
+					Classes="Button PageRight">
 					<Svg/>
 				</Button>
 			</StackPanel>		

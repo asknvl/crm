@@ -94,12 +94,6 @@ namespace crm.ViewModels.tabs
 #else
 
                     BaseUser user = await appcontext.ServerApi.Login(Login, Password);
-
-                    List<User> users;
-                    int page;
-
-                    (users, page) = await appcontext.ServerApi.GetUsers(0, 20, user.Token);
-
 #endif
                     if (user != null)
                         onLoginDone?.Invoke(user);

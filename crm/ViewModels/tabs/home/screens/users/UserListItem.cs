@@ -17,6 +17,7 @@ namespace crm.ViewModels.tabs.home.screens.users
             set => this.RaiseAndSetIfChanged(ref status, value);
         }
 
-        public string ShortWallet => $"{Wallet.Substring(0, 15)}...";
+        //public string ShortWallet => $"{Wallet.Substring(0, 15)}...";
+        public string ShortWallet => $"{Wallet}";
     }
 }

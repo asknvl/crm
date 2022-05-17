@@ -3,6 +3,7 @@ using crm.Models.api.server;
 using crm.Models.appcontext;
 using crm.Models.user;
 using crm.ViewModels.tabs;
+using crm.ViewModels.tabs.tabservice;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Text;
 
 namespace crm.ViewModels
 {
-    public class mainVM : ViewModelBase
+    public class mainVM : ViewModelBase, ITabService
     {
 
         #region vars
@@ -55,7 +56,7 @@ namespace crm.ViewModels
             #region dependencies
             ApplicationContext AppContext = new ApplicationContext();
             AppContext.ServerApi = new ServerApi("http://185.46.9.229:4000");
-            //api = 
+            AppContext.TabService = this;            
             #endregion
 
             #region init
@@ -100,12 +101,12 @@ namespace crm.ViewModels
                 loginTab.Clear();
                 ShowTab(loginTab);
             };
-            registrationTab.CloseTabEvent += CloseTab;
+            //registrationTab.CloseTabEvent += CloseTab;
             #endregion
 
             #region loginTab
             loginTab = new loginVM(AppContext, this);
-            loginTab.CloseTabEvent += CloseTab;
+            //loginTab.CloseTabEvent += CloseTab;
             loginTab.onLoginDone += (user) => {
 
                 AppContext.User = user;
@@ -130,7 +131,7 @@ namespace crm.ViewModels
 
             #region tokenTab
             tokenTab = new tokenVM(AppContext, this);
-            tokenTab.CloseTabEvent += CloseTab;
+            //tokenTab.CloseTabEvent += CloseTab;
             tokenTab.onTokenCheckResult += (result, token) =>
             {
 
@@ -147,11 +148,14 @@ namespace crm.ViewModels
         }
 
         #region helpers
-        void ShowTab(Tab tab)
+        public void ShowTab(Tab tab)
         {
             var fTab = TabsList.FirstOrDefault(t => t.Title.Equals(tab.Title));
             if (fTab == null)
             {
+
+                tab.CloseTabEvent += CloseTab;
+
                 if (tab is homeVM)                
                     TabsList.Insert(0, tab);
                 else                
@@ -164,16 +168,18 @@ namespace crm.ViewModels
             
         }
 
-        void AddTab(Tab tab)
+        public void AddTab(Tab tab)
         {
             var fTab = TabsList.FirstOrDefault(t => t.Title.Equals(tab.Title));
             if (fTab == null)
             {
+                tab.CloseTabEvent += CloseTab;
+
                 TabsList.Add(tab);                
             }            
         }
 
-        void CloseTab(Tab tab)
+        public void CloseTab(Tab tab)
         {
             int index = TabsList.IndexOf(tab);
             if (index >= 1)
@@ -183,7 +189,7 @@ namespace crm.ViewModels
                     ShowTab(prev);
             }
             TabsList.Remove(tab);
-        }
+        }       
         #endregion
 
     }
