@@ -69,11 +69,11 @@ namespace crm.ViewModels.tabs.home.screens
 
                     (users, total_pages) = await AppContext.ServerApi.GetUsers(1, 20, AppContext.User.Token);
 
-                    Users.Clear();
+                    //Users.Clear();
 
                     foreach (var user in users)
                     {
-                        Users.Add();
+                        //Users.Add();
                     }
 
                     //Users.Add(new UserItemTest());
