@@ -11,6 +11,7 @@
 			 xmlns:controls="using:crm.Views.tabs.home.controls"
 			 xmlns:conv="using:crm.Views.converters"
 			 xmlns:menu="using:crm.ViewModels.tabs.home.menu"			 
+			 xmlns:behaviors="using:crm.Views.behaviors"
              x:Class="crm.Views.tabs.homeTab"
 			 RenderOptions.BitmapInterpolationMode="HighQuality">
 	<Design.DataContext>
@@ -118,20 +119,25 @@
 							Grid.Row="0">
 							<ScrollViewer>
 								<ItemsPresenter DataContext="{Binding Menu}" Items="{Binding Items}">
+									<ItemsPresenter.ContextMenu>										
+											<ContextMenu>
+												<MenuItem Command="{Binding showInTabCmd}" Header="Закрыть" VerticalAlignment="Center" FontSize="12"/>
+											</ContextMenu>										
+									</ItemsPresenter.ContextMenu>
 									<ItemsPresenter.DataTemplates>
 										<DataTemplate DataType="{x:Type menu:SimpleMenuItem}">
 											<ToggleButton
 												Name="PART_Simple"
-												IsChecked="{Binding Screens[0].IsChecked}"
-												Classes="ToggleButton SimpleItem"
+												IsChecked="{Binding Screens[0].IsChecked}"												
+												Classes="ToggleButton SimpleItem"												
 												HorizontalAlignment="Stretch">
-												<ToggleButton.Styles>
+												<ToggleButton.Styles>													
 													<Style Selector="ToggleButton TextBlock">
 														<Setter Property="Text" Value="{Binding Screens[0].Title}"/>
 													</Style>
 													<Style Selector="ToggleButton Svg">
 														<Setter Property="Path" Value="{Binding IconPath}"/>
-													</Style>
+													</Style>													
 												</ToggleButton.Styles>
 												<Grid
 													ColumnDefinitions="Auto, *"
@@ -150,6 +156,10 @@
 														Margin="16, 0, 0, 0"
 														Text="{Binding Title}"/>
 												</Grid>
+												<!--<Interaction.Behaviors>
+													<behaviors:RightButtonClickBehavior Command="{Binding showInTabCmd}"/>
+												</Interaction.Behaviors>-->
+												
 											</ToggleButton>
 										</DataTemplate>
 										<DataTemplate DataType="{x:Type menu:ComplexMenuItem}">
