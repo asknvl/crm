@@ -82,19 +82,28 @@ namespace crm.WS
                 wnd = new errMsgDlg();
             }
 
+            if (vm is tagsDlgVM)
+            {
+                wnd = new tagsDlg();
+            }
+
             wnd.DataContext = vm;
             windowList.Add(wnd);
             wnd.Closed += (s, e) =>
             {
-                main.IsEnabled = true;
+
+                ((MainWindow)main).overlayGrid.IsVisible = false;
+                //main.IsEnabled = true;
+
             };
             vm.onCloseRequest += () =>
             {
                 wnd.Close();
+                windowList.Remove(wnd);
             };
-
-            main.IsEnabled = false;
-
+            ((MainWindow)main).overlayGrid.IsVisible = true;
+            //main.IsEnabled = false;
+            wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             wnd.Show(main);
         }
 

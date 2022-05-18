@@ -316,6 +316,7 @@
 										Grid.Column="8">										
 									</TextBlock>
 									<Button
+										Command="{Binding showTagsCmd}"
 										Classes="Button List"
 										VerticalAlignment="Center"
 										HorizontalAlignment="Center"

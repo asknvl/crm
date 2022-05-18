@@ -55,6 +55,10 @@
 		<Color x:Key="LeftSlideMenuSelectedItemBackground">#AADAEBF7</Color>
 		<Color x:Key="LeftSlideMenuPointeoverItemBackground">#AADAEBF7</Color>
 
+		<Color x:Key="ScreenPrimatyTextForeground">#FF464646</Color>
+
+		<Color x:Key="DialogPrimaryElementBackground">#FFF2F2F2</Color>
+
 	</Styles.Resources>
 
 	<Design.PreviewWith>

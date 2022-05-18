@@ -52,6 +52,23 @@
 		<Setter Property="Padding" Value="10, 0, 10, 0"/>
 	</Style>
 
+	<Style Selector="Button.Dialog">
+		<Style.Resources>
+			<Color x:Key="ButtonBackgroundPressed">#FFFFFFFF</Color>
+			<Color x:Key="ButtonBackgroundPointerOver">#FFF5F5F5</Color>
+			<Color x:Key="ButtonBorderBrushPointerOver">#FF464646</Color>
+			<Color x:Key="ButtonBorderBrushPressed">#FF464646</Color>
+		</Style.Resources>
+		<Setter Property="Background" Value="#FFFFFFFF"/>
+		<Setter Property="BorderBrush" Value="#FF464646"/>
+		<Setter Property="CornerRadius" Value="3"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Margin" Value="0"/>
+		<Setter Property="Height" Value="30"/>
+		<Setter Property="Padding" Value="10, 0, 10, 0"/>
+	</Style>
+
 	<Style Selector="Button.Hyper">
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Foreground" Value="#FF0BB3E8"/>

@@ -2,7 +2,9 @@
 using crm.Models.api.server;
 using crm.Models.appcontext;
 using crm.Models.user;
+using crm.ViewModels.dialogs;
 using crm.ViewModels.tabs.home.screens.users;
+using crm.WS;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,9 @@ namespace crm.ViewModels.tabs.home.screens
 
         #region vars
         CancellationTokenSource cts;
+        IWindowService ws = WindowService.getInstance();
+        BaseServerApi api;
+        string token;
         #endregion
 
         #region properties       
@@ -96,7 +101,9 @@ namespace crm.ViewModels.tabs.home.screens
 
         public UserList(ApplicationContext context) : base(context)
         {
-            
+
+            api = AppContext.ServerApi;
+            token = AppContext.User.Token;
             SelectedPage = 1;
 
             #region commands
@@ -111,12 +118,24 @@ namespace crm.ViewModels.tabs.home.screens
 
             prevPageCmd = ReactiveCommand.CreateFromTask(async () => {
                 SelectedPage--;
-                updatePageInfo(SelectedPage, 20);
+                try
+                {
+                    await updatePageInfo(SelectedPage, PageSize);
+                } catch (Exception ex)
+                {
+                    ws.ShowDialog(new errMsgVM(ex.Message));
+                }
             });
 
             nextPageCmd = ReactiveCommand.CreateFromTask(async () => {
                 SelectedPage++;
-                updatePageInfo(SelectedPage, 20);
+                try
+                {
+                    await updatePageInfo(SelectedPage, PageSize);
+                } catch (Exception ex)
+                {
+                    ws.ShowDialog(new errMsgVM(ex.Message));
+                }
             });
             #endregion
         }
@@ -125,10 +144,10 @@ namespace crm.ViewModels.tabs.home.screens
         #endregion
 
         #region helpers
-        async Task updatePageInfo(int page, int total)
+        async Task updatePageInfo(int page, int pagesize)
         {
-            await Task.Run(async () => {
-
+            await Task.Run(async () =>
+            {
                 List<User> users;
 
                 await Dispatcher.UIThread.InvokeAsync(() =>
@@ -136,7 +155,7 @@ namespace crm.ViewModels.tabs.home.screens
                     Users.Clear();
                 });
 
-                (users, TotalPages) = await AppContext.ServerApi.GetUsers(SelectedPage - 1, 20, AppContext.User.Token);
+                (users, TotalPages) = await api.GetUsers(page - 1, pagesize, token);
 
                 foreach (var user in users)
                 {
@@ -147,45 +166,36 @@ namespace crm.ViewModels.tabs.home.screens
                         Users.Add(tmp);
                     });
                 }
+            });
 
-            });            
+            //Users.Add(new UserItemTest());
+            //Users.Add(new UserItemTest());
+            //Users.Add(new UserItemTest());
+            //Users.Add(new UserItemTest());
+            //Users.Add(new UserItemTest());
+            //Users.Add(new UserItemTest());
+            //Users.Add(new UserItemTest());
+
         }
         #endregion
 
         #region override
         public override async void OnActivate()
-        {
-
-            //AppContext.TabService.ShowTab(new loginVM(AppContext ,this));
-
+        {       
             base.OnActivate();
-
 
             cts = new CancellationTokenSource();
 
-            BaseServerApi api = AppContext.ServerApi;
-            string token = AppContext.User.Token;
-
-            updatePageInfo(SelectedPage, 20);            
-
             try
             {
+                await updatePageInfo(SelectedPage, PageSize);
+
                 await Task.Run(async () =>
                 {
-
                     while (true)
                     {
-
-                        List<User> users;
-                        (users, TotalPages) = await AppContext.ServerApi.GetUsers(SelectedPage - 1, 20, AppContext.User.Token);
-
-                        //if (users.Count != Users.Count)
-                        //{
-                        //    await Dispatcher.UIThread.InvokeAsync(() =>
-                        //    {
-                        //        Users.Clear();
-                        //    });
-                        //}
+                        List<User> users = new List<User>();
+                        (users, TotalPages) = await api.GetUsers(SelectedPage - 1, PageSize, token);
 
                         foreach (var user in users)
                         {
@@ -193,7 +203,8 @@ namespace crm.ViewModels.tabs.home.screens
                             if (found != null)
                             {
                                 found.Copy(user);
-                            } else
+                            }
+                            else
                             {
                                 var tmp = new UserListItem();
                                 tmp.Copy(user);
@@ -204,32 +215,18 @@ namespace crm.ViewModels.tabs.home.screens
                             }
                         }
 
-                        Thread.Sleep(1000);
+                        cts?.Token.ThrowIfCancellationRequested();
+                        Thread.Sleep(update_period);
                     }
-
-                    //Users.Add(new UserItemTest());
-                    //Users.Add(new UserItemTest());
-                    //Users.Add(new UserItemTest());
-                    //Users.Add(new UserItemTest());
-                    //Users.Add(new UserItemTest());
-                    //Users.Add(new UserItemTest());
-                    //Users.Add(new UserItemTest());
-
-
-
-                    //while (true)
-                    //{
-                    //    cts.Token.ThrowIfCancellationRequested();
-                    //    Debug.WriteLine("!!!");
-                    //    Thread.Sleep(update_period);
-                    //}
-
                 });
 
             }
             catch (OperationCanceledException ex)
+            {                
+            }
+            catch (Exception ex)
             {
-                обработать ошибки
+                ws.ShowDialog(new errMsgVM(ex.Message));
             }
         }
         public override void OnDeactivate()
