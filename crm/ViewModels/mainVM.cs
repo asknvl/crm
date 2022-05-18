@@ -109,7 +109,7 @@ namespace crm.ViewModels
             //loginTab.CloseTabEvent += CloseTab;
             loginTab.onLoginDone += (user) => {
 
-                AppContext.User = user;
+                AppContext.User = user;                
                 homeVM homeTab = new homeVM(AppContext, this);
                 homeTab.AddUserEvent += () => {
                     ShowTab(tokenTab);
@@ -120,7 +120,7 @@ namespace crm.ViewModels
                     loginTab.Password = "";
                     ShowTab(loginTab);
                 };
-                CloseTab(loginTab);
+                CloseTab(loginTab);                
                 ShowTab(homeTab);
             };
             loginTab.onCreateUserAction += () =>
@@ -151,14 +151,25 @@ namespace crm.ViewModels
         public void ShowTab(Tab tab)
         {
             var fTab = TabsList.FirstOrDefault(t => t.Title.Equals(tab.Title));
+            if (fTab is homeVM)
+            {
+                var found = TabsList.FirstOrDefault(o => o is homeVM);
+                if (found != null)
+                    TabsList.Remove(found);
+                Content = fTab;
+                return;
+            }
+            
             if (fTab == null)
             {
 
                 tab.CloseTabEvent += CloseTab;
 
-                if (tab is homeVM)                
+                if (tab is homeVM)
+                {              
+
                     TabsList.Insert(0, tab);
-                else                
+                } else
                     TabsList.Add(tab);
                 
                 Content = tab;

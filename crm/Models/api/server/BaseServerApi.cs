@@ -121,11 +121,15 @@ namespace crm.Models.api.server
                 p.birthday = converter.date(user.BirthDate, Direction.user_server);
                 p.phone = converter.phone(user.PhoneNumber, Direction.user_server);
                 p.telegram = converter.telegram(user.Telegram, Direction.user_server);
-                p.usdtaccount = user.Wallet;
+                p.usdt_account = user.Wallet;
+                p.firstname = user.FirstName;
+                p.middlename = user.MiddleName;
+                p.lastname = user.LastName;
+                p.fullname = $"{user.LastName} {user.FirstName} {user.MiddleName}";
                 //p.devices = new JArray();
                 //foreach (var device in user.Devices) 
                 //    p.devices.Add(device);
-                p.device = user.Devices[0];
+                p.device = user.Devices[0].Name;
                 request.AddParameter("application/json", p.ToString(), ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
                 if (!response.IsSuccessful)

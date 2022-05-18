@@ -269,6 +269,12 @@ namespace crm.ViewModels.tabs
                     Devices = new List<Device> { new Device() { Name = Device } }                    
                 };
 
+                string[] splt = FullName.Split(" ");
+
+                user.FirstName = splt[2];
+                user.MiddleName = splt[1];
+                user.LastName = splt[0];
+
                 bool res = false;
                 try
                 {
